@@ -33,14 +33,7 @@ class MessagesViewController : UIViewController {
         let message: String = messageTextField.text!
         
         client?.publishString(message, topic: topic, qos: 2, retain: false, requestCompletion: { result in
-//            
-//            let alert = UIAlertView()
-//            alert.title = "Sent"
-//            alert.message = "Your message was sent"
-//            alert.
-//            alert.show()
         })
     }
     
-
 }

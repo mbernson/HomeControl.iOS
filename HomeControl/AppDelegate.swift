@@ -53,10 +53,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // create new MQTT Connection
         let mqttClient = MQTT.newConnection(mqttConfig)
         
-        // publish and subscribe
-        mqttClient.publishString("on", topic: "hildebrandpad/livingroom/lights/all", qos: 2, retain: false)
-        mqttClient.subscribe("#", qos: 2)
-        
         self.mqttClient = mqttClient
     }
 

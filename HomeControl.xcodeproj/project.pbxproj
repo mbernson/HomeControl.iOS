@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		699C55C50DEA8C5B578A8FB2 /* Pods_HomeControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 707BA3C191EC60538C624174 /* Pods_HomeControl.framework */; };
 		D5A06C5F1C11AB0200664494 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A06C5E1C11AB0200664494 /* AppDelegate.swift */; };
-		D5A06C611C11AB0200664494 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A06C601C11AB0200664494 /* ViewController.swift */; };
 		D5A06C641C11AB0200664494 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5A06C621C11AB0200664494 /* Main.storyboard */; };
 		D5A06C661C11AB0200664494 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5A06C651C11AB0200664494 /* Assets.xcassets */; };
 		D5A06C691C11AB0200664494 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5A06C671C11AB0200664494 /* LaunchScreen.storyboard */; };
@@ -41,7 +40,6 @@
 		87AB8638862A41723CCFC337 /* Pods-HomeControl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeControl.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeControl/Pods-HomeControl.release.xcconfig"; sourceTree = "<group>"; };
 		D5A06C5B1C11AB0200664494 /* HomeControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5A06C5E1C11AB0200664494 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D5A06C601C11AB0200664494 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D5A06C631C11AB0200664494 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D5A06C651C11AB0200664494 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D5A06C681C11AB0200664494 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -124,7 +122,6 @@
 			isa = PBXGroup;
 			children = (
 				D5A06C5E1C11AB0200664494 /* AppDelegate.swift */,
-				D5A06C601C11AB0200664494 /* ViewController.swift */,
 				D5A06C621C11AB0200664494 /* Main.storyboard */,
 				D5A06C651C11AB0200664494 /* Assets.xcassets */,
 				D5A06C671C11AB0200664494 /* LaunchScreen.storyboard */,
@@ -337,7 +334,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5A06C611C11AB0200664494 /* ViewController.swift in Sources */,
 				D5A06C5F1C11AB0200664494 /* AppDelegate.swift in Sources */,
 				D5A06C8D1C11AB9F00664494 /* MessagesViewController.swift in Sources */,
 			);
