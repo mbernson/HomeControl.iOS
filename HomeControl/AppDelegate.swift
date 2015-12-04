@@ -7,16 +7,57 @@
 //
 
 import UIKit
+import Moscapsule
+
+func prefString(key: String) -> String {
+    return NSUserDefaults.standardUserDefaults().stringForKey(key)!
+}
+func prefInt(key: String) -> Int {
+    return NSUserDefaults.standardUserDefaults().integerForKey(key)
+}
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var mqttClient: MQTTClient?
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let appDefaults = [
+            "mqtt_client_id": "homecontrol-app",
+            "mqtt_host": "homepi",
+            "mqtt_port": 1883
+        ]
+        
+        NSUserDefaults.standardUserDefaults().registerDefaults(appDefaults)
+        
+        setMQTTClient()
+        
         return true
+    }
+    
+    func setMQTTClient() {
+        // set MQTT Client Configuration
+        
+        let mqttConfig = MQTTConfig(clientId: prefString("mqtt_client_id"), host: prefString("mqtt_host"), port: Int32(prefInt("mqtt_port")), keepAlive: 60)
+        mqttConfig.onPublishCallback = { messageId in
+            NSLog("published (mid=\(messageId))")
+        }
+        mqttConfig.onMessageCallback = { mqttMessage in
+            NSLog("MQTT Message received: payload=\(mqttMessage.payloadString)")
+        }
+        
+        // create new MQTT Connection
+        let mqttClient = MQTT.newConnection(mqttConfig)
+        
+        // publish and subscribe
+        mqttClient.publishString("on", topic: "hildebrandpad/livingroom/lights/all", qos: 2, retain: false)
+        mqttClient.subscribe("#", qos: 2)
+        
+        self.mqttClient = mqttClient
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -39,6 +80,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+
+        self.mqttClient!.disconnect()
     }
 
 
