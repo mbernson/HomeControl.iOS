@@ -1,5 +1,5 @@
 //
-//  MessagesViewControlkler.swift
+//  MessagesViewController.swift
 //  HomeControl
 //
 //  Created by Mathijs Bernson on 04/12/15.
