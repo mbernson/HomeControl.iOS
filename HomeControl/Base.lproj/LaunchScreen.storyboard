@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,8 +17,53 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HomeControl" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XrR-7w-7Wa">
+                                <rect key="frame" x="20" y="20" width="560" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2015, Mathijs Bernson" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tOG-2R-Goi">
+                                <rect key="frame" x="20" y="559" width="560" height="21"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="mLo-mv-kCL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="256" verticalHuggingPriority="256" placeholderIntrinsicWidth="256" placeholderIntrinsicHeight="256" image="LaunchIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Bjj-25-d6O">
+                                <rect key="frame" x="172" y="172" width="256" height="256"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="256" id="Z3x-Jc-oDr"/>
+                                    <constraint firstAttribute="width" constant="256" id="yVt-8f-Qvh"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="XrR-7w-7Wa" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" id="3cz-zO-1az"/>
+                            <constraint firstItem="tOG-2R-Goi" firstAttribute="top" secondItem="Bjj-25-d6O" secondAttribute="bottom" constant="131" id="5gX-Pe-KTY"/>
+                            <constraint firstItem="Bjj-25-d6O" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="6ym-Qi-sl7"/>
+                            <constraint firstItem="XrR-7w-7Wa" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="IBo-F8-ggm"/>
+                            <constraint firstItem="tOG-2R-Goi" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="KWy-fY-jUy"/>
+                            <constraint firstItem="tOG-2R-Goi" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" id="djF-xp-qPj"/>
+                            <constraint firstAttribute="bottom" secondItem="tOG-2R-Goi" secondAttribute="bottom" constant="20" symbolic="YES" id="guC-ym-Gfi"/>
+                            <constraint firstItem="tOG-2R-Goi" firstAttribute="leading" secondItem="XrR-7w-7Wa" secondAttribute="leading" id="irO-Zq-vCX"/>
+                            <constraint firstItem="Bjj-25-d6O" firstAttribute="top" secondItem="XrR-7w-7Wa" secondAttribute="bottom" constant="131" id="kU3-jO-b9s"/>
+                            <constraint firstItem="Bjj-25-d6O" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="p5U-Gh-T9z"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="kU3-jO-b9s"/>
+                                <exclude reference="5gX-Pe-KTY"/>
+                            </mask>
+                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -25,4 +71,7 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="LaunchIcon" width="1024" height="1024"/>
+    </resources>
 </document>

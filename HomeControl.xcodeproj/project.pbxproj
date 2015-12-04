@@ -122,11 +122,11 @@
 			isa = PBXGroup;
 			children = (
 				D5A06C5E1C11AB0200664494 /* AppDelegate.swift */,
+				D5A06C8C1C11AB9F00664494 /* MessagesViewController.swift */,
 				D5A06C621C11AB0200664494 /* Main.storyboard */,
 				D5A06C651C11AB0200664494 /* Assets.xcassets */,
 				D5A06C671C11AB0200664494 /* LaunchScreen.storyboard */,
 				D5A06C6A1C11AB0200664494 /* Info.plist */,
-				D5A06C8C1C11AB9F00664494 /* MessagesViewController.swift */,
 			);
 			path = HomeControl;
 			sourceTree = "<group>";
