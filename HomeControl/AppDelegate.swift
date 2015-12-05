@@ -16,6 +16,30 @@ func prefInt(key: String) -> Int {
     return NSUserDefaults.standardUserDefaults().integerForKey(key)
 }
 
+func appDelegate() -> AppDelegate {
+    let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    return delegate
+}
+
+func sharedMQTTClient() -> MQTTClient {
+    return appDelegate().mqttClient!
+}
+
+func createMQTTClient() -> MQTTClient {
+    // set MQTT Client Configuration
+    
+    let mqttConfig = MQTTConfig(clientId: prefString("mqtt_client_id"), host: prefString("mqtt_host"), port: Int32(prefInt("mqtt_port")), keepAlive: 60)
+    mqttConfig.onPublishCallback = { messageId in
+        NSLog("published (mid=\(messageId))")
+    }
+    mqttConfig.onMessageCallback = { mqttMessage in
+        NSLog("MQTT Message received: payload=\(mqttMessage.payloadString)")
+    }
+    
+    // create new MQTT Connection
+    return MQTT.newConnection(mqttConfig)
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -34,26 +58,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NSUserDefaults.standardUserDefaults().registerDefaults(appDefaults)
         
-        setMQTTClient()
+        self.mqttClient = createMQTTClient()
+        
+        let themeColor = UIColor(red: 251/255, green: 70/255, blue: 45/255, alpha: 1)
+        window?.tintColor = themeColor
         
         return true
-    }
-    
-    func setMQTTClient() {
-        // set MQTT Client Configuration
-        
-        let mqttConfig = MQTTConfig(clientId: prefString("mqtt_client_id"), host: prefString("mqtt_host"), port: Int32(prefInt("mqtt_port")), keepAlive: 60)
-        mqttConfig.onPublishCallback = { messageId in
-            NSLog("published (mid=\(messageId))")
-        }
-        mqttConfig.onMessageCallback = { mqttMessage in
-            NSLog("MQTT Message received: payload=\(mqttMessage.payloadString)")
-        }
-        
-        // create new MQTT Connection
-        let mqttClient = MQTT.newConnection(mqttConfig)
-        
-        self.mqttClient = mqttClient
     }
 
     func applicationWillResignActive(application: UIApplication) {

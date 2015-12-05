@@ -10,21 +10,21 @@ import UIKit
 import Moscapsule
 
 
-class MessagesViewController : UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class MessagesViewController : UIViewController {
     
     var client: MQTTClient?
     
     @IBOutlet weak var topicTextField: UITextField!
     @IBOutlet weak var messageTextField: UITextField!
 
-    var messageChoices = ["on", "off", "yes", "no"]
+    var messageChoices = ["", "on", "off", "yes", "no"]
+    let default_message_choice = "on"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        self.client = delegate.mqttClient
+        self.client = sharedMQTTClient()
         
         let messagePickerView = UIPickerView()
         messagePickerView.delegate = self
@@ -40,24 +40,28 @@ class MessagesViewController : UIViewController, UIPickerViewDelegate, UIPickerV
         if(client == nil) {
             NSLog("MQTT client is nil!")
         }
-        client?.publishString(getMessage(), topic: getTopic(), qos: 2, retain: false, requestCompletion: { result in
-        })
+        self.messageTextField.resignFirstResponder()
+        client?.publishString(getMessage(), topic: getTopic(), qos: 2, retain: false, requestCompletion: { result in })
+    }
+    
+    @IBAction func viewWasTapped(sender: AnyObject) {
+        self.messageTextField.resignFirstResponder()
     }
     
     func getMessage() -> String {
         if(messageTextField.hasText()) {
             return messageTextField.text!
         } else {
-            return "on"
+            return default_message_choice
         }
     }
 
     func getTopic() -> String {
         return topicTextField.text!
     }
-    
-    // UIPicker Delegate
-    
+}
+
+extension MessagesViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }

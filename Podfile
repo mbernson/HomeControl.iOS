@@ -6,6 +6,8 @@ use_frameworks!
 target 'HomeControl' do
     pod 'Moscapsule', :git => 'https://github.com/flightonary/Moscapsule.git'
     pod 'OpenSSL-Universal', '~> 1.0.1.l'
+
+    pod 'Alamofire', '~> 3.0'
 end
 
 target 'HomeControlTests' do
