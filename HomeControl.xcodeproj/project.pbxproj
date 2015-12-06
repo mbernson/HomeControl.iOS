@@ -11,6 +11,7 @@
 		D50912AA1C134803009BFC9A /* SpeedDialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50912A91C134803009BFC9A /* SpeedDialViewController.swift */; };
 		D50912AE1C134830009BFC9A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50912AD1C134830009BFC9A /* SettingsViewController.swift */; };
 		D52E04351C134BBC00054AF8 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52E04341C134BBC00054AF8 /* EventsViewController.swift */; };
+		D56E52471C146C9400EAD83D /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = D56E52461C146C9400EAD83D /* Reachability.swift */; };
 		D5A06C5F1C11AB0200664494 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A06C5E1C11AB0200664494 /* AppDelegate.swift */; };
 		D5A06C641C11AB0200664494 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5A06C621C11AB0200664494 /* Main.storyboard */; };
 		D5A06C661C11AB0200664494 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5A06C651C11AB0200664494 /* Assets.xcassets */; };
@@ -18,7 +19,8 @@
 		D5A06C741C11AB0200664494 /* HomeControlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A06C731C11AB0200664494 /* HomeControlTests.swift */; };
 		D5A06C7F1C11AB0300664494 /* HomeControlUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A06C7E1C11AB0300664494 /* HomeControlUITests.swift */; };
 		D5A06C8D1C11AB9F00664494 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A06C8C1C11AB9F00664494 /* MessagesViewController.swift */; };
-		D5EFFB9E1C1384B80084AD25 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5EFFB9D1C1384B80084AD25 /* Message.swift */; };
+		D5B3BB981C1441FC004C5D96 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B3BB971C1441FC004C5D96 /* Models.swift */; };
+		D5B3BB9A1C1442AA004C5D96 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B3BB991C1442AA004C5D96 /* Client.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +47,7 @@
 		D50912A91C134803009BFC9A /* SpeedDialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeedDialViewController.swift; sourceTree = "<group>"; };
 		D50912AD1C134830009BFC9A /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		D52E04341C134BBC00054AF8 /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
+		D56E52461C146C9400EAD83D /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		D5A06C5B1C11AB0200664494 /* HomeControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5A06C5E1C11AB0200664494 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D5A06C631C11AB0200664494 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -58,7 +61,8 @@
 		D5A06C7E1C11AB0300664494 /* HomeControlUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeControlUITests.swift; sourceTree = "<group>"; };
 		D5A06C801C11AB0300664494 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5A06C8C1C11AB9F00664494 /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
-		D5EFFB9D1C1384B80084AD25 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		D5B3BB971C1441FC004C5D96 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		D5B3BB991C1442AA004C5D96 /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,7 +158,9 @@
 				D50912AC1C134821009BFC9A /* User interface */,
 				D5A06C651C11AB0200664494 /* Assets.xcassets */,
 				D5A06C6A1C11AB0200664494 /* Info.plist */,
-				D5EFFB9D1C1384B80084AD25 /* Message.swift */,
+				D5B3BB991C1442AA004C5D96 /* Client.swift */,
+				D5B3BB971C1441FC004C5D96 /* Models.swift */,
+				D5B3BB941C1441D0004C5D96 /* Utility */,
 			);
 			path = HomeControl;
 			sourceTree = "<group>";
@@ -175,6 +181,14 @@
 				D5A06C801C11AB0300664494 /* Info.plist */,
 			);
 			path = HomeControlUITests;
+			sourceTree = "<group>";
+		};
+		D5B3BB941C1441D0004C5D96 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				D56E52461C146C9400EAD83D /* Reachability.swift */,
+			);
+			name = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -364,9 +378,11 @@
 			files = (
 				D5A06C5F1C11AB0200664494 /* AppDelegate.swift in Sources */,
 				D50912AA1C134803009BFC9A /* SpeedDialViewController.swift in Sources */,
+				D5B3BB981C1441FC004C5D96 /* Models.swift in Sources */,
 				D5A06C8D1C11AB9F00664494 /* MessagesViewController.swift in Sources */,
-				D5EFFB9E1C1384B80084AD25 /* Message.swift in Sources */,
 				D50912AE1C134830009BFC9A /* SettingsViewController.swift in Sources */,
+				D5B3BB9A1C1442AA004C5D96 /* Client.swift in Sources */,
+				D56E52471C146C9400EAD83D /* Reachability.swift in Sources */,
 				D52E04351C134BBC00054AF8 /* EventsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

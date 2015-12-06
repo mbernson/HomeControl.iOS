@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NetworkExtension
 import Moscapsule
 
 func prefString(key: String) -> String {
@@ -21,36 +22,22 @@ func appDelegate() -> AppDelegate {
     return delegate
 }
 
-func sharedMQTTClient() -> MQTTClient {
-    return appDelegate().mqttClient!
-}
-
-func createMQTTClient() -> MQTTClient {
-    // set MQTT Client Configuration
-    
-    let mqttConfig = MQTTConfig(clientId: prefString("mqtt_client_id"), host: prefString("mqtt_host"), port: Int32(prefInt("mqtt_port")), keepAlive: 60)
-    mqttConfig.onPublishCallback = { messageId in
-        NSLog("published (mid=\(messageId))")
-    }
-    mqttConfig.onMessageCallback = { mqttMessage in
-        NSLog("MQTT Message received: payload=\(mqttMessage.payloadString)")
-    }
-    
-    // create new MQTT Connection
-    return MQTT.newConnection(mqttConfig)
+func sharedClient() -> Client {
+    return appDelegate().client!
 }
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var mqttClient: MQTTClient?
+    var client: Client?
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
         let appDefaults = [
+            "api_mqtt_url": "https://lab.duckson.nl/iot/api/mqtt",
             "mqtt_client_id": "homecontrol-app",
             "mqtt_host": "homepi",
             "mqtt_port": 1883
@@ -58,7 +45,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NSUserDefaults.standardUserDefaults().registerDefaults(appDefaults)
         
-        self.mqttClient = createMQTTClient()
+        self.client = createClient()
+        self.client?.connect(appDefaults)
         
         let themeColor = UIColor(red: 251/255, green: 70/255, blue: 45/255, alpha: 1)
         window?.tintColor = themeColor
@@ -87,7 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 
-        self.mqttClient!.disconnect()
+        self.client!.disconnect()
     }
 
 

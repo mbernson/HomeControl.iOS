@@ -143,7 +143,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="925" y="-264"/>
+            <point key="canvasLocation" x="925" y="400"/>
         </scene>
         <!--Speed Dial-->
         <scene sceneID="vaw-G8-hJc">
@@ -203,7 +203,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YRn-Ck-C8V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="925" y="399"/>
+            <point key="canvasLocation" x="925" y="-281"/>
         </scene>
         <!--Settings-->
         <scene sceneID="qVm-o9-X50">

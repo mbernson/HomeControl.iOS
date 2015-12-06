@@ -12,7 +12,7 @@ import Moscapsule
 
 class MessagesViewController : UIViewController {
     
-    var client: MQTTClient?
+    var client: Client?
     
     @IBOutlet weak var topicTextField: UITextField!
     @IBOutlet weak var messageTextField: UITextField!
@@ -24,7 +24,7 @@ class MessagesViewController : UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        self.client = sharedMQTTClient()
+        self.client = sharedClient()
         
         let messagePickerView = UIPickerView()
         messagePickerView.delegate = self
@@ -41,7 +41,7 @@ class MessagesViewController : UIViewController {
             NSLog("MQTT client is nil!")
         }
         self.messageTextField.resignFirstResponder()
-        client?.publishString(getMessage(), topic: getTopic(), qos: 2, retain: false, requestCompletion: { result in })
+        client?.publish(getTopic(), message: getMessage())
     }
     
     @IBAction func viewWasTapped(sender: AnyObject) {

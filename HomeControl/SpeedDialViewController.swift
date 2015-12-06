@@ -10,13 +10,6 @@ import UIKit
 import Moscapsule
 
 
-struct ButtonAction {
-    let topic: String
-    let message: String
-    let description: String
-}
-
-
 class SpeedDialViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     let columns: CGFloat = 2
     let horizontalMargin: CGFloat = 10.0 // TODO: Replace hard-coded value with the minimum spacing property of the collection view
@@ -36,17 +29,17 @@ class SpeedDialViewController: UICollectionViewController, UICollectionViewDeleg
         ButtonAction(topic: "hildebrandpad/livingroom/lights/bed_lampen", message: "off", description: "Bed lampen uit"),
     ]
     
-    var client: MQTTClient?
+    var client: Client?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.client = sharedMQTTClient()
+        self.client = sharedClient()
     }
     
     // Gets called from the SpeedDialCollectionViewCell
-    func performAction(action: ButtonAction) {
-        client?.publishString(action.message, topic: action.topic, qos: 2, retain: false)
+    func performAction(action: ButtonAction, completion: ((ClientStatus) -> ())) {
+        client?.publish(action.topic, message: action.message, completion: completion)
     }
 
     // Delegate methods
@@ -82,19 +75,39 @@ class SpeedDialCollectionViewCell: UICollectionViewCell {
     
     @IBAction func buttonTouchedUp(sender: AnyObject) {
         assert(delegate != nil, "SpeedDialCollectionViewCell delegate has not been set")
-        delegate?.performAction(action)
-        animateButtonPress()
+        self.animateSuccess()
+        delegate?.performAction(action, completion: { result in
+            if result == .Success {
+                self.animateEnd()
+            } else {
+                self.animateFailure()
+                
+                let alert = UIAlertController(title: "Connection error", message:"The IoT service is unavailable or responded with an error.", preferredStyle: .Alert)
+                alert.addAction(UIAlertAction(title: "Ok :(", style: .Default) { _ in })
+                self.delegate?.presentViewController(alert, animated: true){}
+            }
+        })
     }
     
-    func animateButtonPress() {
-        UIView.beginAnimations("speeddialbutton", context: nil)
-        UIView.setAnimationDuration(0.4)
-        self.backgroundColor = UIColor.greenColor()
-        UIView.commitAnimations()
-        
-        UIView.beginAnimations("speeddialbutton_revert", context: nil)
-        UIView.setAnimationDuration(0.4)
-        self.backgroundColor = self.window?.tintColor
-        UIView.commitAnimations()
+    func animateSuccess() {
+        UIView.animateWithDuration(0.25, animations: {
+            self.backgroundColor = UIColor.greenColor()
+        }, completion: { success in
+            
+        })
+    }
+    
+    func animateFailure() {
+        UIView.animateWithDuration(1, animations: {
+            self.backgroundColor = UIColor.blackColor()
+        }, completion: { success in
+            self.animateEnd()
+        })
+    }
+    
+    func animateEnd() {
+        UIView.animateWithDuration(0.25, animations: {
+            self.backgroundColor = self.window?.tintColor
+        })
     }
 }
