@@ -30,22 +30,32 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="hildebrandpad/livingroom/lights/bureaulamp" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="usW-u9-cE9">
-                                <rect key="frame" x="146" y="182" width="309" height="30"/>
+                                <rect key="frame" x="40" y="182" width="520" height="30"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="309" id="oIE-6X-a4x"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="oIE-6X-a4x"/>
+                                    </mask>
+                                </variation>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FEd-n5-Cep">
-                                <rect key="frame" x="205" y="249" width="190" height="30"/>
+                                <rect key="frame" x="80" y="249" width="440" height="30"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="190" id="dQw-zg-Hb8"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="dQw-zg-Hb8"/>
+                                    </mask>
+                                </variation>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Topic" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pd7-0v-um8">
                                 <rect key="frame" x="279" y="153" width="42" height="21"/>
@@ -83,7 +93,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="FEd-n5-Cep" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="60" id="1cG-gb-P7c"/>
                             <constraint firstItem="PO3-mI-s44" firstAttribute="top" secondItem="FEd-n5-Cep" secondAttribute="bottom" constant="8" symbolic="YES" id="2gy-Vo-ouX"/>
+                            <constraint firstItem="usW-u9-cE9" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="2zB-k3-wWi"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="FEd-n5-Cep" secondAttribute="trailing" constant="40" id="3Wh-8s-UMz"/>
                             <constraint firstItem="PO3-mI-s44" firstAttribute="top" secondItem="FEd-n5-Cep" secondAttribute="bottom" constant="8" symbolic="YES" id="4GP-2r-SSt"/>
                             <constraint firstItem="5JK-dj-vvT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="90x-BE-j8D"/>
                             <constraint firstItem="usW-u9-cE9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="FHu-NP-Ik4"/>
@@ -94,13 +107,20 @@
                             <constraint firstItem="usW-u9-cE9" firstAttribute="top" secondItem="Pd7-0v-um8" secondAttribute="bottom" constant="8" symbolic="YES" id="UYB-CQ-ue6"/>
                             <constraint firstItem="FEd-n5-Cep" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="X5f-co-m2N"/>
                             <constraint firstItem="5JK-dj-vvT" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="cuO-e9-VfY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="FEd-n5-Cep" secondAttribute="trailing" constant="60" id="e3G-33-0tm"/>
                             <constraint firstItem="Pd7-0v-um8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="h2e-41-hcN"/>
+                            <constraint firstItem="FEd-n5-Cep" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="40" id="mlg-jQ-wuW"/>
                             <constraint firstItem="Pd7-0v-um8" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="153" id="n9p-40-vdd"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="PO3-mI-s44" secondAttribute="bottom" constant="361" id="pGo-yq-WSE"/>
                             <constraint firstItem="PO3-mI-s44" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sNF-z8-U8Q"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="usW-u9-cE9" secondAttribute="trailing" constant="20" id="zc3-W1-uAM"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="FHu-NP-Ik4"/>
+                                <exclude reference="3Wh-8s-UMz"/>
+                                <exclude reference="X5f-co-m2N"/>
+                                <exclude reference="mlg-jQ-wuW"/>
                                 <exclude reference="M3a-S7-rcr"/>
                                 <exclude reference="2gy-Vo-ouX"/>
                                 <exclude reference="pGo-yq-WSE"/>
@@ -134,15 +154,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Mo7-Nd-eid">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="20" id="Mo7-Nd-eid">
                             <size key="itemSize" width="160" height="160"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="sectionInset" minX="20" minY="40" maxX="20" maxY="60"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SpeedDialCell" id="oDj-ad-UHi" customClass="SpeedDialCollectionViewCell" customModule="HomeControl" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
+                                <rect key="frame" x="20" y="40" width="160" height="160"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
@@ -201,7 +221,7 @@
                                 <rect key="frame" x="20" y="20" width="64" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -236,7 +256,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="h2j-bM-dC3">
@@ -244,7 +264,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -283,7 +303,7 @@
                                 <rect key="frame" x="20" y="72" width="42" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tqj-7s-vcE">
@@ -292,7 +312,7 @@
                                 <attributedString key="attributedText">
                                     <fragment content="hildebrandpad/livingroom/lights/bureaulamp">
                                         <attributes>
-                                            <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="21" name="HelveticaNeue"/>
                                         </attributes>
                                     </fragment>

@@ -17,9 +17,10 @@ struct ButtonAction {
 }
 
 
-class SpeedDialViewController: UICollectionViewController {
+class SpeedDialViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    let columns: CGFloat = 2
+    let horizontalMargin: CGFloat = 10.0 // TODO: Replace hard-coded value with the minimum spacing property of the collection view
     private let reuseIdentifier = "SpeedDialCell"
-    private let sectionInsets = UIEdgeInsets(top: 40.0, left: 20.0, bottom: 60.0, right: 20.0)
     
     private var actions = [
         ButtonAction(topic: "hildebrandpad/livingroom/lights/all", message: "on", description: "Alle lichten aan"),
@@ -43,10 +44,12 @@ class SpeedDialViewController: UICollectionViewController {
         self.client = sharedMQTTClient()
     }
     
+    // Gets called from the SpeedDialCollectionViewCell
     func performAction(action: ButtonAction) {
         client?.publishString(action.message, topic: action.topic, qos: 2, retain: false)
     }
 
+    // Delegate methods
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return actions.count
     }
@@ -54,6 +57,7 @@ class SpeedDialViewController: UICollectionViewController {
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! SpeedDialCollectionViewCell
         
+        // Cell customization
         cell.action = actions[indexPath.row]
         cell.button.setTitle(cell.action.description, forState: .Normal)
         cell.delegate = self
@@ -63,10 +67,10 @@ class SpeedDialViewController: UICollectionViewController {
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-            return sectionInsets
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        let cellWidth = (self.view.bounds.width / columns) - (horizontalMargin * columns) - horizontalMargin
+        let size: CGSize = CGSize(width: cellWidth, height: cellWidth)
+        return size
     }
 }
 
@@ -77,11 +81,12 @@ class SpeedDialCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var button: UIButton!
     
     @IBAction func buttonTouchedUp(sender: AnyObject) {
+        assert(delegate != nil, "SpeedDialCollectionViewCell delegate has not been set")
         delegate?.performAction(action)
-        animate()
+        animateButtonPress()
     }
     
-    func animate() {
+    func animateButtonPress() {
         UIView.beginAnimations("speeddialbutton", context: nil)
         UIView.setAnimationDuration(0.4)
         self.backgroundColor = UIColor.greenColor()
