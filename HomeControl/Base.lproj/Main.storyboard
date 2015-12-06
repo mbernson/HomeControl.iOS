@@ -130,7 +130,7 @@
                             <outletCollection property="gestureRecognizers" destination="3p8-t1-b1p" appends="YES" id="f43-qK-D56"/>
                         </connections>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Send Message" id="4vq-cz-U1n"/>
+                    <tabBarItem key="tabBarItem" title="Send Message" image="envelope" id="4vq-cz-U1n"/>
                     <connections>
                         <outlet property="messageTextField" destination="FEd-n5-Cep" id="UKd-kI-p7I"/>
                         <outlet property="topicTextField" destination="usW-u9-cE9" id="xkW-eC-3SK"/>
@@ -199,7 +199,7 @@
                             <outlet property="delegate" destination="7Hm-Al-0sQ" id="C6y-cJ-MGs"/>
                         </connections>
                     </collectionView>
-                    <tabBarItem key="tabBarItem" title="Speed Dial" id="Fst-qE-E8m"/>
+                    <tabBarItem key="tabBarItem" title="Speed Dial" image="dialpad" id="Fst-qE-E8m"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YRn-Ck-C8V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -366,4 +366,8 @@
             <point key="canvasLocation" x="102" y="749"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="dialpad" width="18" height="25"/>
+        <image name="envelope" width="25" height="16"/>
+    </resources>
 </document>
