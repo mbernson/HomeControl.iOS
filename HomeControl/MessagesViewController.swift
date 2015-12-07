@@ -14,41 +14,48 @@ class MessagesViewController : UIViewController {
     
     var client: Client?
     
-    @IBOutlet weak var topicTextField: UITextField!
-    @IBOutlet weak var messageTextField: UITextField!
-
-    var messageChoices = ["", "on", "off", "yes", "no"]
+    var messageChoices = ["on", "off", "yes", "no"]
     let default_message_choice = "on"
+    
+    var enterCustomMessage: Bool = true
+    
+    // MARK: Initializers
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
         self.client = sharedClient()
-        
-        let messagePickerView = UIPickerView()
-        messagePickerView.delegate = self
-        messageTextField.inputView = messagePickerView
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    // MARK: Outlets and actions
+    
+    @IBOutlet weak var topicTextField: UITextField!
+    @IBOutlet weak var messageTextField: UITextField!
     
     @IBAction func sendButtonPressed(sender: AnyObject) {
-        if(client == nil) {
-            NSLog("MQTT client is nil!")
-        }
         self.messageTextField.resignFirstResponder()
-        client?.publish(getTopic(), message: getMessage())
+        assert(client != nil, "No client to send the message to")
+        client?.publish(topic(), message: message())
     }
     
     @IBAction func viewWasTapped(sender: AnyObject) {
         self.messageTextField.resignFirstResponder()
     }
     
-    func getMessage() -> String {
+    @IBAction func customMessageSwitchChanged(sender: UISwitch) {
+        self.messageTextField.resignFirstResponder()
+        if(!sender.on) {
+            let messagePickerView = UIPickerView()
+            messagePickerView.delegate = self
+            messageTextField.inputView = messagePickerView
+        } else {
+            messageTextField.inputView = nil
+        }
+        self.messageTextField.becomeFirstResponder()
+    }
+    
+    // MARK: Getting data from the view
+    
+    func message() -> String {
         if(messageTextField.hasText()) {
             return messageTextField.text!
         } else {
@@ -56,7 +63,7 @@ class MessagesViewController : UIViewController {
         }
     }
 
-    func getTopic() -> String {
+    func topic() -> String {
         return topicTextField.text!
     }
 }

@@ -9,13 +9,13 @@
 import UIKit
 import Moscapsule
 
-
 class SpeedDialViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     let columns: CGFloat = 2
     let horizontalMargin: CGFloat = 10.0 // TODO: Replace hard-coded value with the minimum spacing property of the collection view
     private let reuseIdentifier = "SpeedDialCell"
     
-    private var actions = [
+    // TODO: Replace hard-coded actions
+    private var actions: [ButtonAction] = [
         ButtonAction(topic: "hildebrandpad/livingroom/lights/all", message: "on", description: "Alle lichten aan"),
         ButtonAction(topic: "hildebrandpad/livingroom/lights/all", message: "off", description: "Alle lichten uit"),
         
@@ -33,12 +33,11 @@ class SpeedDialViewController: UICollectionViewController, UICollectionViewDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.client = sharedClient()
     }
     
     // Gets called from the SpeedDialCollectionViewCell
-    func performAction(action: ButtonAction, completion: ((ClientStatus) -> ())) {
+    func performButtonAction(action: ButtonAction, completion: ((ClientStatus) -> ())) {
         client?.publish(action.topic, message: action.message, completion: completion)
     }
 
@@ -76,17 +75,22 @@ class SpeedDialCollectionViewCell: UICollectionViewCell {
     @IBAction func buttonTouchedUp(sender: AnyObject) {
         assert(delegate != nil, "SpeedDialCollectionViewCell delegate has not been set")
         self.animateSuccess()
-        delegate?.performAction(action, completion: { result in
-            if result == .Success {
-                self.animateEnd()
-            } else {
-                self.animateFailure()
-                
-                let alert = UIAlertController(title: "Connection error", message:"The IoT service is unavailable or responded with an error.", preferredStyle: .Alert)
-                alert.addAction(UIAlertAction(title: "Ok :(", style: .Default) { _ in })
-                self.delegate?.presentViewController(alert, animated: true){}
-            }
-        })
+        delegate?.performButtonAction(action, completion: self.actionWasSent)
+    }
+    
+    func actionWasSent(result: ClientStatus) {
+        if result == .Success {
+            animateEnd()
+        } else {
+            animateFailure()
+            showErrorMessage()
+        }
+    }
+    
+    func showErrorMessage() {
+        let alert = UIAlertController(title: "Connection error", message:"The IoT service is unavailable or responded with an error.", preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "Ok :(", style: .Default) { _ in })
+        delegate?.presentViewController(alert, animated: true){}
     }
     
     func animateSuccess() {
