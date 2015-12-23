@@ -52,7 +52,7 @@ class SpeedDialViewController: UICollectionViewController, UICollectionViewDeleg
         // Cell customization
         cell.action = actions[indexPath.row]
         cell.button.setTitle(cell.action.description, forState: .Normal)
-        cell.delegate = self
+        cell.viewController = self
         cell.layer.cornerRadius = 30
         cell.backgroundColor = collectionView.window?.tintColor
         
@@ -68,14 +68,14 @@ class SpeedDialViewController: UICollectionViewController, UICollectionViewDeleg
 
 class SpeedDialCollectionViewCell: UICollectionViewCell {
     var action: ButtonAction!
-    var delegate: SpeedDialViewController?
+    var viewController: SpeedDialViewController?
     
     @IBOutlet weak var button: UIButton!
     
     @IBAction func buttonTouchedUp(sender: AnyObject) {
-        assert(delegate != nil, "SpeedDialCollectionViewCell delegate has not been set")
+        assert(viewController != nil, "SpeedDialCollectionViewCell viewController has not been set")
         self.animateSuccess()
-        delegate?.performButtonAction(action, completion: self.actionWasSent)
+        viewController?.performButtonAction(action, completion: self.actionWasSent)
     }
     
     func actionWasSent(result: ClientStatus) {
@@ -90,7 +90,7 @@ class SpeedDialCollectionViewCell: UICollectionViewCell {
     func showErrorMessage() {
         let alert = UIAlertController(title: "Connection error", message:"The IoT service is unavailable or responded with an error.", preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: "Ok :(", style: .Default) { _ in })
-        delegate?.presentViewController(alert, animated: true){}
+        viewController?.presentViewController(alert, animated: true){}
     }
     
     func animateSuccess() {
