@@ -9,8 +9,16 @@
 import Foundation
 
 
-struct ButtonAction {
+struct MessageAction {
     let topic: String
     let message: String
     let description: String
+    
+    func send(client: Client) {
+        client.publish(self.topic, message: self.message)
+    }
+    
+    func send(client: Client, completion: ((ClientStatus) -> ())) {
+        client.publish(self.topic, message: self.message, completion: completion)
+    }
 }

@@ -7,31 +7,12 @@
 //
 
 import UIKit
-import NetworkExtension
-import Moscapsule
-
-func prefString(key: String) -> String {
-    return NSUserDefaults.standardUserDefaults().stringForKey(key)!
-}
-func prefInt(key: String) -> Int {
-    return NSUserDefaults.standardUserDefaults().integerForKey(key)
-}
-
-func appDelegate() -> AppDelegate {
-    let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    return delegate
-}
-
-func sharedClient() -> Client {
-    return appDelegate().client!
-}
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var client: Client?
-
+    var client: Client = SwitchingClient()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -39,17 +20,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let appDefaults = [
             "api_mqtt_url": "https://lab.duckson.nl/iot/api/mqtt",
             "mqtt_client_id": "homecontrol-app",
-            "mqtt_host": "homepi",
+            "mqtt_host": "MathBook-Pro",
             "mqtt_port": 1883
         ]
         
         NSUserDefaults.standardUserDefaults().registerDefaults(appDefaults)
         
-        self.client = createClient()
-        self.client?.connect(appDefaults)
+        self.client.connect(appDefaults)
         
-        let themeColor = UIColor(red: 251/255, green: 70/255, blue: 45/255, alpha: 1)
-        window?.tintColor = themeColor
+        // Customize tint color
+        window?.tintColor = UIColor(red: 251/255, green: 70/255, blue: 45/255, alpha: 1)
         
         return true
     }
@@ -75,9 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 
-        self.client!.disconnect()
+        self.client.disconnect()
     }
-
-
 }
 

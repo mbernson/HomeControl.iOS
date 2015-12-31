@@ -10,23 +10,25 @@ import UIKit
 import Moscapsule
 
 class SpeedDialViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    
     let columns: CGFloat = 2
-    let horizontalMargin: CGFloat = 10.0 // TODO: Replace hard-coded value with the minimum spacing property of the collection view
+    // TODO: Replace hard-coded value with the minimum spacing property of the collection view
+    let horizontalMargin: CGFloat = 10.0
     private let reuseIdentifier = "SpeedDialCell"
     
     // TODO: Replace hard-coded actions
-    private var actions: [ButtonAction] = [
-        ButtonAction(topic: "hildebrandpad/livingroom/lights/all", message: "on", description: "Alle lichten aan"),
-        ButtonAction(topic: "hildebrandpad/livingroom/lights/all", message: "off", description: "Alle lichten uit"),
+    private var actions: [MessageAction] = [
+        MessageAction(topic: "hildebrandpad/livingroom/lights/all", message: "on", description: "Alle lichten aan"),
+        MessageAction(topic: "hildebrandpad/livingroom/lights/all", message: "off", description: "Alle lichten uit"),
         
-        ButtonAction(topic: "hildebrandpad/livingroom/lights/staande_lamp", message: "on", description: "Staande lamp aan"),
-        ButtonAction(topic: "hildebrandpad/livingroom/lights/staande_lamp", message: "off", description: "Staande lamp uit"),
+        MessageAction(topic: "hildebrandpad/livingroom/lights/staande_lamp", message: "on", description: "Staande lamp aan"),
+        MessageAction(topic: "hildebrandpad/livingroom/lights/staande_lamp", message: "off", description: "Staande lamp uit"),
         
-        ButtonAction(topic: "hildebrandpad/livingroom/lights/bureaulamp", message: "on", description: "Bureaulamp aan"),
-        ButtonAction(topic: "hildebrandpad/livingroom/lights/bureaulamp", message: "off", description: "Bureaulamp uit"),
+        MessageAction(topic: "hildebrandpad/livingroom/lights/bureaulamp", message: "on", description: "Bureaulamp aan"),
+        MessageAction(topic: "hildebrandpad/livingroom/lights/bureaulamp", message: "off", description: "Bureaulamp uit"),
         
-        ButtonAction(topic: "hildebrandpad/livingroom/lights/bed_lampen", message: "on", description: "Bed lampen aan"),
-        ButtonAction(topic: "hildebrandpad/livingroom/lights/bed_lampen", message: "off", description: "Bed lampen uit"),
+        MessageAction(topic: "hildebrandpad/livingroom/lights/bed_lampen", message: "on", description: "Bed lampen aan"),
+        MessageAction(topic: "hildebrandpad/livingroom/lights/bed_lampen", message: "off", description: "Bed lampen uit"),
     ]
     
     var client: Client?
@@ -37,8 +39,8 @@ class SpeedDialViewController: UICollectionViewController, UICollectionViewDeleg
     }
     
     // Gets called from the SpeedDialCollectionViewCell
-    func performButtonAction(action: ButtonAction, completion: ((ClientStatus) -> ())) {
-        client?.publish(action.topic, message: action.message, completion: completion)
+    func performButtonAction(action: MessageAction, completion: ((ClientStatus) -> ())) {
+        action.send(client!, completion: completion)
     }
 
     // Delegate methods
@@ -67,7 +69,7 @@ class SpeedDialViewController: UICollectionViewController, UICollectionViewDeleg
 }
 
 class SpeedDialCollectionViewCell: UICollectionViewCell {
-    var action: ButtonAction!
+    var action: MessageAction!
     var viewController: SpeedDialViewController?
     
     @IBOutlet weak var button: UIButton!
@@ -83,14 +85,14 @@ class SpeedDialCollectionViewCell: UICollectionViewCell {
             animateEnd()
         } else {
             animateFailure()
-            showErrorMessage()
+            showAlert("Connection error", message:"The IoT service is unavailable or responded with an error.")
         }
     }
     
-    func showErrorMessage() {
-        let alert = UIAlertController(title: "Connection error", message:"The IoT service is unavailable or responded with an error.", preferredStyle: .Alert)
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: "Ok :(", style: .Default) { _ in })
-        viewController?.presentViewController(alert, animated: true){}
+        viewController?.presentViewController(alert, animated: true) {}
     }
     
     func animateSuccess() {
