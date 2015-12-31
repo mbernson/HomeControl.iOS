@@ -10,12 +10,8 @@ import UIKit
 
 // Convenience functions
 
-func prefString(key: String) -> String {
-    return NSUserDefaults.standardUserDefaults().stringForKey(key)!
-}
-
-func prefInt(key: String) -> Int {
-    return NSUserDefaults.standardUserDefaults().integerForKey(key)
+func userDefaults() -> NSUserDefaults {
+    return NSUserDefaults.standardUserDefaults()
 }
 
 func appDelegate() -> AppDelegate {

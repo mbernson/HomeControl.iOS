@@ -63,8 +63,7 @@ class SpeedDialViewController: UICollectionViewController, UICollectionViewDeleg
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         let cellWidth = (self.view.bounds.width / columns) - (horizontalMargin * columns) - horizontalMargin
-        let size: CGSize = CGSize(width: cellWidth, height: cellWidth)
-        return size
+        return CGSize(width: cellWidth, height: cellWidth)
     }
 }
 

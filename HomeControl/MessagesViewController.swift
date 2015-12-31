@@ -15,7 +15,7 @@ class MessagesViewController : UIViewController {
     var client: Client?
     
     var messageChoices = ["on", "off", "yes", "no"]
-    let default_message_choice = "on"
+    let defaultMessageChoice = "on"
     
     var enterCustomMessage: Bool = true
     
@@ -59,7 +59,7 @@ class MessagesViewController : UIViewController {
         if(messageTextField.hasText()) {
             return messageTextField.text!
         } else {
-            return default_message_choice
+            return defaultMessageChoice
         }
     }
 

@@ -32,13 +32,13 @@ enum ClientStatus {
 
 class SwitchingClient: NSObject, Client {
     
-    var actualClient: Client
+    var realClient: Client
     var localServerReachable: Reachability?, internetReachable: Reachability?
     var lastUsedOptions: NSDictionary?
     var listening: Bool = false
     
     override init() {
-        actualClient = HttpClient()
+        realClient = HttpClient()
         super.init()
     }
     
@@ -48,13 +48,9 @@ class SwitchingClient: NSObject, Client {
     
     private func startListening() {
         do {
-            let mqttServerHost = prefString("mqtt_host")
+            let mqttServerHost = userDefaults().stringForKey("mqtt_host")!
             localServerReachable = try Reachability(hostname: mqttServerHost)
-            
             internetReachable = try Reachability.reachabilityForInternetConnection()
-            
-//            localServerReachable?.whenReachable = self.switchToLocalConnection
-//            localServerReachable?.whenUnreachable = self.switchToProxyConnection
 
             NSNotificationCenter.defaultCenter().addObserver(self,
                 selector: "reachabilityChanged:",
@@ -72,10 +68,14 @@ class SwitchingClient: NSObject, Client {
     
     private func stopListening() {
         localServerReachable?.stopNotifier()
+        NSNotificationCenter.defaultCenter().removeObserver(self,
+            name: ReachabilityChangedNotification,
+            object: localServerReachable)
     }
     
     func reachabilityChanged(notification: NSNotification) {
         let reachability = notification.object as! Reachability
+        
         if reachability.isReachableViaWiFi() {
             self.switchToLocalConnection()
         } else {
@@ -84,30 +84,30 @@ class SwitchingClient: NSObject, Client {
     }
     
     private func switchToLocalConnection() {
-        if let _ = actualClient as? HttpClient {
+        if let _ = realClient as? HttpClient {
             NSLog("Local server became reachable")
-            self.actualClient.disconnect()
-            self.actualClient = AMQTTClient()
-            self.actualClient.connect(lastUsedOptions!)
+            self.realClient.disconnect()
+            self.realClient = AMQTTClient()
+            self.realClient.connect(lastUsedOptions!)
         }
     }
     
     private func switchToProxyConnection() {
-        if let _ = actualClient as? AMQTTClient {
+        if let _ = realClient as? AMQTTClient {
             NSLog("Local server became unreachable")
-            self.actualClient.disconnect()
-            self.actualClient = HttpClient()
-            self.actualClient.connect(lastUsedOptions!)
+            self.realClient.disconnect()
+            self.realClient = HttpClient()
+            self.realClient.connect(lastUsedOptions!)
         }
     }
 
     func publish(topic: String, message: String) {
-        actualClient.publish(topic, message: message)
+        realClient.publish(topic, message: message)
     }
     
     func publish(topic: String, message: String, completion: ((ClientStatus) -> ())) {
         if(internetReachable!.isReachable()) {
-            actualClient.publish(topic, message: message, completion: completion)
+            realClient.publish(topic, message: message, completion: completion)
         } else {
             completion(ClientStatus.Failure)
         }
@@ -115,14 +115,14 @@ class SwitchingClient: NSObject, Client {
     
     func connect(options: NSDictionary) {
         lastUsedOptions = options
-        actualClient.connect(options)
+        realClient.connect(options)
         if !listening {
             self.startListening()
         }
     }
     
     func disconnect() {
-        actualClient.disconnect()
+        realClient.disconnect()
     }
 }
 
@@ -149,17 +149,14 @@ class AMQTTClient: NSObject, Client {
     }
     
     func connect(options: NSDictionary) {
-        let mqttConfig = MQTTConfig(clientId: prefString("mqtt_client_id"), host: prefString("mqtt_host"), port: Int32(prefInt("mqtt_port")), keepAlive: 60)
+        let mqttConfig = MQTTConfig(
+            clientId: userDefaults().stringForKey("mqtt_client_id")!,
+            host: userDefaults().stringForKey("mqtt_host")!,
+            port: Int32(userDefaults().integerForKey("mqtt_port")),
+            keepAlive: 60
+        )
         
-        mqttConfig.onPublishCallback = { messageId in
-            NSLog("published (mid=\(messageId))")
-        }
-        
-        mqttConfig.onMessageCallback = { mqttMessage in
-            NSLog("MQTT Message received: payload=\(mqttMessage.payloadString)")
-        }
-        
-        // create new MQTT Connection
+        // Create new MQTT Connection
         mqttClient = MQTT.newConnection(mqttConfig)
         NSLog("MQTT connecting")
     }
@@ -204,8 +201,8 @@ class HttpClient: NSObject, Client {
     }
     
     func connect(options: NSDictionary) {
-        // We cannot access the preferences yet in init()
-        apiURL = prefString("api_mqtt_url")
+        // We cannot access the preferences in init() yet
+        apiURL = userDefaults().stringForKey("api_mqtt_url")!
         // No connection necessary
         NSLog("HTTP connecting")
     }

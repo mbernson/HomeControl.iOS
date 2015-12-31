@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let appDefaults = [
             "api_mqtt_url": "https://lab.duckson.nl/iot/api/mqtt",
             "mqtt_client_id": "homecontrol-app",
-            "mqtt_host": "MathBook-Pro",
+            "mqtt_host": "homepi",
             "mqtt_port": 1883
         ]
         
