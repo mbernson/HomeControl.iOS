@@ -10,7 +10,7 @@ import Foundation
 import Moscapsule
 import Alamofire
 import ReachabilitySwift
-import SystemConfiguration
+
 
 // MARK: Client protocol
 
@@ -28,23 +28,15 @@ enum ClientStatus {
     case Failure
 }
 
+
 // MARK: Network auto-switching client
 
 class SwitchingClient: NSObject, Client {
     
-    var realClient: Client
+    var realClient: Client = HttpClient()
     var localServerReachable: Reachability?, internetReachable: Reachability?
     var lastUsedOptions: NSDictionary?
     var listening: Bool = false
-    
-    override init() {
-        realClient = HttpClient()
-        super.init()
-    }
-    
-    deinit {
-        stopListening()
-    }
     
     private func startListening() {
         do {
@@ -71,6 +63,10 @@ class SwitchingClient: NSObject, Client {
         NSNotificationCenter.defaultCenter().removeObserver(self,
             name: ReachabilityChangedNotification,
             object: localServerReachable)
+    }
+    
+    deinit {
+        stopListening()
     }
     
     func reachabilityChanged(notification: NSNotification) {
@@ -100,6 +96,8 @@ class SwitchingClient: NSObject, Client {
             self.realClient.connect(lastUsedOptions!)
         }
     }
+    
+    // Client protocol implementation
 
     func publish(topic: String, message: String) {
         realClient.publish(topic, message: message)
@@ -125,6 +123,7 @@ class SwitchingClient: NSObject, Client {
         realClient.disconnect()
     }
 }
+
 
 // MARK: MQTT client
 
@@ -170,6 +169,7 @@ class AMQTTClient: NSObject, Client {
         disconnect()
     }
 }
+
 
 // MARK: HTTP proxied client
 

@@ -8,6 +8,18 @@
 
 import UIKit
 
+func appDefaults() -> NSDictionary {
+    let appDefaults = [
+        "api_mqtt_url": "https://lab.duckson.nl/iot/api/mqtt",
+        "mqtt_client_id": "homecontrol-app",
+        "mqtt_host": "homepi",
+        "mqtt_port": 1883
+    ]
+    
+    NSUserDefaults.standardUserDefaults().registerDefaults(appDefaults)
+    return appDefaults
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -17,16 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        let appDefaults = [
-            "api_mqtt_url": "https://lab.duckson.nl/iot/api/mqtt",
-            "mqtt_client_id": "homecontrol-app",
-            "mqtt_host": "homepi",
-            "mqtt_port": 1883
-        ]
-        
-        NSUserDefaults.standardUserDefaults().registerDefaults(appDefaults)
-        
-        self.client.connect(appDefaults)
+        self.client.connect(appDefaults())
         
         // Customize tint color
         window?.tintColor = UIColor(red: 251/255, green: 70/255, blue: 45/255, alpha: 1)
