@@ -12,8 +12,10 @@ import Moscapsule
 class SpeedDialViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     let columns: CGFloat = 2
+    
     // TODO: Replace hard-coded value with the minimum spacing property of the collection view
     let horizontalMargin: CGFloat = 10.0
+    
     private let reuseIdentifier = "SpeedDialCell"
     
     // TODO: Replace hard-coded actions
@@ -31,7 +33,7 @@ class SpeedDialViewController: UICollectionViewController, UICollectionViewDeleg
         MessageAction(topic: "hildebrandpad/livingroom/lights/bed_lampen", message: "off", description: "Bed lampen uit"),
     ]
     
-    var client: Client?
+    var client: HomeClient?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +41,7 @@ class SpeedDialViewController: UICollectionViewController, UICollectionViewDeleg
     }
     
     // Gets called from the SpeedDialCollectionViewCell
-    func performButtonAction(action: MessageAction, completion: ((ClientStatus) -> ())) {
+    func performButtonAction(action: MessageAction, completion: ((HomeClientStatus) -> ())) {
         action.send(client!, completion: completion)
     }
 
@@ -79,7 +81,7 @@ class SpeedDialCollectionViewCell: UICollectionViewCell {
         viewController?.performButtonAction(action, completion: self.actionWasSent)
     }
     
-    func actionWasSent(result: ClientStatus) {
+    func actionWasSent(result: HomeClientStatus) {
         if result == .Success {
             animateEnd()
         } else {

@@ -18,6 +18,6 @@ func appDelegate() -> AppDelegate {
     return UIApplication.sharedApplication().delegate as! AppDelegate
 }
 
-func sharedClient() -> Client {
+func sharedClient() -> HomeClient {
     return appDelegate().client
 }

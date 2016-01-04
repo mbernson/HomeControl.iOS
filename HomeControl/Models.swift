@@ -14,11 +14,11 @@ struct MessageAction {
     let message: String
     let description: String
     
-    func send(client: Client) {
+    func send(client: HomeClient) {
         client.publish(self.topic, message: self.message)
     }
     
-    func send(client: Client, completion: ((ClientStatus) -> ())) {
+    func send(client: HomeClient, completion: ((HomeClientStatus) -> ())) {
         client.publish(self.topic, message: self.message, completion: completion)
     }
 }

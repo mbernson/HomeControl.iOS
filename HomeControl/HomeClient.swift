@@ -1,5 +1,5 @@
 //
-//  Client.swift
+//  HomeClient.swift
 //  HomeControl
 //
 //  Created by Mathijs Bernson on 06/12/15.
@@ -12,28 +12,28 @@ import Alamofire
 import ReachabilitySwift
 
 
-// MARK: Client protocol
+// MARK: HomeClient protocol
 
-protocol Client {
+protocol HomeClient {
     func publish(topic: String, message: String)
-    func publish(topic: String, message: String, completion: ((ClientStatus) -> ()))
+    func publish(topic: String, message: String, completion: ((HomeClientStatus) -> ()))
     
     func connect(options: NSDictionary)
     func disconnect()
 }
 
 
-enum ClientStatus {
+enum HomeClientStatus {
     case Success
     case Failure
 }
 
 
-// MARK: Network auto-switching client
+// MARK: Network auto-switching HomeClient
 
-class SwitchingClient: NSObject, Client {
+class SwitchingHomeClient: NSObject, HomeClient {
     
-    var realClient: Client = HttpClient()
+    var realClient: HomeClient = HttpHomeClient()
     var localServerReachable: Reachability?, internetReachable: Reachability?
     var lastUsedOptions: NSDictionary?
     var listening: Bool = false
@@ -42,19 +42,21 @@ class SwitchingClient: NSObject, Client {
         do {
             let mqttServerHost = userDefaults().stringForKey("mqtt_host")!
             localServerReachable = try Reachability(hostname: mqttServerHost)
+            
             internetReachable = try Reachability.reachabilityForInternetConnection()
 
             NSNotificationCenter.defaultCenter().addObserver(self,
                 selector: "reachabilityChanged:",
                 name: ReachabilityChangedNotification,
-                object: localServerReachable)
+                object: localServerReachable
+            )
             
             try localServerReachable?.startNotifier()
             
             listening = true
             NSLog("Started listening for connectivity")
         } catch {
-            NSLog("Unable to create Reachability.")
+            NSLog("Unable to create or start Reachability.")
         }
     }
     
@@ -62,7 +64,8 @@ class SwitchingClient: NSObject, Client {
         localServerReachable?.stopNotifier()
         NSNotificationCenter.defaultCenter().removeObserver(self,
             name: ReachabilityChangedNotification,
-            object: localServerReachable)
+            object: localServerReachable
+        )
     }
     
     deinit {
@@ -80,34 +83,34 @@ class SwitchingClient: NSObject, Client {
     }
     
     private func switchToLocalConnection() {
-        if let _ = realClient as? HttpClient {
+        if let _ = realClient as? HttpHomeClient {
             NSLog("Local server became reachable")
             self.realClient.disconnect()
-            self.realClient = AMQTTClient()
+            self.realClient = MqttHomeClient()
             self.realClient.connect(lastUsedOptions!)
         }
     }
     
     private func switchToProxyConnection() {
-        if let _ = realClient as? AMQTTClient {
+        if let _ = realClient as? MqttHomeClient {
             NSLog("Local server became unreachable")
             self.realClient.disconnect()
-            self.realClient = HttpClient()
+            self.realClient = HttpHomeClient()
             self.realClient.connect(lastUsedOptions!)
         }
     }
     
-    // Client protocol implementation
+    // HomeClient protocol implementation
 
     func publish(topic: String, message: String) {
         realClient.publish(topic, message: message)
     }
     
-    func publish(topic: String, message: String, completion: ((ClientStatus) -> ())) {
+    func publish(topic: String, message: String, completion: ((HomeClientStatus) -> ())) {
         if(internetReachable!.isReachable()) {
             realClient.publish(topic, message: message, completion: completion)
         } else {
-            completion(ClientStatus.Failure)
+            completion(HomeClientStatus.Failure)
         }
     }
     
@@ -125,44 +128,42 @@ class SwitchingClient: NSObject, Client {
 }
 
 
-// MARK: MQTT client
+// MARK: MQTT HomeClient
 
-class AMQTTClient: NSObject, Client {
-    var mqttClient: MQTTClient?
+class MqttHomeClient: NSObject, HomeClient {
+    var mqtt: MQTTClient?
     
     func publish(topic: String, message: String) {
-        assert(mqttClient != nil, "Not connected to MQTT yet!")
-        mqttClient?.publishString(message, topic: topic, qos: 2, retain: false)
+        mqtt?.publishString(message, topic: topic, qos: 2, retain: false)
     }
     
-    func publish(topic: String, message: String, completion: ((ClientStatus) -> ())) {
-        assert(mqttClient != nil, "Not connected to MQTT yet!")
-        mqttClient?.publishString(message, topic: topic, qos: 2, retain: false, requestCompletion: { (result, _) in
+    func publish(topic: String, message: String, completion: ((HomeClientStatus) -> ())) {
+        mqtt?.publishString(message, topic: topic, qos: 2, retain: false, requestCompletion: { (result, _) in
             NSLog("result")
             if result == MosqResult.MOSQ_SUCCESS {
-                completion(ClientStatus.Success)
+                completion(HomeClientStatus.Success)
             } else {
-                completion(ClientStatus.Failure)
+                completion(HomeClientStatus.Failure)
             }
         })
     }
     
     func connect(options: NSDictionary) {
         let mqttConfig = MQTTConfig(
-            clientId: userDefaults().stringForKey("mqtt_client_id")!,
+            clientId: userDefaults().stringForKey("mqtt_HomeClient_id")!,
             host: userDefaults().stringForKey("mqtt_host")!,
             port: Int32(userDefaults().integerForKey("mqtt_port")),
             keepAlive: 60
         )
         
         // Create new MQTT Connection
-        mqttClient = MQTT.newConnection(mqttConfig)
+        mqtt = MQTT.newConnection(mqttConfig)
         NSLog("MQTT connecting")
     }
     
     func disconnect() {
         NSLog("MQTT disconnecting")
-        mqttClient?.disconnect()
+        mqtt?.disconnect()
     }
     
     deinit {
@@ -171,13 +172,13 @@ class AMQTTClient: NSObject, Client {
 }
 
 
-// MARK: HTTP proxied client
+// MARK: HTTP proxied HomeClient
 
-class HttpClient: NSObject, Client {
+class HttpHomeClient: NSObject, HomeClient {
     var apiURL: String?
     
     func publish(topic: String, message: String) {
-        NSLog("httpclient publish")
+        NSLog("httpHomeClient publish")
         
         Alamofire.request(.POST, apiURL!, parameters: [
             "topic": topic,
@@ -185,17 +186,17 @@ class HttpClient: NSObject, Client {
         ])
     }
     
-    func publish(topic: String, message: String, completion: ((ClientStatus) -> ())) {
-        NSLog("httpclient publish with callback")
+    func publish(topic: String, message: String, completion: ((HomeClientStatus) -> ())) {
+        NSLog("httpHomeClient publish with callback")
         
         Alamofire.request(.POST, apiURL!, parameters: [
             "topic": topic,
             "message": message
         ]).responseJSON { response in
             if response.result.isSuccess {
-                completion(ClientStatus.Success)
+                completion(HomeClientStatus.Success)
             } else {
-                completion(ClientStatus.Failure)
+                completion(HomeClientStatus.Failure)
             }
         }
     }

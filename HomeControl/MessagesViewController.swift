@@ -12,7 +12,7 @@ import Moscapsule
 
 class MessagesViewController : UIViewController {
     
-    var client: Client?
+    var client: HomeClient?
     
     var messageChoices = ["on", "off", "yes", "no"]
     let defaultMessageChoice = "on"

@@ -20,7 +20,7 @@
 		D5A06C7F1C11AB0300664494 /* HomeControlUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A06C7E1C11AB0300664494 /* HomeControlUITests.swift */; };
 		D5A06C8D1C11AB9F00664494 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A06C8C1C11AB9F00664494 /* MessagesViewController.swift */; };
 		D5B3BB981C1441FC004C5D96 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B3BB971C1441FC004C5D96 /* Models.swift */; };
-		D5B3BB9A1C1442AA004C5D96 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B3BB991C1442AA004C5D96 /* Client.swift */; };
+		D5B3BB9A1C1442AA004C5D96 /* HomeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B3BB991C1442AA004C5D96 /* HomeClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,7 +62,7 @@
 		D5A06C801C11AB0300664494 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5A06C8C1C11AB9F00664494 /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		D5B3BB971C1441FC004C5D96 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
-		D5B3BB991C1442AA004C5D96 /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		D5B3BB991C1442AA004C5D96 /* HomeClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,10 +111,10 @@
 		D50912AB1C134817009BFC9A /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				D5A06C8C1C11AB9F00664494 /* MessagesViewController.swift */,
 				D50912A91C134803009BFC9A /* SpeedDialViewController.swift */,
-				D50912AD1C134830009BFC9A /* SettingsViewController.swift */,
+				D5A06C8C1C11AB9F00664494 /* MessagesViewController.swift */,
 				D52E04341C134BBC00054AF8 /* EventsViewController.swift */,
+				D50912AD1C134830009BFC9A /* SettingsViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -158,7 +158,7 @@
 				D50912AC1C134821009BFC9A /* User interface */,
 				D5A06C651C11AB0200664494 /* Assets.xcassets */,
 				D5A06C6A1C11AB0200664494 /* Info.plist */,
-				D5B3BB991C1442AA004C5D96 /* Client.swift */,
+				D5B3BB991C1442AA004C5D96 /* HomeClient.swift */,
 				D5B3BB971C1441FC004C5D96 /* Models.swift */,
 				D5005FBD1C34427400A071A4 /* Utility.swift */,
 			);
@@ -374,7 +374,7 @@
 				D5A06C8D1C11AB9F00664494 /* MessagesViewController.swift in Sources */,
 				D5005FBE1C34427400A071A4 /* Utility.swift in Sources */,
 				D50912AE1C134830009BFC9A /* SettingsViewController.swift in Sources */,
-				D5B3BB9A1C1442AA004C5D96 /* Client.swift in Sources */,
+				D5B3BB9A1C1442AA004C5D96 /* HomeClient.swift in Sources */,
 				D52E04351C134BBC00054AF8 /* EventsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
