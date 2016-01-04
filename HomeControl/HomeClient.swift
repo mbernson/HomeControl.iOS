@@ -18,7 +18,7 @@ protocol HomeClient {
     func publish(topic: String, message: String)
     func publish(topic: String, message: String, completion: ((HomeClientStatus) -> ()))
     
-    func connect(options: NSDictionary)
+    func connect()
     func disconnect()
 }
 
@@ -35,7 +35,6 @@ class SwitchingHomeClient: NSObject, HomeClient {
     
     var realClient: HomeClient = HttpHomeClient()
     var localServerReachable: Reachability?, internetReachable: Reachability?
-    var lastUsedOptions: NSDictionary?
     var listening: Bool = false
     
     private func startListening() {
@@ -87,7 +86,7 @@ class SwitchingHomeClient: NSObject, HomeClient {
             NSLog("Local server became reachable")
             self.realClient.disconnect()
             self.realClient = MqttHomeClient()
-            self.realClient.connect(lastUsedOptions!)
+            self.realClient.connect()
         }
     }
     
@@ -96,7 +95,7 @@ class SwitchingHomeClient: NSObject, HomeClient {
             NSLog("Local server became unreachable")
             self.realClient.disconnect()
             self.realClient = HttpHomeClient()
-            self.realClient.connect(lastUsedOptions!)
+            self.realClient.connect()
         }
     }
     
@@ -114,9 +113,8 @@ class SwitchingHomeClient: NSObject, HomeClient {
         }
     }
     
-    func connect(options: NSDictionary) {
-        lastUsedOptions = options
-        realClient.connect(options)
+    func connect() {
+        realClient.connect()
         if !listening {
             self.startListening()
         }
@@ -148,7 +146,7 @@ class MqttHomeClient: NSObject, HomeClient {
         })
     }
     
-    func connect(options: NSDictionary) {
+    func connect() {
         let mqttConfig = MQTTConfig(
             clientId: userDefaults().stringForKey("mqtt_HomeClient_id")!,
             host: userDefaults().stringForKey("mqtt_host")!,
@@ -201,7 +199,7 @@ class HttpHomeClient: NSObject, HomeClient {
         }
     }
     
-    func connect(options: NSDictionary) {
+    func connect() {
         // We cannot access the preferences in init() yet
         apiURL = userDefaults().stringForKey("api_mqtt_url")!
         // No connection necessary
