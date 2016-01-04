@@ -131,12 +131,14 @@ class SwitchingHomeClient: NSObject, HomeClient {
 class MqttHomeClient: NSObject, HomeClient {
     var mqtt: MQTTClient?
     
+    let qos: Int32 = 2 // The broker/client will deliver the message exactly once by using a four step handshake.
+    
     func publish(topic: String, message: String) {
-        mqtt?.publishString(message, topic: topic, qos: 2, retain: false)
+        mqtt?.publishString(message, topic: topic, qos: qos, retain: false)
     }
     
     func publish(topic: String, message: String, completion: ((HomeClientStatus) -> ())) {
-        mqtt?.publishString(message, topic: topic, qos: 2, retain: false, requestCompletion: { (result, _) in
+        mqtt?.publishString(message, topic: topic, qos: qos, retain: false, requestCompletion: { (result, _) in
             NSLog("result")
             if result == MosqResult.MOSQ_SUCCESS {
                 completion(HomeClientStatus.Success)
@@ -148,7 +150,7 @@ class MqttHomeClient: NSObject, HomeClient {
     
     func connect() {
         let mqttConfig = MQTTConfig(
-            clientId: userDefaults().stringForKey("mqtt_HomeClient_id")!,
+            clientId: userDefaults().stringForKey("mqtt_client_id")!,
             host: userDefaults().stringForKey("mqtt_host")!,
             port: Int32(userDefaults().integerForKey("mqtt_port")),
             keepAlive: 60

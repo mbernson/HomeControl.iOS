@@ -31,6 +31,9 @@ class SpeedDialViewController: UICollectionViewController, UICollectionViewDeleg
         
         MessageAction(topic: "hildebrandpad/livingroom/lights/bed_lampen", message: "on", description: "Bed lampen aan"),
         MessageAction(topic: "hildebrandpad/livingroom/lights/bed_lampen", message: "off", description: "Bed lampen uit"),
+        
+        MessageAction(topic: "test", message: "on", description: "Test aan"),
+        MessageAction(topic: "test", message: "off", description: "Test uit"),
     ]
     
     var client: HomeClient?
