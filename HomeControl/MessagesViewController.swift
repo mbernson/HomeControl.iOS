@@ -34,7 +34,7 @@ class MessagesViewController : UIViewController {
     @IBAction func sendButtonPressed(sender: AnyObject) {
         self.messageTextField.resignFirstResponder()
         assert(client != nil, "No client to send the message to")
-        client?.publish(topic(), message: message())
+        client?.publish(topic(), message: message(), retain: false)
     }
     
     @IBAction func viewWasTapped(sender: AnyObject) {

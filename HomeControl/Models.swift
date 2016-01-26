@@ -15,10 +15,10 @@ struct MessageAction {
     let description: String
     
     func send(client: HomeClient) {
-        client.publish(self.topic, message: self.message)
+        client.publish(self.topic, message: self.message, retain: true)
     }
     
-    func send(client: HomeClient, completion: ((HomeClientStatus) -> ())) {
-        client.publish(self.topic, message: self.message, completion: completion)
+    func send(client: HomeClient, completion: HomeClientStatus -> Void) {
+        client.publish(self.topic, message: self.message, retain: true, completion: completion)
     }
 }

@@ -15,8 +15,8 @@ import ReachabilitySwift
 // MARK: HomeClient protocol
 
 protocol HomeClient {
-    func publish(topic: String, message: String)
-    func publish(topic: String, message: String, completion: ((HomeClientStatus) -> ()))
+    func publish(topic: String, message: String, retain: Bool)
+    func publish(topic: String, message: String, retain: Bool, completion: ((HomeClientStatus) -> ()))
     
     func connect()
     func disconnect()
@@ -101,13 +101,13 @@ class SwitchingHomeClient: NSObject, HomeClient {
     
     // HomeClient protocol implementation
 
-    func publish(topic: String, message: String) {
-        realClient.publish(topic, message: message)
+    func publish(topic: String, message: String, retain: Bool) {
+        realClient.publish(topic, message: message, retain: retain)
     }
     
-    func publish(topic: String, message: String, completion: ((HomeClientStatus) -> ())) {
+    func publish(topic: String, message: String, retain: Bool, completion: ((HomeClientStatus) -> ())) {
         if(internetReachable!.isReachable()) {
-            realClient.publish(topic, message: message, completion: completion)
+            realClient.publish(topic, message: message, retain: retain, completion: completion)
         } else {
             completion(HomeClientStatus.Failure)
         }
@@ -128,17 +128,17 @@ class SwitchingHomeClient: NSObject, HomeClient {
 
 // MARK: MQTT HomeClient
 
-class MqttHomeClient: NSObject, HomeClient {
+class MqttHomeClient: HomeClient {
     var mqtt: MQTTClient?
     
     let qos: Int32 = 2 // The broker/client will deliver the message exactly once by using a four step handshake.
     
-    func publish(topic: String, message: String) {
-        mqtt?.publishString(message, topic: topic, qos: qos, retain: false)
+    func publish(topic: String, message: String, retain: Bool = false) {
+        mqtt?.publishString(message, topic: topic, qos: qos, retain: retain)
     }
     
-    func publish(topic: String, message: String, completion: ((HomeClientStatus) -> ())) {
-        mqtt?.publishString(message, topic: topic, qos: qos, retain: false, requestCompletion: { (result, _) in
+    func publish(topic: String, message: String, retain: Bool, completion: ((HomeClientStatus) -> ())) {
+        mqtt?.publishString(message, topic: topic, qos: qos, retain: retain, requestCompletion: { (result, _) in
             NSLog("result")
             if result == MosqResult.MOSQ_SUCCESS {
                 completion(HomeClientStatus.Success)
@@ -174,36 +174,39 @@ class MqttHomeClient: NSObject, HomeClient {
 
 // MARK: HTTP proxied HomeClient
 
-class HttpHomeClient: NSObject, HomeClient {
+class HttpHomeClient: HomeClient {
     var apiURL: String?
     
-    func publish(topic: String, message: String) {
+    func publish(topic: String, message: String, retain: Bool = false) {
         NSLog("httpHomeClient publish")
         
         Alamofire.request(.POST, apiURL!, parameters: [
             "topic": topic,
-            "message": message
+            "message": message,
+            "retain": retain
         ])
     }
     
-    func publish(topic: String, message: String, completion: ((HomeClientStatus) -> ())) {
+    func publish(topic: String, message: String, retain: Bool, completion: ((HomeClientStatus) -> ())) {
         NSLog("httpHomeClient publish with callback")
         
         Alamofire.request(.POST, apiURL!, parameters: [
             "topic": topic,
-            "message": message
+            "message": message,
+            "retain": retain
         ]).responseJSON { response in
             if response.result.isSuccess {
-                completion(HomeClientStatus.Success)
+                completion(.Success)
             } else {
-                completion(HomeClientStatus.Failure)
+                completion(.Failure)
             }
         }
     }
     
     func connect() {
-        // We cannot access the preferences in init() yet
+        // We cannot access the preferences yet when init() runs...
         apiURL = userDefaults().stringForKey("api_mqtt_url")!
+        
         // No connection necessary
         NSLog("HTTP connecting")
     }
