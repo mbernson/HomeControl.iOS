@@ -9,6 +9,10 @@ target 'HomeControl' do
 
     pod 'ReachabilitySwift', git: 'https://github.com/ashleymills/Reachability.swift'
     pod 'Alamofire', '~> 3.0'
+    pod 'Promissum'
+    pod 'Promissum/Alamofire'
+
+    pod 'R.swift'
 end
 
 target 'HomeControlTests' do

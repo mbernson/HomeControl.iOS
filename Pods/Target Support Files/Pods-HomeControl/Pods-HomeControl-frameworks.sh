@@ -86,10 +86,14 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-HomeControl/Alamofire.framework"
   install_framework "Pods-HomeControl/Moscapsule.framework"
+  install_framework "Pods-HomeControl/Promissum.framework"
+  install_framework "Pods-HomeControl/Rswift.framework"
   install_framework "Pods-HomeControl/ReachabilitySwift.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-HomeControl/Alamofire.framework"
   install_framework "Pods-HomeControl/Moscapsule.framework"
+  install_framework "Pods-HomeControl/Promissum.framework"
+  install_framework "Pods-HomeControl/Rswift.framework"
   install_framework "Pods-HomeControl/ReachabilitySwift.framework"
 fi

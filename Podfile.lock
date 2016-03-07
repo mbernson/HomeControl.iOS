@@ -1,13 +1,25 @@
 PODS:
-  - Alamofire (3.1.3)
+  - Alamofire (3.2.1)
   - Moscapsule (0.5.1)
-  - OpenSSL-Universal (1.0.1.p)
+  - OpenSSL-Universal (1.0.1.17)
+  - Promissum (0.5.0):
+    - Promissum/Core (= 0.5.0)
+  - Promissum/Alamofire (0.5.0):
+    - Alamofire (~> 3.0)
+    - Promissum/Core
+  - Promissum/Core (0.5.0)
+  - R.swift (1.3.0):
+    - R.swift.Library (~> 1.1.0)
+  - R.swift.Library (1.1.0)
   - ReachabilitySwift (2.3.3)
 
 DEPENDENCIES:
   - Alamofire (~> 3.0)
   - Moscapsule (from `https://github.com/flightonary/Moscapsule.git`)
   - OpenSSL-Universal (~> 1.0.1.l)
+  - Promissum
+  - Promissum/Alamofire
+  - R.swift
   - ReachabilitySwift (from `https://github.com/ashleymills/Reachability.swift`)
 
 EXTERNAL SOURCES:
@@ -18,16 +30,19 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   Moscapsule:
-    :commit: 0a27f73202b91846d4ea6dcee1f2c18e24c52136
+    :commit: 6f3eb451312baead2c1020c428d8ab147843feaf
     :git: https://github.com/flightonary/Moscapsule.git
   ReachabilitySwift:
-    :commit: 217ba79579efbfebd66691666b782ecd04fe5f5b
+    :commit: cf126c0584a209143c75bf1d0f23fd904891e26e
     :git: https://github.com/ashleymills/Reachability.swift
 
 SPEC CHECKSUMS:
-  Alamofire: 9f93b56389e48def9220dd57d1f44b1927229a5a
+  Alamofire: f11d8624a05f5d39e0c99309b3e600a3ba64298a
   Moscapsule: e80b7d3d6ac34706731cfdbe65fbf1d731fad88a
-  OpenSSL-Universal: 8746d6f33874f85a30f5be1dc6e696d1b2ebcf01
+  OpenSSL-Universal: b3c4ab9bbc3e4978caf9e838c8589f1f537244b4
+  Promissum: 178ef117f446ed62e92e58cfbf8dd01bf543dad1
+  R.swift: 43f8a833dd8cbb4a19908cbfd37fb982e9147899
+  R.swift.Library: 775f3086e07313ed1a1dfddca8418317f5a87397
   ReachabilitySwift: e0f6b6f280effb47731acfaaa2d5ffe223703793
 
 COCOAPODS: 0.39.0
