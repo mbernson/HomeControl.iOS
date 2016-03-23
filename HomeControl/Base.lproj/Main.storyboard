@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="k1f-Nc-b2o">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="k1f-Nc-b2o">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -147,64 +147,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="925" y="400"/>
-        </scene>
-        <!--Speed Dial-->
-        <scene sceneID="vaw-G8-hJc">
-            <objects>
-                <collectionViewController id="7Hm-Al-0sQ" customClass="SpeedDialViewController" customModule="HomeControl" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="2be-UJ-nFp">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="20" id="Mo7-Nd-eid">
-                            <size key="itemSize" width="160" height="160"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="20" minY="40" maxX="20" maxY="60"/>
-                        </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SpeedDialCell" id="oDj-ad-UHi" customClass="SpeedDialCollectionViewCell" customModule="HomeControl" customModuleProvider="target">
-                                <rect key="frame" x="20" y="40" width="160" height="160"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s3E-qQ-NaC">
-                                            <rect key="frame" x="8" y="8" width="144" height="144"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                            <state key="normal" title="Button">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="buttonTouchedUp:" destination="oDj-ad-UHi" eventType="touchUpInside" id="ZcT-W5-WKb"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </view>
-                                <constraints>
-                                    <constraint firstItem="s3E-qQ-NaC" firstAttribute="leading" secondItem="oDj-ad-UHi" secondAttribute="leadingMargin" id="ENP-iD-VwJ"/>
-                                    <constraint firstAttribute="bottomMargin" secondItem="s3E-qQ-NaC" secondAttribute="bottom" id="Gie-RF-0sH"/>
-                                    <constraint firstAttribute="trailingMargin" secondItem="s3E-qQ-NaC" secondAttribute="trailing" id="hHL-F2-g3r"/>
-                                    <constraint firstItem="s3E-qQ-NaC" firstAttribute="top" secondItem="oDj-ad-UHi" secondAttribute="topMargin" id="ibs-fx-K3L"/>
-                                </constraints>
-                                <connections>
-                                    <outlet property="button" destination="s3E-qQ-NaC" id="Dn7-Xm-vc1"/>
-                                </connections>
-                            </collectionViewCell>
-                        </cells>
-                        <connections>
-                            <outlet property="dataSource" destination="7Hm-Al-0sQ" id="sEb-8E-m4r"/>
-                            <outlet property="delegate" destination="7Hm-Al-0sQ" id="C6y-cJ-MGs"/>
-                        </connections>
-                    </collectionView>
-                    <tabBarItem key="tabBarItem" title="Speed Dial" image="dialpad" id="Fst-qE-E8m"/>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YRn-Ck-C8V" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="925" y="-281"/>
+            <point key="canvasLocation" x="1561" y="940"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="M9I-Hg-bab">
@@ -216,17 +159,42 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="7Hm-Al-0sQ" kind="relationship" relationship="viewControllers" id="au8-ML-L5A"/>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="vvI-YC-a7O"/>
+                        <segue destination="8CG-Ie-mVS" kind="relationship" relationship="viewControllers" id="fos-tQ-jGg"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZuT-hE-Sio" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="102" y="749"/>
+            <point key="canvasLocation" x="-372" y="749"/>
+        </scene>
+        <!--Dashboard-->
+        <scene sceneID="EbV-Di-9UQ">
+            <objects>
+                <navigationController id="8CG-Ie-mVS" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Dashboard" id="feK-ph-Tnw"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="TRF-ad-dz0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="vD6-SH-rr9" kind="relationship" relationship="rootViewController" id="aid-vh-F8t"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dah-ry-lll" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="336" y="749"/>
+        </scene>
+        <!--Dashboard-->
+        <scene sceneID="1vq-Vf-IlM">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Dashboard" id="vD6-SH-rr9" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="vmh-kZ-VtA"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aS9-MM-3gu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="849.5" y="474"/>
         </scene>
     </scenes>
     <resources>
-        <image name="dialpad" width="25" height="25"/>
         <image name="envelope" width="25" height="16"/>
     </resources>
 </document>

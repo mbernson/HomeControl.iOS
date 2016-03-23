@@ -14,23 +14,23 @@ class HttpHomeClient: HomeClient {
     return userDefaults().stringForKey("api_mqtt_url")
   }()
   
-  func publish(topic: String, message: String, retain: Bool = false) {
+  func publish(message: Message) {
     NSLog("httpHomeClient publish")
     
     Alamofire.request(.POST, apiURL!, parameters: [
-      "topic": topic,
-      "message": message,
-      "retain": retain
+      "topic": message.topic,
+      "message": message.payload,
+      "retain": message.retain
     ])
   }
 
-  func publish(topic: String, message: String, retain: Bool, completion: ((HomeClientStatus) -> ())) {
+  func publish(message: Message, completion: HomeClientStatus -> Void) {
     NSLog("httpHomeClient publish with callback")
 
     Alamofire.request(.POST, apiURL!, parameters: [
-      "topic": topic,
-      "message": message,
-      "retain": retain
+      "topic": message.topic,
+      "message": message.payload,
+      "retain": message.retain
     ]).responseJSON { response in
       if response.result.isSuccess {
         completion(.Success)
@@ -39,7 +39,15 @@ class HttpHomeClient: HomeClient {
       }
     }
   }
-  
+
+  func subscribe(topic: Topic, listener: HomeClientListener) {
+    fatalError("Not implmemented")
+  }
+
+  func unsubscribe(topic: Topic) {
+    fatalError("Not implmemented")
+  }
+
   func connect() {
     // No connection necessary
     NSLog("HTTP connecting")

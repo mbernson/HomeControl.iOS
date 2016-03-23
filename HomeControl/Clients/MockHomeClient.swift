@@ -9,18 +9,27 @@
 import Foundation
 
 class MockHomeClient: HomeClient {
-  func publish(topic: String, message: String, retain: Bool) {
+  func publish(message: Message) {
     print("MockHomeClient published a message")
-    print("topic: '\(topic)'")
-    print("message: '\(message)'")
-    print("retain: '\(retain)'")
+    print("topic: '\(message.topic)'")
+    print("message: '\(message.payload)'")
+    print("retain: '\(message.retain)'")
   }
-  func publish(topic: String, message: String, retain: Bool, completion: ((HomeClientStatus) -> ())) {
+
+  func publish(message: Message, completion: HomeClientStatus -> Void) {
     print("MockHomeClient published a message with callback")
-    print("topic: '\(topic)'")
-    print("message: '\(message)'")
-    print("retain: '\(retain)'")
+    print("topic: '\(message.topic)'")
+    print("message: '\(message.payload)'")
+    print("retain: '\(message.retain)'")
     completion(HomeClientStatus.Success)
+  }
+
+  func subscribe(topic: Topic, listener: HomeClientListener) {
+    fatalError("Not implmemented")
+  }
+
+  func unsubscribe(topic: Topic) {
+    fatalError("Not implmemented")
   }
   
   func connect() {

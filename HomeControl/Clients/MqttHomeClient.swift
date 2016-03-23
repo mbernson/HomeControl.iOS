@@ -10,17 +10,16 @@ import Foundation
 import Moscapsule
 
 class MqttHomeClient: HomeClient {
-  var mqtt: MQTTClient?
+  private var mqtt: MQTTClient?
   
-  let qos: Int32 = 2 // The broker/client will deliver the message exactly once by using a four step handshake.
+  private let keepAlive: Int32 = 60
   
-  func publish(topic: String, message: String, retain: Bool = false) {
-    mqtt?.publishString(message, topic: topic, qos: qos, retain: retain)
+  func publish(message: Message) {
+    mqtt?.publishString(message.payload, topic: message.topic, qos: Int32(message.qos), retain: message.retain)
   }
   
-  func publish(topic: String, message: String, retain: Bool, completion: ((HomeClientStatus) -> ())) {
-    mqtt?.publishString(message, topic: topic, qos: qos, retain: retain, requestCompletion: { (result, _) in
-      NSLog("result")
+  func publish(message: Message, completion: HomeClientStatus -> Void) {
+    mqtt?.publishString(message.payload, topic: message.topic, qos: Int32(message.qos), retain: message.retain, requestCompletion: { (result, _) in
       if result == MosqResult.MOSQ_SUCCESS {
         completion(HomeClientStatus.Success)
       } else {
@@ -28,13 +27,21 @@ class MqttHomeClient: HomeClient {
       }
     })
   }
+
+  func subscribe(topic: Topic, listener: HomeClientListener) {
+    fatalError("Not implmemented")
+  }
+
+  func unsubscribe(topic: Topic) {
+    fatalError("Not implmemented") 
+  }
   
   func connect() {
     let mqttConfig = MQTTConfig(
       clientId: userDefaults().stringForKey("mqtt_client_id")!,
       host: userDefaults().stringForKey("mqtt_host")!,
       port: Int32(userDefaults().integerForKey("mqtt_port")),
-      keepAlive: 60
+      keepAlive: keepAlive
     )
     
     // Create new MQTT Connection
@@ -45,9 +52,5 @@ class MqttHomeClient: HomeClient {
   func disconnect() {
     NSLog("MQTT disconnecting")
     mqtt?.disconnect()
-  }
-  
-  deinit {
-    disconnect()
   }
 }

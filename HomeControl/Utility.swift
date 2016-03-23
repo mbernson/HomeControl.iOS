@@ -11,13 +11,13 @@ import UIKit
 // Convenience functions
 
 func userDefaults() -> NSUserDefaults {
-    return NSUserDefaults.standardUserDefaults()
+  return NSUserDefaults.standardUserDefaults()
 }
 
 func appDelegate() -> AppDelegate {
-    return UIApplication.sharedApplication().delegate as! AppDelegate
+  return UIApplication.sharedApplication().delegate as! AppDelegate
 }
 
 func sharedClient() -> HomeClient {
-    return appDelegate().client
+  return appDelegate().client
 }

@@ -23,13 +23,13 @@ class SwitchingHomeClient: HomeClient {
       internetReachable = try Reachability.reachabilityForInternetConnection()
       
 //      NSNotificationCenter.defaultCenter().addObserver(self,
-//        selector: "reachabilityChanged:",
+//        selector: "reachabilityChanged",
 //        name: ReachabilityChangedNotification,
 //        object: localServerReachable
 //      )
 
-      try localServerReachable?.startNotifier()
-      
+//      try localServerReachable?.startNotifier()
+
       listening = true
       NSLog("Started listening for connectivity")
     } catch {
@@ -76,18 +76,31 @@ class SwitchingHomeClient: HomeClient {
   
   // HomeClient protocol implementation
   
-  func publish(topic: String, message: String, retain: Bool) {
-    realClient.publish(topic, message: message, retain: retain)
+  func publish(message: Message) {
+    realClient.publish(message)
   }
-  
-  func publish(topic: String, message: String, retain: Bool, completion: ((HomeClientStatus) -> ())) {
+
+  func publish(message: Message, completion: HomeClientStatus -> Void) {
     if(internetReachable!.isReachable()) {
-      realClient.publish(topic, message: message, retain: retain, completion: completion)
+      realClient.publish(message, completion: completion)
     } else {
       completion(HomeClientStatus.Failure)
     }
   }
-  
+
+  func subscribe(topic: Topic, listener: HomeClientListener) {
+    if(internetReachable!.isReachable()) {
+      realClient.subscribe(topic, listener: listener)
+    } else {
+      fatalError("WARNING: did not subscribe because the network is unreachable!")
+//      callback(HomeClientStatus.Failure)
+    }
+  }
+
+  func unsubscribe(topic: Topic) {
+    fatalError("Not implmemented")
+  }
+
   func connect() {
     realClient.connect()
     if !listening {

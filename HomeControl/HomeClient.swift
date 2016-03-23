@@ -7,23 +7,25 @@
 //
 
 import Foundation
-import Moscapsule
-import Alamofire
-import ReachabilitySwift
 
-
-// MARK: HomeClient protocol
+typealias Topic = String
 
 protocol HomeClient {
-    func publish(topic: String, message: String, retain: Bool)
-    func publish(topic: String, message: String, retain: Bool, completion: ((HomeClientStatus) -> ()))
-    
-    func connect()
-    func disconnect()
+  func publish(message: Message)
+  func publish(message: Message, completion: HomeClientStatus -> Void)
+
+  func subscribe(topic: Topic, listener: HomeClientListener)
+  func unsubscribe(topic: Topic)
+
+  func connect()
+  func disconnect()
 }
 
+protocol HomeClientListener {
+  func onMessage(message: Message)
+}
 
 enum HomeClientStatus {
-    case Success
-    case Failure
+  case Success
+  case Failure
 }
