@@ -12,15 +12,17 @@ PODS:
     - R.swift.Library (~> 1.1.0)
   - R.swift.Library (1.1.0)
   - ReachabilitySwift (2.3.3)
+  - RxSwift (2.3.1)
 
 DEPENDENCIES:
   - Alamofire (~> 3.0)
   - Moscapsule (from `https://github.com/flightonary/Moscapsule.git`)
   - OpenSSL-Universal (~> 1.0.1.l)
-  - Promissum
+  - Promissum (~> 0.5)
   - Promissum/Alamofire
   - R.swift
   - ReachabilitySwift (from `https://github.com/ashleymills/Reachability.swift`)
+  - RxSwift (~> 2.3.1)
 
 EXTERNAL SOURCES:
   Moscapsule:
@@ -44,5 +46,6 @@ SPEC CHECKSUMS:
   R.swift: 43f8a833dd8cbb4a19908cbfd37fb982e9147899
   R.swift.Library: 775f3086e07313ed1a1dfddca8418317f5a87397
   ReachabilitySwift: e0f6b6f280effb47731acfaaa2d5ffe223703793
+  RxSwift: 829b2843e9eddc77a02cb3f5117f0d55f8f646f1
 
 COCOAPODS: 0.39.0
