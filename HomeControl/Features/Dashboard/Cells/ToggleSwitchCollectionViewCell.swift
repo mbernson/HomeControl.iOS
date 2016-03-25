@@ -10,9 +10,16 @@ import UIKit
 
 class ToggleSwitchCollectionViewCell: DashboardCollectionViewCell {
 
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    // Initialization code
+  @IBOutlet weak var titleLabel: UILabel!
+  @IBOutlet weak var toggleSwitch: UISwitch!
+
+  @IBAction func switchValueDidChange(sender: AnyObject) {
+    guard let action = action else { return }
+    send()
   }
 
+  func didReceiveMessage(message: Message) {
+    print("ToggleSwitchCollectionViewCell didReceiveMessage")
+    toggleSwitch.setOn(message.isTruthy(), animated: true)
+  }
 }

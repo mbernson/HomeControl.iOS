@@ -13,7 +13,7 @@ import DataMapper
 let appDefaults = [
   "api_mqtt_url": "https://lab.duckson.nl/iot/api/mqtt",
   "mqtt_client_id": "homecontrol-app",
-  "mqtt_host": "homepi",
+  "mqtt_host": "localhost",
   "mqtt_port": 1883
 ]
 
@@ -21,14 +21,14 @@ let appDefaults = [
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
-  var client: HomeClient = SwitchingHomeClient()
+//  var client: HomeClient = SwitchingHomeClient()
   let repository: Repository = SqliteRepository()
 
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     // Override point for customization after application launch.
 
     NSUserDefaults.standardUserDefaults().registerDefaults(appDefaults)
-    self.client.connect()
+//    self.client.connect()
 
     // Customize tint color
     window?.tintColor = UIColor(red: 251/255, green: 70/255, blue: 45/255, alpha: 1)
@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 
-    self.client.disconnect()
+//    self.client.disconnect()
   }
 
   func applicationDidEnterBackground(application: UIApplication) {
@@ -55,13 +55,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func applicationDidBecomeActive(application: UIApplication) {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 
-    self.client.connect()
+//    self.client.connect()
   }
 
   func applicationWillTerminate(application: UIApplication) {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 
-    self.client.disconnect()
+//    self.client.disconnect()
   }
 }
 

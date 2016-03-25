@@ -23,8 +23,13 @@ class DashBoardViewController: UICollectionViewController {
     .ToggleSwitch: R.reuseIdentifier.toggleSwitchCollectionViewCell.identifier,
   ]
 
+  var homeClient: HomeClient = SwitchingHomeClient()
+
   override func viewDidLoad() {
     super.viewDidLoad()
+
+//    homeClient = SwitchingHomeClient()
+
     collectionView?.delegate = self
     collectionView?.dataSource = self
 
@@ -46,6 +51,9 @@ class DashBoardViewController: UICollectionViewController {
   override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
     let action = actions[indexPath.row]
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseMap[action.type]!, forIndexPath: indexPath) as! DashboardCollectionViewCell
+
+    cell.layer.cornerRadius = 30
+    cell.backgroundColor = collectionView.window?.tintColor
 
     cell.action = action
     // Customize

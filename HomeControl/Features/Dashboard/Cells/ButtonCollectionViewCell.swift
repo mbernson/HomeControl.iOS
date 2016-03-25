@@ -8,9 +8,11 @@
 
 import UIKit
 
-class ButtonCollectionViewCell: DashboardCollectionViewCell {
+class ButtonCollectionViewCell: DashboardCollectionViewCell, MessageSenderCell {
 
   @IBOutlet weak var button: UIButton!
+
+  var action: MessageAction? { get set }
 
   @IBAction func buttonTouchedUp(sender: AnyObject) {
 //    assert(viewController != nil, "SpeedDialCollectionViewCell viewController has not been set")
@@ -18,8 +20,5 @@ class ButtonCollectionViewCell: DashboardCollectionViewCell {
 //    viewController?.performButtonAction(action, completion: self.actionWasSent)
   }
   
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    // Initialization code
-  }
+
 }

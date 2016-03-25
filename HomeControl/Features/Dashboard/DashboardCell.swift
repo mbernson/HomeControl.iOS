@@ -8,6 +8,3 @@
 
 import UIKit
 
-protocol DashboardCell {
-  func subscribe(client: HomeClient)
-}

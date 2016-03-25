@@ -13,4 +13,15 @@ struct Message {
   let payload: String?
   let qos: Int
   let retain: Bool
+
+  func isTruthy() -> Bool {
+    guard let payload = payload else { return false }
+    switch payload {
+    case "on", "yes", "1", "true":
+      return true
+    case "off", "no", "0", "false":
+      return false
+    default: return false
+    }
+  }
 }

@@ -15,14 +15,14 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hgG-6y-zVw">
                         <rect key="frame" x="0.0" y="0.0" width="138" height="146"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <state key="normal" title="Button">
-                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
+                        <state key="normal" title="Button"/>
+                        <connections>
+                            <action selector="buttonTouchedUp:" destination="gTV-IL-0wX" eventType="touchUpInside" id="VU4-Jg-z7v"/>
+                        </connections>
                     </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
-            <color key="backgroundColor" red="0.98431372549019602" green="0.27450980392156865" blue="0.1764705882352941" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="hgG-6y-zVw" secondAttribute="trailing" id="86c-Sp-pWU"/>
                 <constraint firstItem="hgG-6y-zVw" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="K0I-dh-zj7"/>
@@ -30,6 +30,9 @@
                 <constraint firstAttribute="bottom" secondItem="hgG-6y-zVw" secondAttribute="bottom" id="khP-BV-r06"/>
             </constraints>
             <size key="customSize" width="138" height="146"/>
+            <connections>
+                <outlet property="button" destination="hgG-6y-zVw" id="dTf-VS-VJC"/>
+            </connections>
             <point key="canvasLocation" x="307" y="347"/>
         </collectionViewCell>
     </objects>

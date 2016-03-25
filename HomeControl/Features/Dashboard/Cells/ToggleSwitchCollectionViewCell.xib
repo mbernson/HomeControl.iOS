@@ -18,14 +18,15 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NQA-CJ-BNP">
                                 <rect key="frame" x="43" y="16" width="42" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qsY-Ye-moM">
                                 <rect key="frame" x="40" y="81" width="51" height="31"/>
+                                <connections>
+                                    <action selector="switchValueDidChange:" destination="gTV-IL-0wX" eventType="valueChanged" id="eOA-Jh-xQP"/>
+                                </connections>
                             </switch>
                         </subviews>
-                        <color key="backgroundColor" red="0.98431372549019602" green="0.27450980392156865" blue="0.1764705882352941" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="qsY-Ye-moM" secondAttribute="bottom" constant="16" id="2IT-15-dEh"/>
                             <constraint firstItem="qsY-Ye-moM" firstAttribute="centerX" secondItem="Ksu-iJ-g5A" secondAttribute="centerX" id="G1l-Yx-UXI"/>
@@ -43,6 +44,10 @@
                 <constraint firstAttribute="bottom" secondItem="Ksu-iJ-g5A" secondAttribute="bottom" id="hHq-C4-BDf"/>
             </constraints>
             <size key="customSize" width="135" height="139"/>
+            <connections>
+                <outlet property="titleLabel" destination="NQA-CJ-BNP" id="aK7-5C-M12"/>
+                <outlet property="toggleSwitch" destination="qsY-Ye-moM" id="kLo-yn-k3n"/>
+            </connections>
             <point key="canvasLocation" x="124.5" y="294.5"/>
         </collectionViewCell>
     </objects>

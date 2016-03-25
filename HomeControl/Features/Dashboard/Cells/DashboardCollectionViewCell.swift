@@ -9,12 +9,28 @@
 import UIKit
 
 class DashboardCollectionViewCell: UICollectionViewCell {
-
   var action: MessageAction?
+  var client: HomeClient?
 
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    // Initialization code
+  func sen
+}
+
+class MessageSenderCell: DashboardCollectionViewCell {
+
+}
+
+class MessageSubscriberCell: DashboardCollectionViewCell {
+  func subscribe(client: HomeClient) {
+    //    guard let message = action?.message else { return }
+    //    client.subscribe(message.topic, listener: self)
   }
 
+  func unsubscribe(client: HomeClient) {
+    //    guard let message = action?.message else { return }
+    //    client.unsubscribe(message.topic)
+  }
+
+  func didReceiveMessage(message: Message) {
+    //
+  }
 }

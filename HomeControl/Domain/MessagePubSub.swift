@@ -9,8 +9,10 @@
 import Foundation
 
 protocol SendsMessages {
-  func send(client: HomeClient)
-  func send(client: HomeClient, completion: HomeClientStatus -> Void)
+  var action: MessageAction? { get }
+
+  func send(message: Message)
+  func send(message: Message, completion: HomeClientStatus -> Void)
 }
 
 protocol SubscribesToMessages {

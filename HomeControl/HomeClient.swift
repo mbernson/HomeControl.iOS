@@ -23,7 +23,7 @@ protocol HomeClient {
 }
 
 protocol HomeClientListener {
-  func onMessage(message: Message)
+  func didReceiveMessage(message: Message)
 }
 
 enum HomeClientStatus {
