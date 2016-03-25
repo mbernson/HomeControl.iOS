@@ -10,16 +10,14 @@ import Foundation
 import Alamofire
 
 class HttpHomeClient: HomeClient {
-  lazy var apiURL: String? = {
-    return userDefaults().stringForKey("api_mqtt_url")
-  }()
+  private var userDefaults = NSUserDefaults.standardUserDefaults()
   
   func publish(message: Message) {
     NSLog("httpHomeClient publish")
     
-    Alamofire.request(.POST, apiURL!, parameters: [
+    Alamofire.request(.POST, userDefaults.stringForKey("api_mqtt_url")!, parameters: [
       "topic": message.topic,
-      "message": message.payload,
+      "message": message.payload ?? "",
       "retain": message.retain
     ])
   }
@@ -27,9 +25,9 @@ class HttpHomeClient: HomeClient {
   func publish(message: Message, completion: HomeClientStatus -> Void) {
     NSLog("httpHomeClient publish with callback")
 
-    Alamofire.request(.POST, apiURL!, parameters: [
+    Alamofire.request(.POST, userDefaults.stringForKey("api_mqtt_url")!, parameters: [
       "topic": message.topic,
-      "message": message.payload,
+      "message": message.payload ?? "",
       "retain": message.retain
     ]).responseJSON { response in
       if response.result.isSuccess {

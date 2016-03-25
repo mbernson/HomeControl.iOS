@@ -147,7 +147,17 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1561" y="940"/>
+            <point key="canvasLocation" x="495" y="1100"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="E1S-DE-F2l">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Settings" id="1Jx-Vn-2oD" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Settings" id="gFS-ew-l2J"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ezR-OW-f6H" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="111.5" y="1424"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="M9I-Hg-bab">
@@ -159,7 +169,9 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="8CG-Ie-mVS" kind="relationship" relationship="viewControllers" id="fos-tQ-jGg"/>
+                        <segue destination="vD6-SH-rr9" kind="relationship" relationship="viewControllers" id="3L2-i2-onb"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="YsL-gM-zwa"/>
+                        <segue destination="1Jx-Vn-2oD" kind="relationship" relationship="viewControllers" id="imN-HW-02t"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZuT-hE-Sio" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -167,34 +179,19 @@
             <point key="canvasLocation" x="-372" y="749"/>
         </scene>
         <!--Dashboard-->
-        <scene sceneID="EbV-Di-9UQ">
-            <objects>
-                <navigationController id="8CG-Ie-mVS" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Dashboard" id="feK-ph-Tnw"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="TRF-ad-dz0">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="vD6-SH-rr9" kind="relationship" relationship="rootViewController" id="aid-vh-F8t"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dah-ry-lll" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="336" y="749"/>
-        </scene>
-        <!--Dashboard-->
         <scene sceneID="1vq-Vf-IlM">
             <objects>
                 <viewControllerPlaceholder storyboardName="Dashboard" id="vD6-SH-rr9" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Dashboard" image="dialpad" id="cYP-1N-pVc"/>
                     <navigationItem key="navigationItem" id="vmh-kZ-VtA"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aS9-MM-3gu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="849.5" y="474"/>
+            <point key="canvasLocation" x="253" y="549"/>
         </scene>
     </scenes>
     <resources>
+        <image name="dialpad" width="25" height="25"/>
         <image name="envelope" width="25" height="16"/>
     </resources>
 </document>

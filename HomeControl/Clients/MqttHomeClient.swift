@@ -13,13 +13,17 @@ class MqttHomeClient: HomeClient {
   private var mqtt: MQTTClient?
   
   private let keepAlive: Int32 = 60
+
+  private var listeners = [HomeClientListener]()
+
+  private var userDefaults = NSUserDefaults.standardUserDefaults()
   
   func publish(message: Message) {
-    mqtt?.publishString(message.payload, topic: message.topic, qos: Int32(message.qos), retain: message.retain)
+    mqtt?.publishString(message.payload ?? "", topic: message.topic, qos: Int32(message.qos), retain: message.retain)
   }
   
   func publish(message: Message, completion: HomeClientStatus -> Void) {
-    mqtt?.publishString(message.payload, topic: message.topic, qos: Int32(message.qos), retain: message.retain, requestCompletion: { (result, _) in
+    mqtt?.publishString(message.payload ?? "", topic: message.topic, qos: Int32(message.qos), retain: message.retain, requestCompletion: { (result, _) in
       if result == MosqResult.MOSQ_SUCCESS {
         completion(HomeClientStatus.Success)
       } else {
@@ -29,18 +33,19 @@ class MqttHomeClient: HomeClient {
   }
 
   func subscribe(topic: Topic, listener: HomeClientListener) {
-    fatalError("Not implmemented")
+    listeners.append(listener)
+    mqtt?.subscribe(topic, qos: 2)
   }
 
   func unsubscribe(topic: Topic) {
-    fatalError("Not implmemented") 
+    mqtt?.unsubscribe(topic)
   }
   
   func connect() {
     let mqttConfig = MQTTConfig(
-      clientId: userDefaults().stringForKey("mqtt_client_id")!,
-      host: userDefaults().stringForKey("mqtt_host")!,
-      port: Int32(userDefaults().integerForKey("mqtt_port")),
+      clientId: userDefaults.stringForKey("mqtt_client_id")!,
+      host: userDefaults.stringForKey("mqtt_host")!,
+      port: Int32(userDefaults.integerForKey("mqtt_port")),
       keepAlive: keepAlive
     )
     

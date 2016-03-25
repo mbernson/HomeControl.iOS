@@ -11,20 +11,20 @@ import Rswift
 import Moscapsule
 
 let actions = [
-  MessageAction(topic: "hildebrandpad/lights/all", message: "on", description: "Alle lichten aan"),
-  MessageAction(topic: "hildebrandpad/livingroom/lights/all", message: "off", description: "Alle lichten uit"),
+  MessageAction(topic: "hildebrandpad/lights/all", payload: "on", type: .PushButton, description: "Alle lichten aan"),
+  MessageAction(topic: "hildebrandpad/livingroom/lights/all", payload: "off", type: .PushButton, description: "Alle lichten uit"),
 
-  MessageAction(topic: "hildebrandpad/livingroom/lights/staande_lamp", message: "on", description: "Staande lamp aan"),
-  MessageAction(topic: "hildebrandpad/livingroom/lights/staande_lamp", message: "off", description: "Staande lamp uit"),
+  MessageAction(topic: "hildebrandpad/livingroom/lights/staande_lamp", payload: "on", type: .PushButton, description: "Staande lamp aan"),
+  MessageAction(topic: "hildebrandpad/livingroom/lights/staande_lamp", payload: "off", type: .PushButton, description: "Staande lamp uit"),
 
-  MessageAction(topic: "hildebrandpad/livingroom/lights/bureaulamp", message: "on", description: "Bureaulamp aan"),
-  MessageAction(topic: "hildebrandpad/livingroom/lights/bureaulamp", message: "off", description: "Bureaulamp uit"),
+  MessageAction(topic: "hildebrandpad/livingroom/lights/bureaulamp", payload: "on", type: .PushButton, description: "Bureaulamp aan"),
+  MessageAction(topic: "hildebrandpad/livingroom/lights/bureaulamp", payload: "off", type: .PushButton, description: "Bureaulamp uit"),
 
-  MessageAction(topic: "hildebrandpad/livingroom/lights/bed_lampen", message: "on", description: "Bed lampen aan"),
-  MessageAction(topic: "hildebrandpad/livingroom/lights/bed_lampen", message: "off", description: "Bed lampen uit"),
+  MessageAction(topic: "hildebrandpad/livingroom/lights/bed_lampen", payload: "on", type: .PushButton, description: "Bed lampen aan"),
+  MessageAction(topic: "hildebrandpad/livingroom/lights/bed_lampen", payload: "off", type: .PushButton, description: "Bed lampen uit"),
 
-  MessageAction(topic: "test", message: "on", description: "Test aan"),
-  MessageAction(topic: "test", message: "off", description: "Test uit"),
+  MessageAction(topic: "test", payload: "on", type: .PushButton, description: "Test aan"),
+  MessageAction(topic: "test", payload: "off", type: .PushButton, description: "Test uit"),
 ]
 
 class SpeedDialViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
@@ -57,7 +57,7 @@ class SpeedDialViewController: UICollectionViewController, UICollectionViewDeleg
 
     // Cell customization
     cell.action = actions[indexPath.row]
-    cell.button.setTitle(cell.action?.description, forState: .Normal)
+    cell.button.setTitle(description, forState: .Normal)
     //        cell.viewController = self
     cell.layer.cornerRadius = 30
     cell.backgroundColor = collectionView.window?.tintColor

@@ -23,7 +23,7 @@ class MessagesViewController : UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.client = sharedClient()
+    self.client = App.homeClient
   }
 
   // MARK: Outlets and actions

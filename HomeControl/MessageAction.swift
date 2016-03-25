@@ -9,30 +9,30 @@
 import Foundation
 
 struct MessageAction {
-  let message: Message
+  // The message to be sent by this action
+  var message: Message
+  // Description of the action for the user
   let description: String
-  let type: ActionType = .PushButton
+  // 
+  let type: ActionType
 
-  init(topic: String, message: String, description: String) {
-    self.message = Message(topic: topic, payload: message, qos: 2, retain: false)
+  init(topic: Topic, payload: String?, type: ActionType, description: String) {
+    self.message = Message(topic: topic, payload: payload, qos: 2, retain: false)
     self.description = description
+    self.type = type
   }
 
-  func currentState() -> Bool? {
-    switch message.payload.lowercaseString {
-    case "on", "yes", "true":
-      return true
-    case "off", "no", "false":
-      return false
-    default:
-      return nil
-    }
+  init(message: Message, type: ActionType, description: String) {
+    self.message = message
+    self.description = description
+    self.type = type
   }
 }
 
 enum ActionType {
   case PushButton
   case ToggleSwitch
+  case Gauge
 }
 
 enum ValueType {

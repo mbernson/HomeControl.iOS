@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		699C55C50DEA8C5B578A8FB2 /* Pods_HomeControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 707BA3C191EC60538C624174 /* Pods_HomeControl.framework */; };
 		D50057B11C8DE2A600E28732 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50057B01C8DE2A600E28732 /* R.generated.swift */; };
-		D5005FBE1C34427400A071A4 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5005FBD1C34427400A071A4 /* Utility.swift */; };
 		D50912AA1C134803009BFC9A /* SpeedDialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50912A91C134803009BFC9A /* SpeedDialViewController.swift */; };
 		D52E04351C134BBC00054AF8 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52E04341C134BBC00054AF8 /* EventsViewController.swift */; };
 		D54C8C0B1C9FDD5D0004B02D /* DashboardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54C8C0A1C9FDD5D0004B02D /* DashboardCollectionViewCell.swift */; };
@@ -27,6 +26,8 @@
 		D5A06C741C11AB0200664494 /* HomeControlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A06C731C11AB0200664494 /* HomeControlTests.swift */; };
 		D5A06C7F1C11AB0300664494 /* HomeControlUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A06C7E1C11AB0300664494 /* HomeControlUITests.swift */; };
 		D5A06C8D1C11AB9F00664494 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A06C8C1C11AB9F00664494 /* MessagesViewController.swift */; };
+		D5A809FA1CA3CCAA00AB9323 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A809F91CA3CCAA00AB9323 /* UserDefaults.swift */; };
+		D5A809FC1CA3CE7400AB9323 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A809FB1CA3CE7400AB9323 /* App.swift */; };
 		D5B3BB981C1441FC004C5D96 /* MessageAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B3BB971C1441FC004C5D96 /* MessageAction.swift */; };
 		D5B3BB9A1C1442AA004C5D96 /* HomeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B3BB991C1442AA004C5D96 /* HomeClient.swift */; };
 		D5B540FF1C9D6A1C00E49508 /* ToggleSwitchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B540FD1C9D6A1C00E49508 /* ToggleSwitchCollectionViewCell.swift */; };
@@ -61,7 +62,6 @@
 		707BA3C191EC60538C624174 /* Pods_HomeControl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HomeControl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		87AB8638862A41723CCFC337 /* Pods-HomeControl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeControl.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeControl/Pods-HomeControl.release.xcconfig"; sourceTree = "<group>"; };
 		D50057B01C8DE2A600E28732 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
-		D5005FBD1C34427400A071A4 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		D50912A91C134803009BFC9A /* SpeedDialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeedDialViewController.swift; sourceTree = "<group>"; };
 		D52262B61C9AC547008E1569 /* DataMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DataMapper.framework; path = "DataMapper/build/Debug-iphoneos/DataMapper.framework"; sourceTree = "<group>"; };
 		D52E04341C134BBC00054AF8 /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
@@ -86,6 +86,8 @@
 		D5A06C7E1C11AB0300664494 /* HomeControlUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeControlUITests.swift; sourceTree = "<group>"; };
 		D5A06C801C11AB0300664494 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5A06C8C1C11AB9F00664494 /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
+		D5A809F91CA3CCAA00AB9323 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDefaults.swift; path = Utilities/UserDefaults.swift; sourceTree = "<group>"; };
+		D5A809FB1CA3CE7400AB9323 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		D5B3BB971C1441FC004C5D96 /* MessageAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageAction.swift; sourceTree = "<group>"; };
 		D5B3BB991C1442AA004C5D96 /* HomeClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeClient.swift; sourceTree = "<group>"; };
 		D5B540FD1C9D6A1C00E49508 /* ToggleSwitchCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToggleSwitchCollectionViewCell.swift; path = Features/Dashboard/Cells/ToggleSwitchCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -208,12 +210,13 @@
 		D5A06C5D1C11AB0200664494 /* HomeControl */ = {
 			isa = PBXGroup;
 			children = (
+				D5A06C5E1C11AB0200664494 /* AppDelegate.swift */,
+				D5A809FB1CA3CE7400AB9323 /* App.swift */,
 				D5B541041C9D6B2A00E49508 /* Domain */,
 				D5B540FA1C9D69E700E49508 /* Features */,
-				D5A06C5E1C11AB0200664494 /* AppDelegate.swift */,
 				D50912AB1C134817009BFC9A /* ViewControllers */,
 				D5879C2C1C650F16005BF7B6 /* Clients */,
-				D5005FBD1C34427400A071A4 /* Utility.swift */,
+				D5A809F81CA3CC9D00AB9323 /* Utilities */,
 				D50912AC1C134821009BFC9A /* User interface */,
 				D57C99E51C6CFB0D00CCC46F /* Supporting files */,
 			);
@@ -238,6 +241,14 @@
 			path = HomeControlUITests;
 			sourceTree = "<group>";
 		};
+		D5A809F81CA3CC9D00AB9323 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				D5A809F91CA3CCAA00AB9323 /* UserDefaults.swift */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
 		D5B540FA1C9D69E700E49508 /* Features */ = {
 			isa = PBXGroup;
 			children = (
@@ -250,10 +261,10 @@
 		D5B540FB1C9D69ED00E49508 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
-				D561B1591C524E5C00F4CEA9 /* DashboardViewController.swift */,
-				D5B541011C9D6A2300E49508 /* Cells */,
-				D5B541021C9D6A6700E49508 /* DashboardCell.swift */,
 				D5B541071C9D6BB500E49508 /* Dashboard.storyboard */,
+				D561B1591C524E5C00F4CEA9 /* DashboardViewController.swift */,
+				D5B541021C9D6A6700E49508 /* DashboardCell.swift */,
+				D5B541011C9D6A2300E49508 /* Cells */,
 			);
 			name = Dashboard;
 			sourceTree = "<group>";
@@ -501,11 +512,12 @@
 				D5B3BB981C1441FC004C5D96 /* MessageAction.swift in Sources */,
 				D5A06C8D1C11AB9F00664494 /* MessagesViewController.swift in Sources */,
 				D5B541031C9D6A6700E49508 /* DashboardCell.swift in Sources */,
-				D5005FBE1C34427400A071A4 /* Utility.swift in Sources */,
 				D57C99E41C6CFA5C00CCC46F /* MockHomeClient.swift in Sources */,
 				D5B3BB9A1C1442AA004C5D96 /* HomeClient.swift in Sources */,
 				D5BA75ED1CA016CE00D088BC /* MessagePubSub.swift in Sources */,
 				D5879C321C650F40005BF7B6 /* SwitchingHomeClient.swift in Sources */,
+				D5A809FC1CA3CE7400AB9323 /* App.swift in Sources */,
+				D5A809FA1CA3CCAA00AB9323 /* UserDefaults.swift in Sources */,
 				D52E04351C134BBC00054AF8 /* EventsViewController.swift in Sources */,
 				D5B540FF1C9D6A1C00E49508 /* ToggleSwitchCollectionViewCell.swift in Sources */,
 				D54C8C0B1C9FDD5D0004B02D /* DashboardCollectionViewCell.swift in Sources */,

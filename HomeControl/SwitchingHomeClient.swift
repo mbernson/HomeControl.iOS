@@ -10,14 +10,15 @@ import Foundation
 import ReachabilitySwift
 
 class SwitchingHomeClient: HomeClient {
-  
-  var realClient: HomeClient = HttpHomeClient()
-  var localServerReachable: Reachability?, internetReachable: Reachability?
-  var listening: Bool = false
+
+  private var userDefaults = NSUserDefaults.standardUserDefaults()
+  private var realClient: HomeClient = HttpHomeClient()
+  private var localServerReachable: Reachability?, internetReachable: Reachability?
+  private var listening: Bool = false
   
   private func startListening() {
     do {
-      let mqttServerHost = userDefaults().stringForKey("mqtt_host")!
+      let mqttServerHost = userDefaults.stringForKey("mqtt_host")!
       localServerReachable = try Reachability(hostname: mqttServerHost)
       
       internetReachable = try Reachability.reachabilityForInternetConnection()

@@ -10,7 +10,7 @@ import Foundation
 
 struct Message {
   let topic: String
-  let payload: String
+  let payload: String?
   let qos: Int
   let retain: Bool
 }
