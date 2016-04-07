@@ -4,15 +4,14 @@ platform :ios, '9.0'
 use_frameworks!
 
 target 'HomeControl' do
-    pod 'Moscapsule', git: 'https://github.com/flightonary/Moscapsule.git'
-    pod 'OpenSSL-Universal', '~> 1.0.1.l'
-
+    pod 'MQTTClient'
     pod 'ReachabilitySwift', git: 'https://github.com/ashleymills/Reachability.swift'
     pod 'Alamofire', '~> 3.0'
     pod 'Promissum', '~> 0.5'
     pod 'Promissum/Alamofire'
     pod 'RxSwift', '~> 2.3.1'
-
+    pod 'RxCocoa', '~> 2.3.1'
+    pod 'BetterSegmentedControl', '~> 0.1'
     pod 'R.swift'
 end
 

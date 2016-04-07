@@ -1,7 +1,18 @@
 PODS:
   - Alamofire (3.2.1)
-  - Moscapsule (0.5.1)
-  - OpenSSL-Universal (1.0.1.17)
+  - BetterSegmentedControl (0.1)
+  - CocoaLumberjack (2.2.0):
+    - CocoaLumberjack/Default (= 2.2.0)
+    - CocoaLumberjack/Extensions (= 2.2.0)
+  - CocoaLumberjack/Core (2.2.0)
+  - CocoaLumberjack/Default (2.2.0):
+    - CocoaLumberjack/Core
+  - CocoaLumberjack/Extensions (2.2.0):
+    - CocoaLumberjack/Default
+  - MQTTClient (0.7.4):
+    - MQTTClient/Core (= 0.7.4)
+  - MQTTClient/Core (0.7.4):
+    - CocoaLumberjack
   - Promissum (0.5.0):
     - Promissum/Core (= 0.5.0)
   - Promissum/Alamofire (0.5.0):
@@ -12,40 +23,40 @@ PODS:
     - R.swift.Library (~> 1.1.0)
   - R.swift.Library (1.1.0)
   - ReachabilitySwift (2.3.3)
+  - RxCocoa (2.3.1):
+    - RxSwift (~> 2.3.1)
   - RxSwift (2.3.1)
 
 DEPENDENCIES:
   - Alamofire (~> 3.0)
-  - Moscapsule (from `https://github.com/flightonary/Moscapsule.git`)
-  - OpenSSL-Universal (~> 1.0.1.l)
+  - BetterSegmentedControl (~> 0.1)
+  - MQTTClient
   - Promissum (~> 0.5)
   - Promissum/Alamofire
   - R.swift
   - ReachabilitySwift (from `https://github.com/ashleymills/Reachability.swift`)
+  - RxCocoa (~> 2.3.1)
   - RxSwift (~> 2.3.1)
 
 EXTERNAL SOURCES:
-  Moscapsule:
-    :git: https://github.com/flightonary/Moscapsule.git
   ReachabilitySwift:
     :git: https://github.com/ashleymills/Reachability.swift
 
 CHECKOUT OPTIONS:
-  Moscapsule:
-    :commit: 6f3eb451312baead2c1020c428d8ab147843feaf
-    :git: https://github.com/flightonary/Moscapsule.git
   ReachabilitySwift:
     :commit: cf126c0584a209143c75bf1d0f23fd904891e26e
     :git: https://github.com/ashleymills/Reachability.swift
 
 SPEC CHECKSUMS:
   Alamofire: f11d8624a05f5d39e0c99309b3e600a3ba64298a
-  Moscapsule: e80b7d3d6ac34706731cfdbe65fbf1d731fad88a
-  OpenSSL-Universal: b3c4ab9bbc3e4978caf9e838c8589f1f537244b4
+  BetterSegmentedControl: f4b7b36fecc705fb7e7539cbb9e506137817a7a8
+  CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
+  MQTTClient: 1c1bedf87249a317ee9324b93252867bbc443ec7
   Promissum: 178ef117f446ed62e92e58cfbf8dd01bf543dad1
   R.swift: 43f8a833dd8cbb4a19908cbfd37fb982e9147899
   R.swift.Library: 775f3086e07313ed1a1dfddca8418317f5a87397
   ReachabilitySwift: e0f6b6f280effb47731acfaaa2d5ffe223703793
+  RxCocoa: a2baaf3462b989559a51dce59d78fbebb8fe0afa
   RxSwift: 829b2843e9eddc77a02cb3f5117f0d55f8f646f1
 
 COCOAPODS: 0.39.0

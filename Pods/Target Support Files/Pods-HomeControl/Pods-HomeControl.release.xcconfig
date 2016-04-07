@@ -1,10 +1,9 @@
 EMBEDDED_CONTENT_CONTAINS_SWIFT = YES
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/OpenSSL-Universal" "${PODS_ROOT}/Headers/Public/R.swift"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/R.swift"
 LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
-LIBRARY_SEARCH_PATHS = "$(PODS_ROOT)/OpenSSL-Universal/lib-ios" $(inherited) "${PODS_ROOT}/OpenSSL-Universal/lib-ios" $(inherited) "${PODS_ROOT}/OpenSSL-Universal/lib-ios"
-OTHER_CFLAGS = -DWITH_THREADING -DWITH_TLS -DWITH_TLS_PSK $(inherited) -iquote "$CONFIGURATION_BUILD_DIR/Alamofire.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/Moscapsule.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/Promissum.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/ReachabilitySwift.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/Rswift.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/RxSwift.framework/Headers" -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/OpenSSL-Universal" -isystem "${PODS_ROOT}/Headers/Public/R.swift"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"crypto" -l"ssl" -framework "Alamofire" -framework "Moscapsule" -framework "Promissum" -framework "ReachabilitySwift" -framework "Rswift" -framework "RxSwift"
+OTHER_CFLAGS = $(inherited) -iquote "$CONFIGURATION_BUILD_DIR/Alamofire.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/BetterSegmentedControl.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/CocoaLumberjack.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/MQTTClient.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/Promissum.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/ReachabilitySwift.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/Rswift.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/RxCocoa.framework/Headers" -iquote "$CONFIGURATION_BUILD_DIR/RxSwift.framework/Headers" -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/R.swift"
+OTHER_LDFLAGS = $(inherited) -framework "Alamofire" -framework "BetterSegmentedControl" -framework "CocoaLumberjack" -framework "MQTTClient" -framework "Promissum" -framework "ReachabilitySwift" -framework "Rswift" -framework "RxCocoa" -framework "RxSwift"
 OTHER_SWIFT_FLAGS = $(inherited) "-D" "COCOAPODS"
 PODS_FRAMEWORK_BUILD_PATH = $(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Pods-HomeControl
 PODS_ROOT = ${SRCROOT}/Pods
