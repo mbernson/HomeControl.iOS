@@ -9,16 +9,13 @@
 /* Begin PBXBuildFile section */
 		699C55C50DEA8C5B578A8FB2 /* Pods_HomeControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 707BA3C191EC60538C624174 /* Pods_HomeControl.framework */; };
 		D50057B11C8DE2A600E28732 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50057B01C8DE2A600E28732 /* R.generated.swift */; };
-		D50912AA1C134803009BFC9A /* SpeedDialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50912A91C134803009BFC9A /* SpeedDialViewController.swift */; };
 		D52E04351C134BBC00054AF8 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52E04341C134BBC00054AF8 /* EventsViewController.swift */; };
 		D54C8C0B1C9FDD5D0004B02D /* DashboardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54C8C0A1C9FDD5D0004B02D /* DashboardCollectionViewCell.swift */; };
 		D54C8C0D1C9FDDF50004B02D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54C8C0C1C9FDDF50004B02D /* SettingsViewController.swift */; };
 		D54C8C0F1C9FDDFF0004B02D /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D54C8C0E1C9FDDFF0004B02D /* Settings.storyboard */; };
 		D561B15A1C524E5C00F4CEA9 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D561B1591C524E5C00F4CEA9 /* DashboardViewController.swift */; };
-		D57C99E41C6CFA5C00CCC46F /* MockHomeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57C99E31C6CFA5C00CCC46F /* MockHomeClient.swift */; };
 		D5879C2E1C650F35005BF7B6 /* MqttHomeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5879C2D1C650F35005BF7B6 /* MqttHomeClient.swift */; };
 		D5879C301C650F3B005BF7B6 /* HttpHomeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5879C2F1C650F3B005BF7B6 /* HttpHomeClient.swift */; };
-		D5879C321C650F40005BF7B6 /* SwitchingHomeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5879C311C650F40005BF7B6 /* SwitchingHomeClient.swift */; };
 		D5A06C5F1C11AB0200664494 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A06C5E1C11AB0200664494 /* AppDelegate.swift */; };
 		D5A06C641C11AB0200664494 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5A06C621C11AB0200664494 /* Main.storyboard */; };
 		D5A06C661C11AB0200664494 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5A06C651C11AB0200664494 /* Assets.xcassets */; };
@@ -32,7 +29,6 @@
 		D5B3BB9A1C1442AA004C5D96 /* HomeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B3BB991C1442AA004C5D96 /* HomeClient.swift */; };
 		D5B540FF1C9D6A1C00E49508 /* ToggleSwitchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B540FD1C9D6A1C00E49508 /* ToggleSwitchCollectionViewCell.swift */; };
 		D5B541001C9D6A1C00E49508 /* ToggleSwitchCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5B540FE1C9D6A1C00E49508 /* ToggleSwitchCollectionViewCell.xib */; };
-		D5B541031C9D6A6700E49508 /* DashboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B541021C9D6A6700E49508 /* DashboardCell.swift */; };
 		D5B541061C9D6B3400E49508 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B541051C9D6B3400E49508 /* Message.swift */; };
 		D5B541081C9D6BB500E49508 /* Dashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5B541071C9D6BB500E49508 /* Dashboard.storyboard */; };
 		D5B5410B1C9D6C0300E49508 /* ButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B541091C9D6C0300E49508 /* ButtonCollectionViewCell.swift */; };
@@ -62,17 +58,14 @@
 		707BA3C191EC60538C624174 /* Pods_HomeControl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HomeControl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		87AB8638862A41723CCFC337 /* Pods-HomeControl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeControl.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeControl/Pods-HomeControl.release.xcconfig"; sourceTree = "<group>"; };
 		D50057B01C8DE2A600E28732 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
-		D50912A91C134803009BFC9A /* SpeedDialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeedDialViewController.swift; sourceTree = "<group>"; };
 		D52262B61C9AC547008E1569 /* DataMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DataMapper.framework; path = "DataMapper/build/Debug-iphoneos/DataMapper.framework"; sourceTree = "<group>"; };
 		D52E04341C134BBC00054AF8 /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
 		D54C8C0A1C9FDD5D0004B02D /* DashboardCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashboardCollectionViewCell.swift; path = Features/Dashboard/Cells/DashboardCollectionViewCell.swift; sourceTree = "<group>"; };
 		D54C8C0C1C9FDDF50004B02D /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = Features/Settings/SettingsViewController.swift; sourceTree = "<group>"; };
 		D54C8C0E1C9FDDFF0004B02D /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Settings.storyboard; path = Features/Settings/Settings.storyboard; sourceTree = "<group>"; };
 		D561B1591C524E5C00F4CEA9 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
-		D57C99E31C6CFA5C00CCC46F /* MockHomeClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MockHomeClient.swift; path = Clients/MockHomeClient.swift; sourceTree = "<group>"; };
 		D5879C2D1C650F35005BF7B6 /* MqttHomeClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MqttHomeClient.swift; path = Clients/MqttHomeClient.swift; sourceTree = "<group>"; };
 		D5879C2F1C650F3B005BF7B6 /* HttpHomeClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpHomeClient.swift; sourceTree = "<group>"; };
-		D5879C311C650F40005BF7B6 /* SwitchingHomeClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchingHomeClient.swift; sourceTree = "<group>"; };
 		D5A06C5B1C11AB0200664494 /* HomeControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5A06C5E1C11AB0200664494 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D5A06C631C11AB0200664494 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -92,7 +85,6 @@
 		D5B3BB991C1442AA004C5D96 /* HomeClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeClient.swift; sourceTree = "<group>"; };
 		D5B540FD1C9D6A1C00E49508 /* ToggleSwitchCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToggleSwitchCollectionViewCell.swift; path = Features/Dashboard/Cells/ToggleSwitchCollectionViewCell.swift; sourceTree = "<group>"; };
 		D5B540FE1C9D6A1C00E49508 /* ToggleSwitchCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ToggleSwitchCollectionViewCell.xib; path = Features/Dashboard/Cells/ToggleSwitchCollectionViewCell.xib; sourceTree = "<group>"; };
-		D5B541021C9D6A6700E49508 /* DashboardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashboardCell.swift; path = Features/Dashboard/DashboardCell.swift; sourceTree = "<group>"; };
 		D5B541051C9D6B3400E49508 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Domain/Message.swift; sourceTree = "<group>"; };
 		D5B541071C9D6BB500E49508 /* Dashboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Dashboard.storyboard; path = Features/Dashboard/Dashboard.storyboard; sourceTree = "<group>"; };
 		D5B541091C9D6C0300E49508 /* ButtonCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ButtonCollectionViewCell.swift; path = Features/Dashboard/Cells/ButtonCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -147,7 +139,6 @@
 		D50912AB1C134817009BFC9A /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				D50912A91C134803009BFC9A /* SpeedDialViewController.swift */,
 				D5A06C8C1C11AB9F00664494 /* MessagesViewController.swift */,
 				D52E04341C134BBC00054AF8 /* EventsViewController.swift */,
 			);
@@ -178,9 +169,7 @@
 			children = (
 				D5B3BB991C1442AA004C5D96 /* HomeClient.swift */,
 				D5879C2F1C650F3B005BF7B6 /* HttpHomeClient.swift */,
-				D5879C311C650F40005BF7B6 /* SwitchingHomeClient.swift */,
 				D5879C2D1C650F35005BF7B6 /* MqttHomeClient.swift */,
-				D57C99E31C6CFA5C00CCC46F /* MockHomeClient.swift */,
 			);
 			name = Clients;
 			sourceTree = "<group>";
@@ -263,7 +252,6 @@
 			children = (
 				D5B541071C9D6BB500E49508 /* Dashboard.storyboard */,
 				D561B1591C524E5C00F4CEA9 /* DashboardViewController.swift */,
-				D5B541021C9D6A6700E49508 /* DashboardCell.swift */,
 				D5B541011C9D6A2300E49508 /* Cells */,
 			);
 			name = Dashboard;
@@ -508,14 +496,10 @@
 				D561B15A1C524E5C00F4CEA9 /* DashboardViewController.swift in Sources */,
 				D54C8C0D1C9FDDF50004B02D /* SettingsViewController.swift in Sources */,
 				D5B541061C9D6B3400E49508 /* Message.swift in Sources */,
-				D50912AA1C134803009BFC9A /* SpeedDialViewController.swift in Sources */,
 				D5B3BB981C1441FC004C5D96 /* MessageAction.swift in Sources */,
 				D5A06C8D1C11AB9F00664494 /* MessagesViewController.swift in Sources */,
-				D5B541031C9D6A6700E49508 /* DashboardCell.swift in Sources */,
-				D57C99E41C6CFA5C00CCC46F /* MockHomeClient.swift in Sources */,
 				D5B3BB9A1C1442AA004C5D96 /* HomeClient.swift in Sources */,
 				D5BA75ED1CA016CE00D088BC /* MessagePubSub.swift in Sources */,
-				D5879C321C650F40005BF7B6 /* SwitchingHomeClient.swift in Sources */,
 				D5A809FC1CA3CE7400AB9323 /* App.swift in Sources */,
 				D5A809FA1CA3CCAA00AB9323 /* UserDefaults.swift in Sources */,
 				D52E04351C134BBC00054AF8 /* EventsViewController.swift in Sources */,

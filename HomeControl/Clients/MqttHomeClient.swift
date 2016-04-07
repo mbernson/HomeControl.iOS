@@ -8,37 +8,45 @@
 
 import Foundation
 import Moscapsule
+import RxSwift
+import Promissum
 
 class MqttHomeClient: HomeClient {
   private var mqtt: MQTTClient?
+  private var mqttMessages: Observable<Message>?
   
   private let keepAlive: Int32 = 60
 
-  private var listeners = [HomeClientListener]()
-
   private var userDefaults = NSUserDefaults.standardUserDefaults()
-  
-  func publish(message: Message) {
-    mqtt?.publishString(message.payload ?? "", topic: message.topic, qos: Int32(message.qos), retain: message.retain)
-  }
-  
-  func publish(message: Message, completion: HomeClientStatus -> Void) {
+
+  func publish(message: Message) -> Promise<HomeClientStatus, ErrorType> {
+    let source = PromiseSource<HomeClientStatus, ErrorType>()
     mqtt?.publishString(message.payload ?? "", topic: message.topic, qos: Int32(message.qos), retain: message.retain, requestCompletion: { (result, _) in
       if result == MosqResult.MOSQ_SUCCESS {
-        completion(HomeClientStatus.Success)
+        source.resolve(.Success)
       } else {
-        completion(HomeClientStatus.Failure)
+        source.reject(HomeClientError(message: "Could not publish to MQTT"))
       }
     })
+    return source.promise
   }
 
-  func subscribe(topic: Topic, listener: HomeClientListener) {
-    listeners.append(listener)
-    mqtt?.subscribe(topic, qos: 2)
+  func subscribe(topic: Topic) -> Observable<Message> {
+    print("subscribing to \(topic)")
+    guard let mqttMessages = mqttMessages else {
+      fatalError()
+    }
+    return mqttMessages
   }
+
+//  private func onMessage(mqttMessage: MQTTMessage) {
+//    let message = Message(mqttMessage: mqttMessage)
+//    print("message was received on topic: \(message.topic) payload: \(message.payload)")
+//  }
 
   func unsubscribe(topic: Topic) {
-    mqtt?.unsubscribe(topic)
+    print("unsubscribed from \(topic)")
+//    mqtt?.unsubscribe(topic)
   }
   
   func connect() {
@@ -48,6 +56,16 @@ class MqttHomeClient: HomeClient {
       port: Int32(userDefaults.integerForKey("mqtt_port")),
       keepAlive: keepAlive
     )
+
+    mqttMessages = Observable<Message>.create { observer in
+      mqttConfig.onMessageCallback = { mqttMessage in
+        print("received a message in root observable!")
+        observer.on(.Next(Message(mqttMessage: mqttMessage)))
+      }
+      return RefCountDisposable(disposable: AnonymousDisposable {
+        mqttConfig.onMessageCallback = { _ in }
+      })
+    }
     
     // Create new MQTT Connection
     mqtt = MQTT.newConnection(mqttConfig)

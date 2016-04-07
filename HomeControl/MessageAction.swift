@@ -8,24 +8,29 @@
 
 import Foundation
 
-struct MessageAction {
+protocol MessageAction {
+  var description: String { get }
+  func nextMessage() -> Message
+}
+
+struct StandardMessageAction: MessageAction {
   // The message to be sent by this action
-  var message: Message
+  let message: Message
   // Description of the action for the user
   let description: String
-  // 
-  let type: ActionType
 
-  init(topic: Topic, payload: String?, type: ActionType, description: String) {
+  init(topic: Topic, payload: String?, description: String) {
     self.message = Message(topic: topic, payload: payload, qos: 2, retain: false)
     self.description = description
-    self.type = type
   }
 
-  init(message: Message, type: ActionType, description: String) {
+  init(message: Message, description: String) {
     self.message = message
     self.description = description
-    self.type = type
+  }
+
+  func nextMessage() -> Message {
+    return message
   }
 }
 
@@ -37,5 +42,6 @@ enum ActionType {
 
 enum ValueType {
   case Number(value: Float)
+  case Boolean(value: Bool)
   case Fraction(teller: Int, noemer: Int)
 }

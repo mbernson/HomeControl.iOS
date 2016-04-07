@@ -9,28 +9,15 @@
 import UIKit
 
 class DashboardCollectionViewCell: UICollectionViewCell {
-  var action: MessageAction?
+  var action: MessageAction? {
+    didSet {
+      layoutCell()
+    }
+  }
   var client: HomeClient?
 
-  func sen
-}
-
-class MessageSenderCell: DashboardCollectionViewCell {
-
-}
-
-class MessageSubscriberCell: DashboardCollectionViewCell {
-  func subscribe(client: HomeClient) {
-    //    guard let message = action?.message else { return }
-    //    client.subscribe(message.topic, listener: self)
-  }
-
-  func unsubscribe(client: HomeClient) {
-    //    guard let message = action?.message else { return }
-    //    client.unsubscribe(message.topic)
-  }
-
-  func didReceiveMessage(message: Message) {
+  func layoutCell() {
     //
   }
+
 }

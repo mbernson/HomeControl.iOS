@@ -8,17 +8,21 @@
 
 import UIKit
 
-class ButtonCollectionViewCell: DashboardCollectionViewCell, MessageSenderCell {
+class ButtonCollectionViewCell: DashboardCollectionViewCell {
 
   @IBOutlet weak var button: UIButton!
-
-  var action: MessageAction? { get set }
 
   @IBAction func buttonTouchedUp(sender: AnyObject) {
 //    assert(viewController != nil, "SpeedDialCollectionViewCell viewController has not been set")
 //    self.animateSuccess()
 //    viewController?.performButtonAction(action, completion: self.actionWasSent)
+    print("buttonTouchedUp")
+    guard let message = action?.nextMessage() else { return }
+    client?.publish(message)
   }
-  
+
+  override func layoutCell() {
+    button.setTitle(action?.description, forState: .Normal)
+  }
 
 }

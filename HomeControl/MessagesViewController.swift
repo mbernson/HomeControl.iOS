@@ -23,7 +23,7 @@ class MessagesViewController : UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.client = App.homeClient
+    self.client = MqttHomeClient()
   }
 
   // MARK: Outlets and actions
@@ -35,9 +35,9 @@ class MessagesViewController : UIViewController {
     self.messageTextField.resignFirstResponder()
     guard let client = client, topic = topicTextField.text else { return }
     let message = Message(topic: topic, payload: messageTextField.text ?? defaultMessageChoice, qos: 2, retain: false)
-    client.publish(message) { result in
-      print("message was sent")
-    }
+//    client.publish(message) { result in
+//      print("message was sent")
+//    }
   }
 
   @IBAction func viewWasTapped(sender: AnyObject) {

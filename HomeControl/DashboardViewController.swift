@@ -8,27 +8,33 @@
 
 import UIKit
 import Rswift
+import RxSwift
 
 class DashBoardViewController: UICollectionViewController {
 
-  var actions = [
-    MessageAction(topic: "hildebrandpad/lights/all", payload: "on", type: .ToggleSwitch, description: "Alle lichten"),
-    MessageAction(topic: "hildebrandpad/lights/all", payload: "on", type: .ToggleSwitch, description: "Bureaulamp"),
-    MessageAction(topic: "test", payload: "test", type: .PushButton, description: "Send test"),
-//    MessageAction(topic: "hildebrandpad/temperature", payload: nil, type: .Gauge, description: "Temperatuur"),
+//  var actions = [
+//    StandardMessageAction(topic: "woonkamer/bureaulamp", payload: "on", type: .ToggleSwitch, description: "Alle lichten"),
+//    StandardMessageAction(topic: "slaapkamer/bedlamp", payload: "on", type: .ToggleSwitch, description: "Bureaulamp"),
+//    StandardMessageAction(topic: "test", payload: "test", type: .PushButton, description: "Send test"),
+////    MessageAction(topic: "hildebrandpad/temperature", payload: nil, type: .Gauge, description: "Temperatuur"),
+//  ]
+  var cells: [UICollectionViewCell] = [
+    ToggleSwitchCollectionViewCell()
   ]
 
-  let reuseMap: [ActionType : String] = [
-    .PushButton: R.reuseIdentifier.pushButtonCollectionViewCell.identifier,
-    .ToggleSwitch: R.reuseIdentifier.toggleSwitchCollectionViewCell.identifier,
-  ]
+//  let reuseMap: [ActionType : String] = [
+//    .PushButton: R.reuseIdentifier.pushButtonCollectionViewCell.identifier,
+//    .ToggleSwitch: R.reuseIdentifier.toggleSwitchCollectionViewCell.identifier,
+//  ]
 
-  var homeClient: HomeClient = SwitchingHomeClient()
+//  var clients: Observable<HomeClient>!
+  let client: HomeClient = MqttHomeClient()
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
-//    homeClient = SwitchingHomeClient()
+    client.connect()
+    let messages = client.subscribe("#")
 
     collectionView?.delegate = self
     collectionView?.dataSource = self
@@ -44,18 +50,21 @@ class DashBoardViewController: UICollectionViewController {
   }
 
   override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return actions.count
+    return cells.count
   }
 
   // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
   override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    let action = actions[indexPath.row]
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseMap[action.type]!, forIndexPath: indexPath) as! DashboardCollectionViewCell
+//    let action = actions[indexPath.row]
+    let cell = cells[indexPath.row]
+//    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseMap[action.type]!, forIndexPath: indexPath) as! DashboardCollectionViewCell
 
     cell.layer.cornerRadius = 30
     cell.backgroundColor = collectionView.window?.tintColor
 
-    cell.action = action
+//    cell.clients
+//    cell.action = action
+
     // Customize
     return cell
   }

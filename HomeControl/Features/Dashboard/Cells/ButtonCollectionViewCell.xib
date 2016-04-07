@@ -15,7 +15,9 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hgG-6y-zVw">
                         <rect key="frame" x="0.0" y="0.0" width="138" height="146"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <state key="normal" title="Button"/>
+                        <state key="normal" title="Button">
+                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                        </state>
                         <connections>
                             <action selector="buttonTouchedUp:" destination="gTV-IL-0wX" eventType="touchUpInside" id="VU4-Jg-z7v"/>
                         </connections>

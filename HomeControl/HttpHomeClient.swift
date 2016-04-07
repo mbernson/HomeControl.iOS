@@ -8,37 +8,24 @@
 
 import Foundation
 import Alamofire
+import Promissum
+import RxSwift
 
 class HttpHomeClient: HomeClient {
   private var userDefaults = NSUserDefaults.standardUserDefaults()
-  
-  func publish(message: Message) {
-    NSLog("httpHomeClient publish")
-    
+
+  func publish(message: Message) -> Promise<HomeClientStatus, ErrorType> {
+    print("httpHomeClient publish")
+
     Alamofire.request(.POST, userDefaults.stringForKey("api_mqtt_url")!, parameters: [
       "topic": message.topic,
       "message": message.payload ?? "",
       "retain": message.retain
     ])
+    return Promise(value: HomeClientStatus.Success)
   }
 
-  func publish(message: Message, completion: HomeClientStatus -> Void) {
-    NSLog("httpHomeClient publish with callback")
-
-    Alamofire.request(.POST, userDefaults.stringForKey("api_mqtt_url")!, parameters: [
-      "topic": message.topic,
-      "message": message.payload ?? "",
-      "retain": message.retain
-    ]).responseJSON { response in
-      if response.result.isSuccess {
-        completion(.Success)
-      } else {
-        completion(.Failure)
-      }
-    }
-  }
-
-  func subscribe(topic: Topic, listener: HomeClientListener) {
+  func subscribe(topic: Topic) -> Observable<Message> {
     fatalError("Not implmemented")
   }
 

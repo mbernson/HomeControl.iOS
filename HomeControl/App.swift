@@ -9,5 +9,5 @@
 import Foundation
 
 struct App {
-  static let homeClient: HomeClient = SwitchingHomeClient()
+//  static let homeClient: HomeClient = SwitchingHomeClient()
 }

@@ -7,16 +7,16 @@
 //
 
 import Foundation
-import UIKit
+import Promissum
+import RxSwift
 
 typealias Topic = String
 
 protocol HomeClient {
-  func publish(message: Message)
-  func publish(message: Message, completion: HomeClientStatus -> Void)
+  func publish(message: Message) -> Promise<HomeClientStatus, ErrorType>
 
-  func subscribe(topic: Topic, listener: HomeClientListener)
-  func unsubscribe(topic: Topic)
+  func subscribe(topic: Topic) -> Observable<Message>
+//  func unsubscribe(topic: Topic)
 
   func connect()
   func disconnect()
@@ -29,4 +29,11 @@ protocol HomeClientListener {
 enum HomeClientStatus {
   case Success
   case Failure
+}
+
+struct HomeClientError: ErrorType, CustomStringConvertible {
+  let message: String
+  var description: String {
+    return message
+  }
 }
