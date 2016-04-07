@@ -7,16 +7,47 @@
 //
 
 import Foundation
-import Moscapsule
+import UIKit
+import MQTTClient
 
 struct Message {
-  let topic: String
-  var payload: String?
-  let qos: Int32
+  static let encoding = NSUTF8StringEncoding
+
+  enum QoS {
+    case AtMostOnce
+    case AtLeastOnce
+    case ExactlyOnce
+
+    static func fromMqttQoS(mqttQos: MQTTQosLevel) -> QoS {
+      switch mqttQos {
+      case .AtLeastOnce: return QoS.AtLeastOnce
+      case .ExactlyOnce: return QoS.ExactlyOnce
+      case .AtMostOnce:  return QoS.AtMostOnce
+      }
+    }
+  }
+
+  let topic: Topic
+  let payload: NSData?
+  let qos: QoS
   let retain: Bool
 
+  init(topic: Topic, payload: NSData? = nil, qos: QoS = .AtLeastOnce, retain: Bool = false) {
+    self.topic = topic
+    self.payload = payload
+    self.qos = qos
+    self.retain = retain
+  }
+
+  init(topic: Topic, payloadString: String? = nil, qos: QoS = .AtLeastOnce, retain: Bool = false) {
+    self.topic = topic
+    self.payload = payloadString?.dataUsingEncoding(Message.encoding)
+    self.qos = qos
+    self.retain = retain
+  }
+
   func asBoolean() -> Bool? {
-    guard let payload = payload else { return nil }
+    guard let payload = payloadString else { return nil }
     switch payload {
     case "on", "yes", "1", "true":
       return true
@@ -29,18 +60,26 @@ struct Message {
   }
 
   func asNumber() -> Float? {
-    guard let payload = payload else { return nil }
+    guard let payload = payloadString else { return nil }
     return Float(payload)
   }
 
-//  func asColor() -> UIColor?
+  func asColor() -> UIColor? {
+    return .clearColor()
+  }
 }
 
 extension Message {
-  init(mqttMessage: MQTTMessage) {
-    topic = mqttMessage.topic
-    payload = mqttMessage.payloadString
-    qos = mqttMessage.qos
-    retain = mqttMessage.retain
+  var payloadString: String? {
+    guard let data = payload else { return nil }
+    return String(data: data, encoding: Message.encoding)
+  }
+
+  var mqttQos: MQTTQosLevel {
+    switch qos {
+    case .AtLeastOnce: return MQTTQosLevel.AtLeastOnce
+    case .ExactlyOnce: return MQTTQosLevel.ExactlyOnce
+    case .AtMostOnce:  return MQTTQosLevel.AtMostOnce
+    }
   }
 }

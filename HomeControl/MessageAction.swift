@@ -20,7 +20,7 @@ struct StandardMessageAction: MessageAction {
   let description: String
 
   init(topic: Topic, payload: String?, description: String) {
-    self.message = Message(topic: topic, payload: payload, qos: 2, retain: false)
+    self.message = Message(topic: topic, payloadString: payload)
     self.description = description
   }
 

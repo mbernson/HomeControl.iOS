@@ -24,7 +24,6 @@
 		D5A06C7F1C11AB0300664494 /* HomeControlUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A06C7E1C11AB0300664494 /* HomeControlUITests.swift */; };
 		D5A06C8D1C11AB9F00664494 /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A06C8C1C11AB9F00664494 /* MessagesViewController.swift */; };
 		D5A809FA1CA3CCAA00AB9323 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A809F91CA3CCAA00AB9323 /* UserDefaults.swift */; };
-		D5A809FC1CA3CE7400AB9323 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A809FB1CA3CE7400AB9323 /* App.swift */; };
 		D5B3BB981C1441FC004C5D96 /* MessageAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B3BB971C1441FC004C5D96 /* MessageAction.swift */; };
 		D5B3BB9A1C1442AA004C5D96 /* HomeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B3BB991C1442AA004C5D96 /* HomeClient.swift */; };
 		D5B540FF1C9D6A1C00E49508 /* ToggleSwitchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B540FD1C9D6A1C00E49508 /* ToggleSwitchCollectionViewCell.swift */; };
@@ -33,7 +32,6 @@
 		D5B541081C9D6BB500E49508 /* Dashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5B541071C9D6BB500E49508 /* Dashboard.storyboard */; };
 		D5B5410B1C9D6C0300E49508 /* ButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B541091C9D6C0300E49508 /* ButtonCollectionViewCell.swift */; };
 		D5B5410C1C9D6C0300E49508 /* ButtonCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5B5410A1C9D6C0300E49508 /* ButtonCollectionViewCell.xib */; };
-		D5BA75ED1CA016CE00D088BC /* MessagePubSub.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BA75EC1CA016CE00D088BC /* MessagePubSub.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,7 +78,6 @@
 		D5A06C801C11AB0300664494 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5A06C8C1C11AB9F00664494 /* MessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		D5A809F91CA3CCAA00AB9323 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDefaults.swift; path = Utilities/UserDefaults.swift; sourceTree = "<group>"; };
-		D5A809FB1CA3CE7400AB9323 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		D5B3BB971C1441FC004C5D96 /* MessageAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageAction.swift; sourceTree = "<group>"; };
 		D5B3BB991C1442AA004C5D96 /* HomeClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeClient.swift; sourceTree = "<group>"; };
 		D5B540FD1C9D6A1C00E49508 /* ToggleSwitchCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToggleSwitchCollectionViewCell.swift; path = Features/Dashboard/Cells/ToggleSwitchCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -89,7 +86,6 @@
 		D5B541071C9D6BB500E49508 /* Dashboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Dashboard.storyboard; path = Features/Dashboard/Dashboard.storyboard; sourceTree = "<group>"; };
 		D5B541091C9D6C0300E49508 /* ButtonCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ButtonCollectionViewCell.swift; path = Features/Dashboard/Cells/ButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		D5B5410A1C9D6C0300E49508 /* ButtonCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ButtonCollectionViewCell.xib; path = Features/Dashboard/Cells/ButtonCollectionViewCell.xib; sourceTree = "<group>"; };
-		D5BA75EC1CA016CE00D088BC /* MessagePubSub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessagePubSub.swift; path = Domain/MessagePubSub.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,11 +196,10 @@
 			isa = PBXGroup;
 			children = (
 				D5A06C5E1C11AB0200664494 /* AppDelegate.swift */,
-				D5A809FB1CA3CE7400AB9323 /* App.swift */,
+				D5879C2C1C650F16005BF7B6 /* Clients */,
 				D5B541041C9D6B2A00E49508 /* Domain */,
 				D5B540FA1C9D69E700E49508 /* Features */,
 				D50912AB1C134817009BFC9A /* ViewControllers */,
-				D5879C2C1C650F16005BF7B6 /* Clients */,
 				D5A809F81CA3CC9D00AB9323 /* Utilities */,
 				D50912AC1C134821009BFC9A /* User interface */,
 				D57C99E51C6CFB0D00CCC46F /* Supporting files */,
@@ -283,7 +278,6 @@
 			children = (
 				D5B3BB971C1441FC004C5D96 /* MessageAction.swift */,
 				D5B541051C9D6B3400E49508 /* Message.swift */,
-				D5BA75EC1CA016CE00D088BC /* MessagePubSub.swift */,
 			);
 			name = Domain;
 			sourceTree = "<group>";
@@ -499,8 +493,6 @@
 				D5B3BB981C1441FC004C5D96 /* MessageAction.swift in Sources */,
 				D5A06C8D1C11AB9F00664494 /* MessagesViewController.swift in Sources */,
 				D5B3BB9A1C1442AA004C5D96 /* HomeClient.swift in Sources */,
-				D5BA75ED1CA016CE00D088BC /* MessagePubSub.swift in Sources */,
-				D5A809FC1CA3CE7400AB9323 /* App.swift in Sources */,
 				D5A809FA1CA3CCAA00AB9323 /* UserDefaults.swift in Sources */,
 				D52E04351C134BBC00054AF8 /* EventsViewController.swift in Sources */,
 				D5B540FF1C9D6A1C00E49508 /* ToggleSwitchCollectionViewCell.swift in Sources */,

@@ -14,32 +14,30 @@ import RxSwift
 class HttpHomeClient: HomeClient {
   private var userDefaults = NSUserDefaults.standardUserDefaults()
 
-  func publish(message: Message) -> Promise<HomeClientStatus, ErrorType> {
+  func publish(message: Message) -> Promise<Void, HomeClientError> {
     print("httpHomeClient publish")
 
-    Alamofire.request(.POST, userDefaults.stringForKey("api_mqtt_url")!, parameters: [
+    return Alamofire.request(.POST, userDefaults.stringForKey("api_mqtt_url")!, parameters: [
       "topic": message.topic,
-      "message": message.payload ?? "",
+      "message": message.payloadString ?? "",
       "retain": message.retain
-    ])
-    return Promise(value: HomeClientStatus.Success)
+      ])
+      .responsePromise()
+      .mapError { error in
+        return HomeClientError(message: "HTTP Networking error")
+      }
+      .map { _ in }
   }
 
   func subscribe(topic: Topic) -> Observable<Message> {
     fatalError("Not implmemented")
   }
 
-  func unsubscribe(topic: Topic) {
-    fatalError("Not implmemented")
+  func connect() {
+    //
   }
 
-  func connect() {
-    // No connection necessary
-    NSLog("HTTP connecting")
-  }
-  
   func disconnect() {
-    // No disconnection necessary
-    NSLog("HTTP disconnecting")
+    //
   }
 }

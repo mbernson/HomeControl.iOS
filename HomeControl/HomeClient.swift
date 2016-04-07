@@ -13,22 +13,12 @@ import RxSwift
 typealias Topic = String
 
 protocol HomeClient {
-  func publish(message: Message) -> Promise<HomeClientStatus, ErrorType>
+  func publish(message: Message) -> Promise<Void, HomeClientError>
 
   func subscribe(topic: Topic) -> Observable<Message>
-//  func unsubscribe(topic: Topic)
 
   func connect()
   func disconnect()
-}
-
-protocol HomeClientListener {
-  func didReceiveMessage(message: Message)
-}
-
-enum HomeClientStatus {
-  case Success
-  case Failure
 }
 
 struct HomeClientError: ErrorType, CustomStringConvertible {

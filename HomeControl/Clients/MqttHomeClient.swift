@@ -7,73 +7,98 @@
 //
 
 import Foundation
-import Moscapsule
-import RxSwift
 import Promissum
+import RxSwift
+import MQTTClient
 
 class MqttHomeClient: HomeClient {
-  private var mqtt: MQTTClient?
-  private var mqttMessages: Observable<Message>?
-  
-  private let keepAlive: Int32 = 60
 
-  private var userDefaults = NSUserDefaults.standardUserDefaults()
+  class MqttHomeDelegate: NSObject, MQTTSessionDelegate {
+    let observer: AnyObserver<Message>
 
-  func publish(message: Message) -> Promise<HomeClientStatus, ErrorType> {
-    let source = PromiseSource<HomeClientStatus, ErrorType>()
-    mqtt?.publishString(message.payload ?? "", topic: message.topic, qos: Int32(message.qos), retain: message.retain, requestCompletion: { (result, _) in
-      if result == MosqResult.MOSQ_SUCCESS {
-        source.resolve(.Success)
+    init(observer: AnyObserver<Message>) {
+      print("MqttHomeDelegate init")
+      self.observer = observer
+      super.init()
+    }
+
+    deinit {
+      print("MqttHomeDelegate deinit")
+    }
+
+    func newMessage(session: MQTTSession!, data: NSData!, onTopic topic: String!, qos: MQTTQosLevel, retained: Bool, mid: UInt32) {
+      print("received a message on topic \(topic)!")
+      let message = Message(topic: topic, payload: data, qos: Message.QoS.fromMqttQoS(qos), retain: retained)
+      observer.on(.Next(message))
+    }
+
+  }
+
+  let mqttTransport: MQTTCFSocketTransport
+  let mqttSession: MQTTSession
+
+  let messages: Observable<Message>
+
+  init() {
+    let mqttTransport: MQTTCFSocketTransport
+    let mqttSession: MQTTSession
+    var delegate: MqttHomeDelegate?
+
+    mqttTransport = MQTTCFSocketTransport()
+    mqttTransport.host = "localhost"
+    mqttTransport.port = 1883
+
+    mqttSession = MQTTSession(clientId: "homecontrol-app")
+    mqttSession.transport = mqttTransport
+
+    let observable: Observable<Message> = Observable.create { observer in
+      delegate = MqttHomeDelegate(observer: observer)
+      mqttSession.delegate = delegate
+
+      return RefCountDisposable(disposable: AnonymousDisposable {
+        print("disposing!!!")
+        mqttSession.disconnect()
+      })
+    }
+
+    self.mqttSession = mqttSession
+    self.mqttTransport = mqttTransport
+    self.messages = observable
+  }
+
+  func connect() {
+    print("connecting...")
+    mqttSession.connectAndWaitTimeout(10)
+  }
+
+  func disconnect() {
+    mqttSession.disconnect()
+  }
+
+  func publish(message: Message) -> Promise<Void, HomeClientError> {
+    let publish = PromiseSource<Void, HomeClientError>()
+    mqttSession.publishData(message.payload, onTopic: message.topic, retain: message.retain, qos: message.mqttQos) { error in
+      if error != nil {
+        publish.reject(HomeClientError(message: error.description))
       } else {
-        source.reject(HomeClientError(message: "Could not publish to MQTT"))
+        publish.resolve()
       }
-    })
-    return source.promise
+    }
+    return publish.promise
   }
 
   func subscribe(topic: Topic) -> Observable<Message> {
-    print("subscribing to \(topic)")
-    guard let mqttMessages = mqttMessages else {
-      fatalError()
-    }
-    return mqttMessages
-  }
-
-//  private func onMessage(mqttMessage: MQTTMessage) {
-//    let message = Message(mqttMessage: mqttMessage)
-//    print("message was received on topic: \(message.topic) payload: \(message.payload)")
-//  }
-
-  func unsubscribe(topic: Topic) {
-    print("unsubscribed from \(topic)")
-//    mqtt?.unsubscribe(topic)
-  }
-  
-  func connect() {
-    let mqttConfig = MQTTConfig(
-      clientId: userDefaults.stringForKey("mqtt_client_id")!,
-      host: userDefaults.stringForKey("mqtt_host")!,
-      port: Int32(userDefaults.integerForKey("mqtt_port")),
-      keepAlive: keepAlive
-    )
-
-    mqttMessages = Observable<Message>.create { observer in
-      mqttConfig.onMessageCallback = { mqttMessage in
-        print("received a message in root observable!")
-        observer.on(.Next(Message(mqttMessage: mqttMessage)))
+    mqttSession.subscribeToTopic(topic, atLevel: .AtLeastOnce) { (error, qos) in
+      if error != nil {
+        print("subscribing failed!")
+      } else {
+        print("subscribed with qos \(qos)")
       }
-      return RefCountDisposable(disposable: AnonymousDisposable {
-        mqttConfig.onMessageCallback = { _ in }
-      })
     }
-    
-    // Create new MQTT Connection
-    mqtt = MQTT.newConnection(mqttConfig)
-    NSLog("MQTT connecting")
+
+    return messages.filter { message in
+      return message.topic == topic
+    }
   }
   
-  func disconnect() {
-    NSLog("MQTT disconnecting")
-    mqtt?.disconnect()
-  }
 }

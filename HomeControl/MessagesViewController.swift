@@ -34,10 +34,10 @@ class MessagesViewController : UIViewController {
   @IBAction func sendButtonPressed(sender: AnyObject) {
     self.messageTextField.resignFirstResponder()
     guard let client = client, topic = topicTextField.text else { return }
-    let message = Message(topic: topic, payload: messageTextField.text ?? defaultMessageChoice, qos: 2, retain: false)
-//    client.publish(message) { result in
-//      print("message was sent")
-//    }
+    let message = Message(topic: topic, payloadString: messageTextField.text ?? defaultMessageChoice)
+    client.publish(message).then { result in
+      print("message was sent")
+    }
   }
 
   @IBAction func viewWasTapped(sender: AnyObject) {
