@@ -13,7 +13,7 @@ import RxSwift
 typealias Topic = String
 
 protocol HomeClient {
-  func publish(message: Message) -> Promise<Void, HomeClientError>
+  func publish(message: Message) -> Promise<Message, HomeClientError>
 
   func subscribe(topic: Topic) -> Observable<Message>
 

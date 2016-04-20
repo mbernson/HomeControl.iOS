@@ -56,7 +56,7 @@ class MqttHomeClient: HomeClient {
       mqttSession.delegate = delegate
 
       return RefCountDisposable(disposable: AnonymousDisposable {
-        print("disposing!!!")
+        print("disposing the mqttsession!")
         mqttSession.disconnect()
       })
     }
@@ -67,21 +67,23 @@ class MqttHomeClient: HomeClient {
   }
 
   func connect() {
-    print("connecting...")
+    print("mqtt connecting...")
     mqttSession.connectAndWaitTimeout(10)
   }
 
   func disconnect() {
+    print("mqtt disconnecting...")
     mqttSession.disconnect()
   }
 
-  func publish(message: Message) -> Promise<Void, HomeClientError> {
-    let publish = PromiseSource<Void, HomeClientError>()
+  func publish(message: Message) -> Promise<Message, HomeClientError> {
+    let publish = PromiseSource<Message, HomeClientError>()
     mqttSession.publishData(message.payload, onTopic: message.topic, retain: message.retain, qos: message.mqttQos) { error in
       if error != nil {
         publish.reject(HomeClientError(message: error.description))
       } else {
-        publish.resolve()
+        print("published message '\(message.payloadString)' on topic '\(message.topic)'")
+        publish.resolve(message)
       }
     }
     return publish.promise
@@ -92,7 +94,7 @@ class MqttHomeClient: HomeClient {
       if error != nil {
         print("subscribing failed!")
       } else {
-        print("subscribed with qos \(qos)")
+        print("subscribed to topic '\(topic)' with qos \(qos)")
       }
     }
 

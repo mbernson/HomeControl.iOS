@@ -8,21 +8,18 @@
 
 import UIKit
 
-class ButtonCollectionViewCell: DashboardCollectionViewCell {
+class ButtonCollectionViewCell: UICollectionViewCell, SendsMessages {
+
+  var homeClient: HomeClient?
+  var action: MessageAction? {
+    didSet {
+      button.titleLabel?.text = action?.description
+    }
+  }
 
   @IBOutlet weak var button: UIButton!
 
   @IBAction func buttonTouchedUp(sender: AnyObject) {
-//    assert(viewController != nil, "SpeedDialCollectionViewCell viewController has not been set")
-//    self.animateSuccess()
-//    viewController?.performButtonAction(action, completion: self.actionWasSent)
-    print("buttonTouchedUp")
-    guard let message = action?.nextMessage() else { return }
-    client?.publish(message)
+    sendCurrentMessage()
   }
-
-  override func layoutCell() {
-    button.setTitle(action?.description, forState: .Normal)
-  }
-
 }

@@ -12,35 +12,35 @@ import RxSwift
 
 class DashBoardViewController: UICollectionViewController {
 
-//  var actions = [
-//    StandardMessageAction(topic: "woonkamer/bureaulamp", payload: "on", type: .ToggleSwitch, description: "Alle lichten"),
-//    StandardMessageAction(topic: "slaapkamer/bedlamp", payload: "on", type: .ToggleSwitch, description: "Bureaulamp"),
-//    StandardMessageAction(topic: "test", payload: "test", type: .PushButton, description: "Send test"),
-////    MessageAction(topic: "hildebrandpad/temperature", payload: nil, type: .Gauge, description: "Temperatuur"),
-//  ]
-  var cells: [UICollectionViewCell] = [
-    ToggleSwitchCollectionViewCell()
+  var widgets: [MessageAction] = [
+    MessageAction(message: Message(topic: "foo", payloadString: "on"), description: "foo display", type: .Display),
+    MessageAction(message: Message(topic: "bar", payloadString: "on"), description: "Bar display", type: .Display),
+    MessageAction(message: Message(topic: "foo", payloadString: "on"), description: "Foo on", type: .PushButton),
+    MessageAction(message: Message(topic: "foo", payloadString: "off"), description: "Foo off", type: .PushButton),
+    MessageAction(message: Message(topic: "foo", payloadString: "on"), description: "Foo toggle", type: .ToggleSwitch),
+//    MessageAction(message: Message(topic: "bar", payloadString: "on"), description: "Bar toggle", type: .ToggleSwitch),
   ]
 
-//  let reuseMap: [ActionType : String] = [
-//    .PushButton: R.reuseIdentifier.pushButtonCollectionViewCell.identifier,
-//    .ToggleSwitch: R.reuseIdentifier.toggleSwitchCollectionViewCell.identifier,
-//  ]
+  let reuseMap: [ActionType : String] = [
+    .PushButton: R.reuseIdentifier.pushButtonCollectionViewCell.identifier,
+    .ToggleSwitch: R.reuseIdentifier.toggleSwitchCollectionViewCell.identifier,
+    .Display: R.reuseIdentifier.displayCell.identifier,
+  ]
 
-//  var clients: Observable<HomeClient>!
   let client: HomeClient = MqttHomeClient()
+  let disposeBag = DisposeBag()
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
     client.connect()
-    let messages = client.subscribe("#")
 
     collectionView?.delegate = self
     collectionView?.dataSource = self
 
     collectionView?.registerNib(R.nib.toggleSwitchCollectionViewCell)
     collectionView?.registerNib(R.nib.buttonCollectionViewCell)
+    collectionView?.registerNib(R.nib.displayCell)
   }
 
   // MARK: Collection view data source
@@ -50,22 +50,25 @@ class DashBoardViewController: UICollectionViewController {
   }
 
   override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return cells.count
+    return widgets.count
   }
 
-  // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
   override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-//    let action = actions[indexPath.row]
-    let cell = cells[indexPath.row]
-//    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseMap[action.type]!, forIndexPath: indexPath) as! DashboardCollectionViewCell
+    let widget = widgets[indexPath.row]
+    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseMap[widget.type]!, forIndexPath: indexPath)
 
     cell.layer.cornerRadius = 30
     cell.backgroundColor = collectionView.window?.tintColor
 
-//    cell.clients
-//    cell.action = action
+    if var sendingCell = cell as? SendsMessages {
+      sendingCell.homeClient = client
+      sendingCell.action = widget
+    }
+    
+    if let receivingCell = cell as? ReceivesMessages {
+      receivingCell.subscribeForChanges(client)
+    }
 
-    // Customize
     return cell
   }
 
@@ -78,8 +81,4 @@ class DashBoardViewController: UICollectionViewController {
   override func collectionView(collectionView: UICollectionView, canMoveItemAtIndexPath indexPath: NSIndexPath) -> Bool {
     return true
   }
-}
-
-struct DashboardViewModel {
-  //  let cells: [Cell]
 }

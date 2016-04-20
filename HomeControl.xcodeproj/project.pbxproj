@@ -10,7 +10,9 @@
 		699C55C50DEA8C5B578A8FB2 /* Pods_HomeControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 707BA3C191EC60538C624174 /* Pods_HomeControl.framework */; };
 		D50057B11C8DE2A600E28732 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50057B01C8DE2A600E28732 /* R.generated.swift */; };
 		D52E04351C134BBC00054AF8 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52E04341C134BBC00054AF8 /* EventsViewController.swift */; };
-		D54C8C0B1C9FDD5D0004B02D /* DashboardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54C8C0A1C9FDD5D0004B02D /* DashboardCollectionViewCell.swift */; };
+		D53968891CC7E811006700A4 /* DisplayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53968871CC7E811006700A4 /* DisplayCell.swift */; };
+		D539688A1CC7E811006700A4 /* DisplayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D53968881CC7E811006700A4 /* DisplayCell.xib */; };
+		D54C8C0B1C9FDD5D0004B02D /* ReceivesMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54C8C0A1C9FDD5D0004B02D /* ReceivesMessages.swift */; };
 		D54C8C0D1C9FDDF50004B02D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54C8C0C1C9FDDF50004B02D /* SettingsViewController.swift */; };
 		D54C8C0F1C9FDDFF0004B02D /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D54C8C0E1C9FDDFF0004B02D /* Settings.storyboard */; };
 		D561B15A1C524E5C00F4CEA9 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D561B1591C524E5C00F4CEA9 /* DashboardViewController.swift */; };
@@ -32,6 +34,7 @@
 		D5B541081C9D6BB500E49508 /* Dashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5B541071C9D6BB500E49508 /* Dashboard.storyboard */; };
 		D5B5410B1C9D6C0300E49508 /* ButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B541091C9D6C0300E49508 /* ButtonCollectionViewCell.swift */; };
 		D5B5410C1C9D6C0300E49508 /* ButtonCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5B5410A1C9D6C0300E49508 /* ButtonCollectionViewCell.xib */; };
+		D5DEA5351CB6A634008DD971 /* SendsMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DEA5341CB6A634008DD971 /* SendsMessages.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,7 +61,9 @@
 		D50057B01C8DE2A600E28732 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		D52262B61C9AC547008E1569 /* DataMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DataMapper.framework; path = "DataMapper/build/Debug-iphoneos/DataMapper.framework"; sourceTree = "<group>"; };
 		D52E04341C134BBC00054AF8 /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
-		D54C8C0A1C9FDD5D0004B02D /* DashboardCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashboardCollectionViewCell.swift; path = Features/Dashboard/Cells/DashboardCollectionViewCell.swift; sourceTree = "<group>"; };
+		D53968871CC7E811006700A4 /* DisplayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DisplayCell.swift; path = Features/Dashboard/Cells/DisplayCell.swift; sourceTree = "<group>"; };
+		D53968881CC7E811006700A4 /* DisplayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DisplayCell.xib; path = Features/Dashboard/Cells/DisplayCell.xib; sourceTree = "<group>"; };
+		D54C8C0A1C9FDD5D0004B02D /* ReceivesMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReceivesMessages.swift; path = Features/Dashboard/Cells/ReceivesMessages.swift; sourceTree = "<group>"; };
 		D54C8C0C1C9FDDF50004B02D /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = Features/Settings/SettingsViewController.swift; sourceTree = "<group>"; };
 		D54C8C0E1C9FDDFF0004B02D /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Settings.storyboard; path = Features/Settings/Settings.storyboard; sourceTree = "<group>"; };
 		D561B1591C524E5C00F4CEA9 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
@@ -86,6 +91,7 @@
 		D5B541071C9D6BB500E49508 /* Dashboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Dashboard.storyboard; path = Features/Dashboard/Dashboard.storyboard; sourceTree = "<group>"; };
 		D5B541091C9D6C0300E49508 /* ButtonCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ButtonCollectionViewCell.swift; path = Features/Dashboard/Cells/ButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		D5B5410A1C9D6C0300E49508 /* ButtonCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ButtonCollectionViewCell.xib; path = Features/Dashboard/Cells/ButtonCollectionViewCell.xib; sourceTree = "<group>"; };
+		D5DEA5341CB6A634008DD971 /* SendsMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SendsMessages.swift; path = Features/Dashboard/Cells/SendsMessages.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,6 +253,8 @@
 			children = (
 				D5B541071C9D6BB500E49508 /* Dashboard.storyboard */,
 				D561B1591C524E5C00F4CEA9 /* DashboardViewController.swift */,
+				D54C8C0A1C9FDD5D0004B02D /* ReceivesMessages.swift */,
+				D5DEA5341CB6A634008DD971 /* SendsMessages.swift */,
 				D5B541011C9D6A2300E49508 /* Cells */,
 			);
 			name = Dashboard;
@@ -268,7 +276,8 @@
 				D5B540FE1C9D6A1C00E49508 /* ToggleSwitchCollectionViewCell.xib */,
 				D5B541091C9D6C0300E49508 /* ButtonCollectionViewCell.swift */,
 				D5B5410A1C9D6C0300E49508 /* ButtonCollectionViewCell.xib */,
-				D54C8C0A1C9FDD5D0004B02D /* DashboardCollectionViewCell.swift */,
+				D53968871CC7E811006700A4 /* DisplayCell.swift */,
+				D53968881CC7E811006700A4 /* DisplayCell.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -399,6 +408,7 @@
 				D5A06C661C11AB0200664494 /* Assets.xcassets in Resources */,
 				D5B541001C9D6A1C00E49508 /* ToggleSwitchCollectionViewCell.xib in Resources */,
 				D5A06C641C11AB0200664494 /* Main.storyboard in Resources */,
+				D539688A1CC7E811006700A4 /* DisplayCell.xib in Resources */,
 				D54C8C0F1C9FDDFF0004B02D /* Settings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -490,13 +500,15 @@
 				D561B15A1C524E5C00F4CEA9 /* DashboardViewController.swift in Sources */,
 				D54C8C0D1C9FDDF50004B02D /* SettingsViewController.swift in Sources */,
 				D5B541061C9D6B3400E49508 /* Message.swift in Sources */,
+				D5DEA5351CB6A634008DD971 /* SendsMessages.swift in Sources */,
 				D5B3BB981C1441FC004C5D96 /* MessageAction.swift in Sources */,
 				D5A06C8D1C11AB9F00664494 /* MessagesViewController.swift in Sources */,
+				D53968891CC7E811006700A4 /* DisplayCell.swift in Sources */,
 				D5B3BB9A1C1442AA004C5D96 /* HomeClient.swift in Sources */,
 				D5A809FA1CA3CCAA00AB9323 /* UserDefaults.swift in Sources */,
 				D52E04351C134BBC00054AF8 /* EventsViewController.swift in Sources */,
 				D5B540FF1C9D6A1C00E49508 /* ToggleSwitchCollectionViewCell.swift in Sources */,
-				D54C8C0B1C9FDD5D0004B02D /* DashboardCollectionViewCell.swift in Sources */,
+				D54C8C0B1C9FDD5D0004B02D /* ReceivesMessages.swift in Sources */,
 				D5879C301C650F3B005BF7B6 /* HttpHomeClient.swift in Sources */,
 				D5B5410B1C9D6C0300E49508 /* ButtonCollectionViewCell.swift in Sources */,
 				D5879C2E1C650F35005BF7B6 /* MqttHomeClient.swift in Sources */,

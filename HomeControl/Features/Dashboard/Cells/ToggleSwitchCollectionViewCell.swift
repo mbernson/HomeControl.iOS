@@ -7,33 +7,42 @@
 //
 
 import UIKit
+import RxSwift
 
-class ToggleSwitchCollectionViewCell: DashboardCollectionViewCell {
+class ToggleSwitchCollectionViewCell: UICollectionViewCell, SendsMessages, ReceivesMessages {
+
+  var homeClient: HomeClient?
+  var action: MessageAction? {
+    didSet {
+      titleLabel.text = action?.description
+    }
+  }
+  var disposable: Disposable?
 
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var toggleSwitch: UISwitch!
 
   @IBAction func switchValueDidChange(sender: AnyObject) {
-    print("switchValueDidChange")
-    guard let message = action?.nextMessage() else { return }
-    client?.publish(message)
-  }
-
-  override func layoutCell() {
-    titleLabel.text = action?.description
-    guard let message = action?.nextMessage() else {
-      contentView.backgroundColor = UIColor.grayColor()
-      return
-    }
-    if let on = message.asBoolean() {
-      toggleSwitch.setOn(on, animated: false)
+    guard var action = action else { return }
+    guard let oldValue = action.message.asBoolean() else { return }
+    let newValue = oldValue ? "off" : "on"
+    action.message = Message(topic: action.message.topic, payloadString: newValue, qos: action.message.qos, retain: action.message.retain)
+    self.action = action
+    sendCurrentMessage().then { _ in
+      print("message published!")
     }
   }
 
-  func didReceiveMessage(message: Message) {
-    print("ToggleSwitchCollectionViewCell didReceiveMessage")
-    if let on = message.asBoolean() {
-      toggleSwitch.setOn(on, animated: true)
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    disposable?.dispose()
+  }
+
+  func subscribeForChanges(client: HomeClient) {
+    disposable = client.subscribe(action!.message.topic).subscribeNext { [weak self] message in
+      if let newState = message.asBoolean() {
+        self?.toggleSwitch.setOn(newState, animated: true)
+      }
     }
   }
 }
