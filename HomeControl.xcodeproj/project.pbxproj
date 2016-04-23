@@ -12,6 +12,11 @@
 		D52E04351C134BBC00054AF8 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D52E04341C134BBC00054AF8 /* EventsViewController.swift */; };
 		D53968891CC7E811006700A4 /* DisplayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D53968871CC7E811006700A4 /* DisplayCell.swift */; };
 		D539688A1CC7E811006700A4 /* DisplayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D53968881CC7E811006700A4 /* DisplayCell.xib */; };
+		D549EBFA1CCA13B900995DA2 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = D549EBF91CCA13B900995DA2 /* UIColor+Hex.swift */; };
+		D549EBFC1CCA13FB00995DA2 /* UIViewController+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = D549EBFB1CCA13FB00995DA2 /* UIViewController+Error.swift */; };
+		D549EBFE1CCA141300995DA2 /* UnitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D549EBFD1CCA141300995DA2 /* UnitExtensions.swift */; };
+		D549EC001CCA143000995DA2 /* NSUserDefaults+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = D549EBFF1CCA143000995DA2 /* NSUserDefaults+Subscript.swift */; };
+		D549EC021CCA145500995DA2 /* ErrorType+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = D549EC011CCA145500995DA2 /* ErrorType+Description.swift */; };
 		D54C8C0B1C9FDD5D0004B02D /* ReceivesMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54C8C0A1C9FDD5D0004B02D /* ReceivesMessages.swift */; };
 		D54C8C0D1C9FDDF50004B02D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54C8C0C1C9FDDF50004B02D /* SettingsViewController.swift */; };
 		D54C8C0F1C9FDDFF0004B02D /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D54C8C0E1C9FDDFF0004B02D /* Settings.storyboard */; };
@@ -63,6 +68,11 @@
 		D52E04341C134BBC00054AF8 /* EventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
 		D53968871CC7E811006700A4 /* DisplayCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DisplayCell.swift; path = Features/Dashboard/Cells/DisplayCell.swift; sourceTree = "<group>"; };
 		D53968881CC7E811006700A4 /* DisplayCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DisplayCell.xib; path = Features/Dashboard/Cells/DisplayCell.xib; sourceTree = "<group>"; };
+		D549EBF91CCA13B900995DA2 /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+Hex.swift"; path = "Extensions/UIColor+Hex.swift"; sourceTree = "<group>"; };
+		D549EBFB1CCA13FB00995DA2 /* UIViewController+Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+Error.swift"; path = "Extensions/UIViewController+Error.swift"; sourceTree = "<group>"; };
+		D549EBFD1CCA141300995DA2 /* UnitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UnitExtensions.swift; path = Extensions/UnitExtensions.swift; sourceTree = "<group>"; };
+		D549EBFF1CCA143000995DA2 /* NSUserDefaults+Subscript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSUserDefaults+Subscript.swift"; path = "Extensions/NSUserDefaults+Subscript.swift"; sourceTree = "<group>"; };
+		D549EC011CCA145500995DA2 /* ErrorType+Description.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ErrorType+Description.swift"; path = "Extensions/ErrorType+Description.swift"; sourceTree = "<group>"; };
 		D54C8C0A1C9FDD5D0004B02D /* ReceivesMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReceivesMessages.swift; path = Features/Dashboard/Cells/ReceivesMessages.swift; sourceTree = "<group>"; };
 		D54C8C0C1C9FDDF50004B02D /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = Features/Settings/SettingsViewController.swift; sourceTree = "<group>"; };
 		D54C8C0E1C9FDDFF0004B02D /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Settings.storyboard; path = Features/Settings/Settings.storyboard; sourceTree = "<group>"; };
@@ -156,6 +166,18 @@
 			name = "User interface";
 			sourceTree = "<group>";
 		};
+		D549EBF61CCA136D00995DA2 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D549EBFF1CCA143000995DA2 /* NSUserDefaults+Subscript.swift */,
+				D549EBF91CCA13B900995DA2 /* UIColor+Hex.swift */,
+				D549EBFB1CCA13FB00995DA2 /* UIViewController+Error.swift */,
+				D549EBFD1CCA141300995DA2 /* UnitExtensions.swift */,
+				D549EC011CCA145500995DA2 /* ErrorType+Description.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		D57C99E51C6CFB0D00CCC46F /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,6 +228,7 @@
 				D5B541041C9D6B2A00E49508 /* Domain */,
 				D5B540FA1C9D69E700E49508 /* Features */,
 				D50912AB1C134817009BFC9A /* ViewControllers */,
+				D549EBF61CCA136D00995DA2 /* Extensions */,
 				D5A809F81CA3CC9D00AB9323 /* Utilities */,
 				D50912AC1C134821009BFC9A /* User interface */,
 				D57C99E51C6CFB0D00CCC46F /* Supporting files */,
@@ -496,6 +519,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5A06C5F1C11AB0200664494 /* AppDelegate.swift in Sources */,
+				D549EBFC1CCA13FB00995DA2 /* UIViewController+Error.swift in Sources */,
 				D50057B11C8DE2A600E28732 /* R.generated.swift in Sources */,
 				D561B15A1C524E5C00F4CEA9 /* DashboardViewController.swift in Sources */,
 				D54C8C0D1C9FDDF50004B02D /* SettingsViewController.swift in Sources */,
@@ -508,9 +532,13 @@
 				D5A809FA1CA3CCAA00AB9323 /* UserDefaults.swift in Sources */,
 				D52E04351C134BBC00054AF8 /* EventsViewController.swift in Sources */,
 				D5B540FF1C9D6A1C00E49508 /* ToggleSwitchCollectionViewCell.swift in Sources */,
+				D549EBFA1CCA13B900995DA2 /* UIColor+Hex.swift in Sources */,
 				D54C8C0B1C9FDD5D0004B02D /* ReceivesMessages.swift in Sources */,
+				D549EC001CCA143000995DA2 /* NSUserDefaults+Subscript.swift in Sources */,
+				D549EC021CCA145500995DA2 /* ErrorType+Description.swift in Sources */,
 				D5879C301C650F3B005BF7B6 /* HttpHomeClient.swift in Sources */,
 				D5B5410B1C9D6C0300E49508 /* ButtonCollectionViewCell.swift in Sources */,
+				D549EBFE1CCA141300995DA2 /* UnitExtensions.swift in Sources */,
 				D5879C2E1C650F35005BF7B6 /* MqttHomeClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

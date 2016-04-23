@@ -29,7 +29,7 @@ class ToggleSwitchCollectionViewCell: UICollectionViewCell, SendsMessages, Recei
     action.message = Message(topic: action.message.topic, payloadString: newValue, qos: action.message.qos, retain: action.message.retain)
     self.action = action
     sendCurrentMessage().then { _ in
-      print("message published!")
+//      print("message '\(action.message.payloadString)' published on topic '\(action.message.topic)'!")
     }
   }
 

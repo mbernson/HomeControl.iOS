@@ -17,8 +17,9 @@ class DashBoardViewController: UICollectionViewController {
     MessageAction(message: Message(topic: "bar", payloadString: "on"), description: "Bar display", type: .Display),
     MessageAction(message: Message(topic: "foo", payloadString: "on"), description: "Foo on", type: .PushButton),
     MessageAction(message: Message(topic: "foo", payloadString: "off"), description: "Foo off", type: .PushButton),
+
+    MessageAction(message: Message(topic: "bar", payloadString: "on"), description: "Bar toggle", type: .ToggleSwitch),
     MessageAction(message: Message(topic: "foo", payloadString: "on"), description: "Foo toggle", type: .ToggleSwitch),
-//    MessageAction(message: Message(topic: "bar", payloadString: "on"), description: "Bar toggle", type: .ToggleSwitch),
   ]
 
   let reuseMap: [ActionType : String] = [
@@ -33,7 +34,13 @@ class DashBoardViewController: UICollectionViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    client.connect()
+    client.connect().dispatchMain().then {
+      print("dashboard connected")
+    }.trap { [weak self] error in
+      print("dashboard connection error")
+      print(error)
+      self?.presentError(error)
+    }
 
     collectionView?.delegate = self
     collectionView?.dataSource = self

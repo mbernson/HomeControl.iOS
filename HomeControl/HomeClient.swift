@@ -17,7 +17,7 @@ protocol HomeClient {
 
   func subscribe(topic: Topic) -> Observable<Message>
 
-  func connect()
+  func connect() -> Promise<Void, HomeClientError>
   func disconnect()
 }
 

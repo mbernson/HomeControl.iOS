@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Moscapsule
 
 
 class MessagesViewController : UIViewController {

@@ -35,8 +35,10 @@ class HttpHomeClient: HomeClient {
     fatalError("Not implmemented")
   }
 
-  func connect() {
-    //
+  func connect() -> Promise<Void, HomeClientError> {
+    let source = PromiseSource<Void, HomeClientError>()
+    source.resolve()
+    return source.promise
   }
 
   func disconnect() {

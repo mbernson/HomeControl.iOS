@@ -17,7 +17,7 @@ class DisplayCell: UICollectionViewCell, ReceivesMessages {
 
   override func prepareForReuse() {
     super.prepareForReuse()
-    disposable?.dispose()
+//    disposable?.dispose()
   }
 
   func subscribeForChanges(client: HomeClient) {

@@ -66,9 +66,18 @@ class MqttHomeClient: HomeClient {
     self.messages = observable
   }
 
-  func connect() {
+  func connect() -> Promise<Void, HomeClientError> {
+    let source = PromiseSource<Void, HomeClientError>()
+    mqttSession.connectHandler = { error in
+      if error != nil {
+        source.reject(HomeClientError(message: error.description))
+      } else {
+        source.resolve()
+      }
+    }
     print("mqtt connecting...")
-    mqttSession.connectAndWaitTimeout(10)
+    mqttSession.connect()
+    return source.promise
   }
 
   func disconnect() {
