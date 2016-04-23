@@ -7,4 +7,13 @@
 //
 
 import UIKit
+import RxSwift
 
+class DashboardCell: UICollectionViewCell {
+  var disposable: Disposable?
+
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    disposable?.dispose()
+  }
+}

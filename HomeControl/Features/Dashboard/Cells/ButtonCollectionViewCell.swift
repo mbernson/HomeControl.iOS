@@ -10,10 +10,14 @@ import UIKit
 
 class ButtonCollectionViewCell: UICollectionViewCell, SendsMessages {
 
+  deinit {
+    print("ButtonCollectionViewCell deinit")
+  }
   var homeClient: HomeClient?
+  
   var action: MessageAction? {
     didSet {
-      button.titleLabel?.text = action?.description
+      button.setTitle(action?.description, forState: .Normal)
     }
   }
 

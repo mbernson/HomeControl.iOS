@@ -9,7 +9,11 @@
 import UIKit
 import RxSwift
 
-class ToggleSwitchCollectionViewCell: UICollectionViewCell, SendsMessages, ReceivesMessages {
+class ToggleSwitchCollectionViewCell: DashboardCell, SendsMessages, ReceivesMessages {
+
+  deinit {
+    print("ToggleSwitchCollectionViewCell deinit")
+  }
 
   var homeClient: HomeClient?
   var action: MessageAction? {
@@ -17,7 +21,6 @@ class ToggleSwitchCollectionViewCell: UICollectionViewCell, SendsMessages, Recei
       titleLabel.text = action?.description
     }
   }
-  var disposable: Disposable?
 
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var toggleSwitch: UISwitch!
@@ -28,14 +31,11 @@ class ToggleSwitchCollectionViewCell: UICollectionViewCell, SendsMessages, Recei
     let newValue = oldValue ? "off" : "on"
     action.message = Message(topic: action.message.topic, payloadString: newValue, qos: action.message.qos, retain: action.message.retain)
     self.action = action
-    sendCurrentMessage().then { _ in
-//      print("message '\(action.message.payloadString)' published on topic '\(action.message.topic)'!")
-    }
-  }
 
-  override func prepareForReuse() {
-    super.prepareForReuse()
-    disposable?.dispose()
+    sendCurrentMessage().then { [weak self] _ in
+//      print("message '\(action.message.payloadString)' published on topic '\(action.message.topic)'!")
+      self?.toggleSwitch.setOn(!oldValue, animated: true)
+    }
   }
 
   func subscribeForChanges(client: HomeClient) {

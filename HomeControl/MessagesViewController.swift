@@ -22,7 +22,8 @@ class MessagesViewController : UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.client = MqttHomeClient()
+//    self.client = MqttHomeClient()
+    self.client = HttpHomeClient()
   }
 
   // MARK: Outlets and actions

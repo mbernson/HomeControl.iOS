@@ -21,6 +21,7 @@
 		D54C8C0D1C9FDDF50004B02D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54C8C0C1C9FDDF50004B02D /* SettingsViewController.swift */; };
 		D54C8C0F1C9FDDFF0004B02D /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D54C8C0E1C9FDDFF0004B02D /* Settings.storyboard */; };
 		D561B15A1C524E5C00F4CEA9 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D561B1591C524E5C00F4CEA9 /* DashboardViewController.swift */; };
+		D5653E601CCBC9C700417EF7 /* DashboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5653E5F1CCBC9C700417EF7 /* DashboardCell.swift */; };
 		D5879C2E1C650F35005BF7B6 /* MqttHomeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5879C2D1C650F35005BF7B6 /* MqttHomeClient.swift */; };
 		D5879C301C650F3B005BF7B6 /* HttpHomeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5879C2F1C650F3B005BF7B6 /* HttpHomeClient.swift */; };
 		D5A06C5F1C11AB0200664494 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A06C5E1C11AB0200664494 /* AppDelegate.swift */; };
@@ -77,6 +78,7 @@
 		D54C8C0C1C9FDDF50004B02D /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = Features/Settings/SettingsViewController.swift; sourceTree = "<group>"; };
 		D54C8C0E1C9FDDFF0004B02D /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Settings.storyboard; path = Features/Settings/Settings.storyboard; sourceTree = "<group>"; };
 		D561B1591C524E5C00F4CEA9 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		D5653E5F1CCBC9C700417EF7 /* DashboardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashboardCell.swift; path = Features/Dashboard/DashboardCell.swift; sourceTree = "<group>"; };
 		D5879C2D1C650F35005BF7B6 /* MqttHomeClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MqttHomeClient.swift; path = Clients/MqttHomeClient.swift; sourceTree = "<group>"; };
 		D5879C2F1C650F3B005BF7B6 /* HttpHomeClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpHomeClient.swift; sourceTree = "<group>"; };
 		D5A06C5B1C11AB0200664494 /* HomeControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -276,6 +278,7 @@
 			children = (
 				D5B541071C9D6BB500E49508 /* Dashboard.storyboard */,
 				D561B1591C524E5C00F4CEA9 /* DashboardViewController.swift */,
+				D5653E5F1CCBC9C700417EF7 /* DashboardCell.swift */,
 				D54C8C0A1C9FDD5D0004B02D /* ReceivesMessages.swift */,
 				D5DEA5341CB6A634008DD971 /* SendsMessages.swift */,
 				D5B541011C9D6A2300E49508 /* Cells */,
@@ -537,6 +540,7 @@
 				D549EC001CCA143000995DA2 /* NSUserDefaults+Subscript.swift in Sources */,
 				D549EC021CCA145500995DA2 /* ErrorType+Description.swift in Sources */,
 				D5879C301C650F3B005BF7B6 /* HttpHomeClient.swift in Sources */,
+				D5653E601CCBC9C700417EF7 /* DashboardCell.swift in Sources */,
 				D5B5410B1C9D6C0300E49508 /* ButtonCollectionViewCell.swift in Sources */,
 				D549EBFE1CCA141300995DA2 /* UnitExtensions.swift in Sources */,
 				D5879C2E1C650F35005BF7B6 /* MqttHomeClient.swift in Sources */,

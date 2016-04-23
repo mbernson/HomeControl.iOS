@@ -42,12 +42,18 @@ class DashBoardViewController: UICollectionViewController {
       self?.presentError(error)
     }
 
+    client.subscribe("testing").subscribeNext { message in
+      print(message.payloadString)
+    }.addDisposableTo(disposeBag)
+
     collectionView?.delegate = self
     collectionView?.dataSource = self
 
     collectionView?.registerNib(R.nib.toggleSwitchCollectionViewCell)
     collectionView?.registerNib(R.nib.buttonCollectionViewCell)
     collectionView?.registerNib(R.nib.displayCell)
+
+//    collectionView.content
   }
 
   // MARK: Collection view data source

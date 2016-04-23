@@ -19,7 +19,7 @@ class MqttHomeClient: HomeClient {
     init(observer: AnyObserver<Message>) {
       print("MqttHomeDelegate init")
       self.observer = observer
-      super.init()
+//      super.init()
     }
 
     deinit {
@@ -30,6 +30,14 @@ class MqttHomeClient: HomeClient {
       print("received a message on topic \(topic)!")
       let message = Message(topic: topic, payload: data, qos: Message.QoS.fromMqttQoS(qos), retain: retained)
       observer.on(.Next(message))
+    }
+
+    func subAckReceived(session: MQTTSession!, msgID: UInt16, grantedQoss qoss: [NSNumber]!) {
+      print("subscribe acknowledged")
+    }
+
+    func unsubAckReceived(session: MQTTSession!, msgID: UInt16) {
+      print("unsubscribe acknowledged")
     }
 
   }
@@ -44,6 +52,8 @@ class MqttHomeClient: HomeClient {
     let mqttSession: MQTTSession
     var delegate: MqttHomeDelegate?
 
+    print("mqtthomeclient init")
+
     mqttTransport = MQTTCFSocketTransport()
     mqttTransport.host = "localhost"
     mqttTransport.port = 1883
@@ -55,15 +65,23 @@ class MqttHomeClient: HomeClient {
       delegate = MqttHomeDelegate(observer: observer)
       mqttSession.delegate = delegate
 
-      return RefCountDisposable(disposable: AnonymousDisposable {
-        print("disposing the mqttsession!")
-        mqttSession.disconnect()
-      })
+      return AnonymousDisposable {
+        print("disposing!")
+      }
+
+//      return RefCountDisposable(disposable: AnonymousDisposable {
+//        print("disposing mqttsession!")
+//        mqttSession.disconnect()
+//      })
     }
 
     self.mqttSession = mqttSession
     self.mqttTransport = mqttTransport
     self.messages = observable
+  }
+
+  deinit {
+    print("mqtthomeclient deinit")
   }
 
   func connect() -> Promise<Void, HomeClientError> {
@@ -99,6 +117,8 @@ class MqttHomeClient: HomeClient {
   }
 
   func subscribe(topic: Topic) -> Observable<Message> {
+    print("attempting to subscribe to topic '\(topic)'")
+    
     mqttSession.subscribeToTopic(topic, atLevel: .AtLeastOnce) { (error, qos) in
       if error != nil {
         print("subscribing failed!")

@@ -9,18 +9,14 @@
 import UIKit
 import RxSwift
 
-class DisplayCell: UICollectionViewCell, ReceivesMessages {
-
+class DisplayCell: DashboardCell, ReceivesMessages {
+  deinit {
+    print("DisplayCell deinit")
+  }
   @IBOutlet weak var outputLabel: UILabel!
 
-  var disposable: Disposable?
-
-  override func prepareForReuse() {
-    super.prepareForReuse()
-//    disposable?.dispose()
-  }
-
   func subscribeForChanges(client: HomeClient) {
+    outputLabel.text = "Geen waarde"
     disposable = client.subscribe("foo/bar").subscribeNext { [weak self] message in
       self?.outputLabel.text = message.payloadString
     }
