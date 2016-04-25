@@ -13,18 +13,24 @@ import RxSwift
 class DashBoardViewController: UICollectionViewController {
 
   var widgets: [MessageAction] = [
-    MessageAction(message: Message(topic: "foo", payloadString: "on"), description: "foo display", type: .Display),
+    MessageAction(message: Message(topic: "foo", payloadString: "on"), description: "Foo display", type: .Display),
     MessageAction(message: Message(topic: "bar", payloadString: "on"), description: "Bar display", type: .Display),
+
+    MessageAction(message: Message(topic: "bar", payloadString: "on"), description: "Bar on", type: .PushButton),
+    MessageAction(message: Message(topic: "bar", payloadString: "off"), description: "Bar off", type: .PushButton),
+
     MessageAction(message: Message(topic: "foo", payloadString: "on"), description: "Foo on", type: .PushButton),
     MessageAction(message: Message(topic: "foo", payloadString: "off"), description: "Foo off", type: .PushButton),
 
     MessageAction(message: Message(topic: "bar", payloadString: "on"), description: "Bar toggle", type: .ToggleSwitch),
+    MessageAction(message: Message(topic: "bar", payloadString: "on"), description: "Bar toggle", type: .ToggleSwitch),
+    MessageAction(message: Message(topic: "foo", payloadString: "on"), description: "Foo toggle", type: .ToggleSwitch),
     MessageAction(message: Message(topic: "foo", payloadString: "on"), description: "Foo toggle", type: .ToggleSwitch),
   ]
 
   let reuseMap: [ActionType : String] = [
-    .PushButton: R.reuseIdentifier.pushButtonCollectionViewCell.identifier,
-    .ToggleSwitch: R.reuseIdentifier.toggleSwitchCollectionViewCell.identifier,
+    .PushButton: R.reuseIdentifier.buttonCell.identifier,
+    .ToggleSwitch: R.reuseIdentifier.switchCell.identifier,
     .Display: R.reuseIdentifier.displayCell.identifier,
   ]
 
@@ -34,7 +40,7 @@ class DashBoardViewController: UICollectionViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    client.connect().dispatchMain().then {
+    client.connect().then {
       print("dashboard connected")
     }.trap { [weak self] error in
       print("dashboard connection error")
@@ -49,11 +55,11 @@ class DashBoardViewController: UICollectionViewController {
     collectionView?.delegate = self
     collectionView?.dataSource = self
 
-    collectionView?.registerNib(R.nib.toggleSwitchCollectionViewCell)
-    collectionView?.registerNib(R.nib.buttonCollectionViewCell)
+    collectionView?.registerNib(R.nib.switchCell)
+    collectionView?.registerNib(R.nib.buttonCell)
     collectionView?.registerNib(R.nib.displayCell)
 
-//    collectionView.content
+    collectionView?.contentInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
   }
 
   // MARK: Collection view data source

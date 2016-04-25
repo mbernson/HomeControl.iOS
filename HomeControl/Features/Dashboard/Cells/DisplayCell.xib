@@ -13,23 +13,34 @@
                 <rect key="frame" x="0.0" y="0.0" width="166" height="145"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zsF-Lg-mf5">
-                        <rect key="frame" x="0.0" y="0.0" width="166" height="145"/>
+                        <rect key="frame" x="0.0" y="72.5" width="166" height="72.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PTa-xe-m5a">
+                        <rect key="frame" x="0.0" y="0.0" width="166" height="72.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
+                <constraint firstItem="zsF-Lg-mf5" firstAttribute="top" secondItem="PTa-xe-m5a" secondAttribute="bottom" id="87f-xm-kmV"/>
+                <constraint firstItem="PTa-xe-m5a" firstAttribute="height" secondItem="zsF-Lg-mf5" secondAttribute="height" id="DkX-JH-WSv"/>
                 <constraint firstAttribute="bottom" secondItem="zsF-Lg-mf5" secondAttribute="bottom" id="Ft7-2z-roz"/>
+                <constraint firstItem="PTa-xe-m5a" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Ftv-aE-hUy"/>
+                <constraint firstAttribute="trailing" secondItem="PTa-xe-m5a" secondAttribute="trailing" id="H14-9R-lyi"/>
                 <constraint firstAttribute="trailing" secondItem="zsF-Lg-mf5" secondAttribute="trailing" id="N7T-C2-NEb"/>
+                <constraint firstItem="PTa-xe-m5a" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="OLX-S3-T6g"/>
                 <constraint firstItem="zsF-Lg-mf5" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="jgU-ck-4ih"/>
-                <constraint firstItem="zsF-Lg-mf5" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="qhd-WC-hNQ"/>
             </constraints>
             <size key="customSize" width="166" height="145"/>
             <connections>
                 <outlet property="outputLabel" destination="zsF-Lg-mf5" id="oZX-rW-z5E"/>
+                <outlet property="titleLabel" destination="PTa-xe-m5a" id="mqW-h7-ycA"/>
             </connections>
             <point key="canvasLocation" x="303" y="319.5"/>
         </collectionViewCell>

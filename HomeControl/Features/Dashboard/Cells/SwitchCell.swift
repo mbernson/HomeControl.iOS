@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 
-class ToggleSwitchCollectionViewCell: DashboardCell, SendsMessages, ReceivesMessages {
+class SwitchCell: DashboardCell, SendsMessages, ReceivesMessages {
 
   deinit {
     print("ToggleSwitchCollectionViewCell deinit")
@@ -32,16 +32,17 @@ class ToggleSwitchCollectionViewCell: DashboardCell, SendsMessages, ReceivesMess
     action.message = Message(topic: action.message.topic, payloadString: newValue, qos: action.message.qos, retain: action.message.retain)
     self.action = action
 
-    sendCurrentMessage().then { [weak self] _ in
-//      print("message '\(action.message.payloadString)' published on topic '\(action.message.topic)'!")
-      self?.toggleSwitch.setOn(!oldValue, animated: true)
-    }
+    sendCurrentMessage()
+//      .then { [toggleSwitch] _ in
+////      print("message '\(action.message.payloadString)' published on topic '\(action.message.topic)'!")
+//      toggleSwitch.setOn(!oldValue, animated: true)
+//    }
   }
 
   func subscribeForChanges(client: HomeClient) {
-    disposable = client.subscribe(action!.message.topic).subscribeNext { [weak self] message in
+    disposable = client.subscribe(action!.message.topic).subscribeNext { [toggleSwitch] message in
       if let newState = message.asBoolean() {
-        self?.toggleSwitch.setOn(newState, animated: true)
+        toggleSwitch.setOn(newState, animated: true)
       }
     }
   }

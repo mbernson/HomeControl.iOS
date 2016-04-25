@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ButtonCollectionViewCell: UICollectionViewCell, SendsMessages {
+class ButtonCell: DashboardCell, SendsMessages {
 
   deinit {
     print("ButtonCollectionViewCell deinit")
@@ -24,6 +24,6 @@ class ButtonCollectionViewCell: UICollectionViewCell, SendsMessages {
   @IBOutlet weak var button: UIButton!
 
   @IBAction func buttonTouchedUp(sender: AnyObject) {
-    sendCurrentMessage()
+//    sendCurrentMessage()
   }
 }

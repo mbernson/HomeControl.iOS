@@ -12,7 +12,7 @@ import UIKit
 let appDefaults = [
   "api_mqtt_url": "https://lab.duckson.nl/iot/api/mqtt",
   "mqtt_client_id": "homecontrol-app",
-  "mqtt_host": "localhost",
+  "mqtt_host": "mathbook-pro.local",
   "mqtt_port": 1883
 ]
 
@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     NSUserDefaults.standardUserDefaults().registerDefaults(appDefaults)
 
     // Customize tint color
-    window?.tintColor = UIColor(red: 251/255, green: 70/255, blue: 45/255, alpha: 1)
+    window?.tintColor = Colors.tintColor
 
     return true
   }

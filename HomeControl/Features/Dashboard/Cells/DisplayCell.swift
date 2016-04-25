@@ -13,9 +13,12 @@ class DisplayCell: DashboardCell, ReceivesMessages {
   deinit {
     print("DisplayCell deinit")
   }
+
+  @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var outputLabel: UILabel!
 
   func subscribeForChanges(client: HomeClient) {
+    titleLabel.text = "foo/bar monitor"
     outputLabel.text = "Geen waarde"
     disposable = client.subscribe("foo/bar").subscribeNext { [weak self] message in
       self?.outputLabel.text = message.payloadString

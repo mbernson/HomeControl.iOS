@@ -27,8 +27,8 @@ class MqttHomeClient: HomeClient {
     }
 
     func newMessage(session: MQTTSession!, data: NSData!, onTopic topic: String!, qos: MQTTQosLevel, retained: Bool, mid: UInt32) {
-      print("received a message on topic \(topic)!")
       let message = Message(topic: topic, payload: data, qos: Message.QoS.fromMqttQoS(qos), retain: retained)
+      print("received a message on topic \(topic) with content \(message.payloadString)")
       observer.on(.Next(message))
     }
 
@@ -68,7 +68,6 @@ class MqttHomeClient: HomeClient {
       return AnonymousDisposable {
         print("disposing!")
       }
-
 //      return RefCountDisposable(disposable: AnonymousDisposable {
 //        print("disposing mqttsession!")
 //        mqttSession.disconnect()
@@ -94,7 +93,7 @@ class MqttHomeClient: HomeClient {
       }
     }
     print("mqtt connecting...")
-    mqttSession.connect()
+    mqttSession.connectAndWaitTimeout(30)
     return source.promise
   }
 
@@ -118,7 +117,7 @@ class MqttHomeClient: HomeClient {
 
   func subscribe(topic: Topic) -> Observable<Message> {
     print("attempting to subscribe to topic '\(topic)'")
-    
+
     mqttSession.subscribeToTopic(topic, atLevel: .AtLeastOnce) { (error, qos) in
       if error != nil {
         print("subscribing failed!")
@@ -127,9 +126,12 @@ class MqttHomeClient: HomeClient {
       }
     }
 
-    return messages.filter { message in
-      return message.topic == topic
-    }
+//    let o = Observable<Message>.
+
+    return messages
+      .filter { message in
+        return message.topic == topic
+      }
   }
   
 }

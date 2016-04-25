@@ -9,7 +9,7 @@
 import UIKit
 
 
-class MessagesViewController : UIViewController {
+class MessagesViewController: UIViewController {
 
   var client: HomeClient?
 
