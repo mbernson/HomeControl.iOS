@@ -34,7 +34,7 @@ class DashBoardViewController: UICollectionViewController {
     .Display: R.reuseIdentifier.displayCell.identifier,
   ]
 
-  let client: HomeClient = MqttHomeClient()
+  let client: HomeClient = MqttHomeClient(userDefaults: NSUserDefaults.standardUserDefaults())
   let disposeBag = DisposeBag()
 
   override func viewDidLoad() {

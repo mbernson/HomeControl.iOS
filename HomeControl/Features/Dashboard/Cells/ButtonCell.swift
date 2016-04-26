@@ -24,6 +24,6 @@ class ButtonCell: DashboardCell, SendsMessages {
   @IBOutlet weak var button: UIButton!
 
   @IBAction func buttonTouchedUp(sender: AnyObject) {
-//    sendCurrentMessage()
+    sendCurrentMessage()
   }
 }

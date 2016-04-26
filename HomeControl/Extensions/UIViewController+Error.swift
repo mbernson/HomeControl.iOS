@@ -20,5 +20,16 @@ extension UIViewController {
 
     presentViewController(alertController, animated: true, completion: nil)
   }
-  
+
+  func presentMessage(message: String, title: String? = nil) {
+    let alertController = UIAlertController(
+      title: title,
+      message: message,
+      preferredStyle: .Alert)
+
+    alertController.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "[TEMP]"), style: .Default, handler: nil))
+
+    presentViewController(alertController, animated: true, completion: nil)
+  }
+
 }

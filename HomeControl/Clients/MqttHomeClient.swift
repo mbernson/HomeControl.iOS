@@ -19,7 +19,6 @@ class MqttHomeClient: HomeClient {
     init(observer: AnyObserver<Message>) {
       print("MqttHomeDelegate init")
       self.observer = observer
-//      super.init()
     }
 
     deinit {
@@ -47,7 +46,13 @@ class MqttHomeClient: HomeClient {
 
   let messages: Observable<Message>
 
-  init() {
+  convenience init(userDefaults: NSUserDefaults) {
+    let host = userDefaults.stringForKey("mqtt_host")!
+    let port = UInt16(userDefaults.integerForKey("mqtt_port"))
+    self.init(host: host, port: port)
+  }
+
+  init(host: String, port: UInt16, clientId: String = "homecontrol-app") {
     let mqttTransport: MQTTCFSocketTransport
     let mqttSession: MQTTSession
     var delegate: MqttHomeDelegate?
@@ -55,10 +60,10 @@ class MqttHomeClient: HomeClient {
     print("mqtthomeclient init")
 
     mqttTransport = MQTTCFSocketTransport()
-    mqttTransport.host = "localhost"
-    mqttTransport.port = 1883
+    mqttTransport.host = host
+    mqttTransport.port = port
 
-    mqttSession = MQTTSession(clientId: "homecontrol-app")
+    mqttSession = MQTTSession(clientId: clientId)
     mqttSession.transport = mqttTransport
 
     let observable: Observable<Message> = Observable.create { observer in
@@ -125,8 +130,6 @@ class MqttHomeClient: HomeClient {
         print("subscribed to topic '\(topic)' with qos \(qos)")
       }
     }
-
-//    let o = Observable<Message>.
 
     return messages
       .filter { message in

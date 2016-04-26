@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="138" height="146"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <state key="normal" title="Button">
-                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <connections>
                             <action selector="buttonTouchedUp:" destination="gTV-IL-0wX" eventType="touchUpInside" id="VU4-Jg-z7v"/>
@@ -25,6 +25,7 @@
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
+            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="hgG-6y-zVw" secondAttribute="trailing" id="86c-Sp-pWU"/>
                 <constraint firstItem="hgG-6y-zVw" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="K0I-dh-zj7"/>

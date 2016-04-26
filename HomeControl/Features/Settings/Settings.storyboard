@@ -23,10 +23,10 @@
             </objects>
             <point key="canvasLocation" x="-944" y="224"/>
         </scene>
-        <!--View Controller-->
+        <!--Settings View Controller-->
         <scene sceneID="cAJ-Sm-f2a">
             <objects>
-                <viewController id="Pdu-EY-izq" sceneMemberID="viewController">
+                <viewController id="Pdu-EY-izq" customClass="SettingsViewController" customModule="HomeControl" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0Ct-ds-KzH"/>
                         <viewControllerLayoutGuide type="bottom" id="brh-8g-huS"/>
@@ -39,18 +39,27 @@
                                 <rect key="frame" x="20" y="101" width="442" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Pdu-EY-izq" id="5UJ-yI-rvf"/>
+                                </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DfZ-do-gNM">
+                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DfZ-do-gNM">
                                 <rect key="frame" x="470" y="101" width="110" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="110" id="HV9-uI-LVx"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Pdu-EY-izq" id="hoK-71-DsR"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NQU-2N-CLd">
                                 <rect key="frame" x="20" y="139" width="110" height="30"/>
                                 <state key="normal" title="Test connection"/>
+                                <connections>
+                                    <action selector="testConnection:" destination="Pdu-EY-izq" eventType="touchUpInside" id="2pd-px-jeU"/>
+                                </connections>
                             </button>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="NSN-o1-vUH">
                                 <rect key="frame" x="138" y="144" width="20" height="20"/>
@@ -76,16 +85,18 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="o6c-KH-rVP">
+                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="o6c-KH-rVP">
                                 <rect key="frame" x="20" y="206" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Pdu-EY-izq" id="hp1-kf-o2t"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="DfZ-do-gNM" firstAttribute="leading" secondItem="aJ7-4r-rBz" secondAttribute="trailing" constant="8" id="3du-31-UTG"/>
-                            <constraint firstItem="o6c-KH-rVP" firstAttribute="top" secondItem="PyQ-N2-8W1" secondAttribute="bottom" constant="8" id="3p9-bW-svU"/>
                             <constraint firstItem="IYS-oT-UAn" firstAttribute="top" secondItem="0Ct-ds-KzH" secondAttribute="bottom" constant="8" id="52z-JQ-WjR"/>
                             <constraint firstItem="NQU-2N-CLd" firstAttribute="leading" secondItem="kuZ-mu-pXN" secondAttribute="leadingMargin" id="7fU-Nd-EE0"/>
                             <constraint firstItem="DfZ-do-gNM" firstAttribute="trailing" secondItem="kuZ-mu-pXN" secondAttribute="trailingMargin" id="Fmd-Xx-1ss"/>
@@ -121,6 +132,12 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="testConnectionSpinner" destination="NSN-o1-vUH" id="f4w-cX-Ydk"/>
+                        <outletCollection property="textFields" destination="aJ7-4r-rBz" collectionClass="NSMutableArray" id="DV2-di-264"/>
+                        <outletCollection property="textFields" destination="DfZ-do-gNM" collectionClass="NSMutableArray" id="t0c-A2-UXB"/>
+                        <outletCollection property="textFields" destination="o6c-KH-rVP" collectionClass="NSMutableArray" id="1J8-2B-U7g"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zqS-99-IQI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
