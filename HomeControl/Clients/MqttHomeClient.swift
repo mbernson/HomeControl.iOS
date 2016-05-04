@@ -38,11 +38,11 @@ class MqttHomeClient: HomeClient {
     func unsubAckReceived(session: MQTTSession!, msgID: UInt16) {
       print("unsubscribe acknowledged")
     }
-
   }
 
   let mqttSession: MQTTSession
   let messages: Observable<Message>
+  var currentObserver: AnyObserver<Message>?
 
   convenience init(userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()) {
     let host = userDefaults.stringForKey("mqtt_host")!
@@ -54,6 +54,7 @@ class MqttHomeClient: HomeClient {
     let mqttTransport: MQTTCFSocketTransport
     let mqttSession: MQTTSession
     var delegate: MqttHomeDelegate? = nil
+    var currentObserver: AnyObserver<Message>? = nil
 
     mqttTransport = MQTTCFSocketTransport()
     mqttTransport.host = host
@@ -62,19 +63,18 @@ class MqttHomeClient: HomeClient {
     mqttSession = MQTTSession()
     mqttSession.transport = mqttTransport
 
-    let observable: Observable<Message> = Observable.create { observer in
+    self.mqttSession = mqttSession
+    self.messages = Observable.create { observer in
       delegate = MqttHomeDelegate(observer: observer)
       mqttSession.delegate = delegate
+      currentObserver = observer
 
-      return RefCountDisposable(disposable: AnonymousDisposable {
+      return AnonymousDisposable {
         print("disposing mqttsession!")
         mqttSession.disconnect()
-      })
-    }
-    .shareReplay(1) // This line is important!
-
-    self.mqttSession = mqttSession
-    self.messages = observable
+      }
+    }.shareReplay(1) // This line is important!
+    self.currentObserver = currentObserver
   }
 
   deinit {
@@ -91,7 +91,7 @@ class MqttHomeClient: HomeClient {
       }
     }
 
-    mqttSession.connectAndWaitTimeout(30)
+    mqttSession.connectAndWaitTimeout(10)
 
     return source.promise
   }
@@ -102,11 +102,12 @@ class MqttHomeClient: HomeClient {
 
   func publish(message: Message) -> Promise<Message, HomeClientError> {
     let publish = PromiseSource<Message, HomeClientError>()
-    mqttSession.publishData(message.payload, onTopic: message.topic, retain: message.retain, qos: message.mqttQos) { error in
+    mqttSession.publishData(message.payload, onTopic: message.topic, retain: message.retain, qos: message.mqttQos) { [weak self] error in
       if error != nil {
         publish.reject(HomeClientError(message: error.description))
       } else {
         print("published message '\(message.payloadString)' on topic '\(message.topic)'")
+        self?.currentObserver?.on(.Next(message))
         publish.resolve(message)
       }
     }
@@ -127,7 +128,6 @@ class MqttHomeClient: HomeClient {
       .filter { message in
         return message.topic == topic
       }
-      .debug()
   }
   
 }
