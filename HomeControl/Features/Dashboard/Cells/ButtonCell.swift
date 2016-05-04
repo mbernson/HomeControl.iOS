@@ -15,7 +15,7 @@ class ButtonCell: UICollectionViewCell, SendsMessages {
   }
   var homeClient: HomeClient?
   
-  var action: MessageAction? {
+  var action: MessageViewModel? {
     didSet {
       button.setTitle(action?.description, forState: .Normal)
     }

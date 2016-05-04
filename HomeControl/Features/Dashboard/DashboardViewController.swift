@@ -13,36 +13,32 @@ import RxCocoa
 
 class DashBoardViewController: UICollectionViewController {
 
-  var actions: [MessageAction] = [
+  var actions = [
 
-    MessageAction(message: Message(topic: "hildebrandpad/livingroom/lights/all", payloadString: "on", retain: false), description: "Alle lampen aan", type: .PushButton),
-    MessageAction(message: Message(topic: "hildebrandpad/livingroom/lights/bureaulamp", payloadString: "on", retain: true), description: "Bureaulamp", type: .ToggleSwitch),
-    MessageAction(message: Message(topic: "hildebrandpad/livingroom/lights/staande_lamp", payloadString: "on", retain: true), description: "Staande lamp", type: .ToggleSwitch),
+    MessageViewModel(message: Message(topic: "hildebrandpad/livingroom/lights/all", payloadString: "on", retain: false), description: "Alle lampen aan", type: .Button),
+    MessageViewModel(message: Message(topic: "hildebrandpad/livingroom/lights/bureaulamp", payloadString: "on", retain: true), description: "Bureaulamp", type: .Toggle),
+    MessageViewModel(message: Message(topic: "hildebrandpad/livingroom/lights/staande_lamp", payloadString: "on", retain: true), description: "Staande lamp", type: .Toggle),
 
-    MessageAction(message: Message(topic: "hildebrandpad/livingroom/lights/bed_lampen", payloadString: "on", retain: true), description: "Bed lampen", type: .ToggleSwitch),
+    MessageViewModel(message: Message(topic: "hildebrandpad/livingroom/lights/bed_lampen", payloadString: "on", retain: true), description: "Bed lampen", type: .Toggle),
 
-    MessageAction(message: Message(topic: "hildebrandpad/livingroom/lights/all", payloadString: "off"), description: "Vertrek van huis", type: .PushButton),
+    MessageViewModel(message: Message(topic: "hildebrandpad/livingroom/lights/all", payloadString: "off"), description: "Vertrek van huis", type: .Button),
 
-    MessageAction(topic: "hildebrandpad/temperature", description: "Kamer temperatuur", type: .Display),
-    MessageAction(topic: "hildebrandpad/humidity", description: "Kamer luchtvochtigheid", type: .Display),
+    MessageViewModel(topic: "hildebrandpad/temperature", description: "Kamer temperatuur", type: .Display),
+    MessageViewModel(topic: "hildebrandpad/humidity", description: "Kamer luchtvochtigheid", type: .Display),
 
-    MessageAction(message: Message(topic: "hildebrandpad/livingroom/lights/staande_lamp", payloadString: "on", retain: true), description: "Staande lamp", type: .ToggleSwitch),
+    MessageViewModel(message: Message(topic: "hildebrandpad/livingroom/lights/staande_lamp", payloadString: "on", retain: true), description: "Staande lamp", type: .Toggle),
 
-    MessageAction(message: Message(topic: "hildebrandpad/livingroom/lights/bed_lampen", payloadString: "on", retain: true), description: "Bed lampen", type: .ToggleSwitch),
+    MessageViewModel(message: Message(topic: "hildebrandpad/livingroom/lights/bed_lampen", payloadString: "on", retain: true), description: "Bed lampen", type: .Toggle),
   ]
 
   let reuseMap: [ActionType : String] = [
-    .PushButton: R.reuseIdentifier.buttonCell.identifier,
-    .ToggleSwitch: R.reuseIdentifier.switchCell.identifier,
+    .Button: R.reuseIdentifier.buttonCell.identifier,
+    .Toggle: R.reuseIdentifier.switchCell.identifier,
     .Display: R.reuseIdentifier.displayCell.identifier,
   ]
 
   var client: HomeClient!
-  var disposeBag: DisposeBag! {
-    didSet {
-      print("disposebag was set!")
-    }
-  }
+  var disposeBag: DisposeBag!
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -52,7 +48,6 @@ class DashBoardViewController: UICollectionViewController {
     client.connect().then {
       print("dashboard connected")
     }.trap { [weak self] error in
-      print("dashboard connection error")
       self?.presentError(error)
     }
 
@@ -82,13 +77,6 @@ class DashBoardViewController: UICollectionViewController {
 
     cell.layer.cornerRadius = 30
     cell.backgroundColor = collectionView.window?.tintColor
-
-//    client.subscribe(action.message.topic).bindTo()
-//      { (collectionView, index, model) in
-//      let indexPath = NSIndexPath(forItem: i, inSection: 0)
-//      let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseMap[action.type]!, forIndexPath: indexPath)
-//      return cell as UICollectionViewCell
-//    }.addDisposableTo(disposeBag)
 
     if let receivingCell = cell as? ReceivesMessages {
       receivingCell.subscribeForChanges(action, client: client, disposeBag: disposeBag)

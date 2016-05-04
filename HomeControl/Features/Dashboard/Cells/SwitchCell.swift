@@ -16,7 +16,7 @@ class SwitchCell: UICollectionViewCell, SendsMessages, ReceivesMessages {
   }
 
   var homeClient: HomeClient?
-  var action: MessageAction? {
+  var action: MessageViewModel? {
     didSet {
       titleLabel.text = action?.description
     }
@@ -37,7 +37,7 @@ class SwitchCell: UICollectionViewCell, SendsMessages, ReceivesMessages {
     sendCurrentMessage()
   }
 
-  func subscribeForChanges(action: MessageAction, client: HomeClient, disposeBag: DisposeBag) {
+  func subscribeForChanges(action: MessageViewModel, client: HomeClient, disposeBag: DisposeBag) {
     homeClient = client
 
     client.subscribe(action.message.topic).subscribeNext { [toggleSwitch] message in

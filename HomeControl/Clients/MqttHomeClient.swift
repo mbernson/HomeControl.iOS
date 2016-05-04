@@ -124,10 +124,9 @@ class MqttHomeClient: HomeClient {
       }
     }
 
-    return messages
-      .filter { message in
-        return message.topic == topic
-      }
+    return messages.filter { message in
+      return message.topic == topic
+    }
   }
   
 }

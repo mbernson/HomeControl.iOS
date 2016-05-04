@@ -11,7 +11,7 @@ import Promissum
 
 protocol SendsMessages {
   var homeClient: HomeClient? { get set }
-  var action: MessageAction? { get set }
+  var action: MessageViewModel? { get set }
 }
 
 extension SendsMessages {
