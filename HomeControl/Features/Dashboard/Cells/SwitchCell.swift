@@ -40,10 +40,11 @@ class SwitchCell: UICollectionViewCell, SendsMessages, ReceivesMessages {
   func subscribeForChanges(action: MessageViewModel, client: HomeClient, disposeBag: DisposeBag) {
     homeClient = client
 
-    client.subscribe(action.message.topic).subscribeNext { [toggleSwitch] message in
+    client.subscribe(action.message.topic).subscribeNext { message in
       if let newState = message.asBoolean() {
         // Reference to self here
-        toggleSwitch.setOn(newState, animated: true)
+        self.toggleSwitch.setOn(newState, animated: true)
+        self.action?.message = message
       }
     }.addDisposableTo(disposeBag)
   }
