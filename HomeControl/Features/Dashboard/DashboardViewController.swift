@@ -15,21 +15,20 @@ class DashBoardViewController: UICollectionViewController {
 
   var actions: [MessageAction] = [
 
-    MessageAction(message: Message(topic: "foo", payloadString: "on"), description: "Foo on", type: .PushButton),
-    MessageAction(message: Message(topic: "foo", payloadString: "off"), description: "Foo off", type: .PushButton),
+    MessageAction(message: Message(topic: "hildebrandpad/livingroom/lights/all", payloadString: "on", retain: false), description: "Alle lampen aan", type: .PushButton),
+    MessageAction(message: Message(topic: "hildebrandpad/livingroom/lights/bureaulamp", payloadString: "on", retain: true), description: "Bureaulamp", type: .ToggleSwitch),
+    MessageAction(message: Message(topic: "hildebrandpad/livingroom/lights/staande_lamp", payloadString: "on", retain: true), description: "Staande lamp", type: .ToggleSwitch),
 
-    MessageAction(message: Message(topic: "foo", payloadString: "on"), description: "Foo toggle", type: .ToggleSwitch),
-    MessageAction(message: Message(topic: "foo", payloadString: "on"), description: "Foo toggle", type: .ToggleSwitch),
+    MessageAction(message: Message(topic: "hildebrandpad/livingroom/lights/bed_lampen", payloadString: "on", retain: true), description: "Bed lampen", type: .ToggleSwitch),
 
-    MessageAction(message: Message(topic: "bar", payloadString: "on"), description: "Bar on", type: .PushButton),
-    MessageAction(message: Message(topic: "bar", payloadString: "off"), description: "Bar off", type: .PushButton),
+    MessageAction(message: Message(topic: "hildebrandpad/livingroom/lights/all", payloadString: "off"), description: "Vertrek van huis", type: .PushButton),
 
-    MessageAction(message: Message(topic: "bar", payloadString: "on"), description: "Bar toggle", type: .ToggleSwitch),
-    MessageAction(message: Message(topic: "bar", payloadString: "on"), description: "Bar toggle", type: .ToggleSwitch),
+    MessageAction(topic: "hildebrandpad/temperature", description: "Kamer temperatuur", type: .Display),
+    MessageAction(topic: "hildebrandpad/humidity", description: "Kamer luchtvochtigheid", type: .Display),
 
-    MessageAction(message: Message(topic: "foo", payloadString: "on"), description: "Foo display", type: .Display),
-    MessageAction(message: Message(topic: "bar", payloadString: "on"), description: "Bar display", type: .Display),
+    MessageAction(message: Message(topic: "hildebrandpad/livingroom/lights/staande_lamp", payloadString: "on", retain: true), description: "Staande lamp", type: .ToggleSwitch),
 
+    MessageAction(message: Message(topic: "hildebrandpad/livingroom/lights/bed_lampen", payloadString: "on", retain: true), description: "Bed lampen", type: .ToggleSwitch),
   ]
 
   let reuseMap: [ActionType : String] = [
@@ -54,7 +53,6 @@ class DashBoardViewController: UICollectionViewController {
       print("dashboard connected")
     }.trap { [weak self] error in
       print("dashboard connection error")
-      print(error)
       self?.presentError(error)
     }
 
