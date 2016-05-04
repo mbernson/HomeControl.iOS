@@ -18,8 +18,8 @@ class DisplayCell: UICollectionViewCell, ReceivesMessages {
   @IBOutlet weak var outputLabel: UILabel!
 
   func subscribeForChanges(action: MessageAction, client: HomeClient, disposeBag: DisposeBag) {
-    titleLabel.text = "Value of \(action.message.topic)"
-    outputLabel.text = "No value available"
+    titleLabel.text = action.description
+    outputLabel.text = "No value received"
     client.subscribe(action.message.topic).subscribeNext { [weak self] message in
       self?.outputLabel.text = message.payloadString
     }.addDisposableTo(disposeBag)
