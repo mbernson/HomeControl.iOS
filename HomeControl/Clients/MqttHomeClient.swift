@@ -14,7 +14,7 @@ import MQTTClient
 class MqttHomeClient: HomeClient {
 
   class MqttHomeDelegate: NSObject, MQTTSessionDelegate {
-    let observer: AnyObserver<Message>
+    var observer: AnyObserver<Message>!
 
     init(observer: AnyObserver<Message>) {
       print("MqttHomeDelegate init")
@@ -41,46 +41,39 @@ class MqttHomeClient: HomeClient {
 
   }
 
-  let mqttTransport: MQTTCFSocketTransport
   let mqttSession: MQTTSession
-
   let messages: Observable<Message>
 
-  convenience init(userDefaults: NSUserDefaults) {
+  convenience init(userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()) {
     let host = userDefaults.stringForKey("mqtt_host")!
     let port = UInt16(userDefaults.integerForKey("mqtt_port"))
     self.init(host: host, port: port)
   }
 
-  init(host: String, port: UInt16, clientId: String = "homecontrol-app") {
+  init(host: String, port: UInt16) {
     let mqttTransport: MQTTCFSocketTransport
     let mqttSession: MQTTSession
-    var delegate: MqttHomeDelegate?
-
-    print("mqtthomeclient init")
+    var delegate: MqttHomeDelegate? = nil
 
     mqttTransport = MQTTCFSocketTransport()
     mqttTransport.host = host
     mqttTransport.port = port
 
-    mqttSession = MQTTSession(clientId: clientId)
+    mqttSession = MQTTSession()
     mqttSession.transport = mqttTransport
 
     let observable: Observable<Message> = Observable.create { observer in
       delegate = MqttHomeDelegate(observer: observer)
       mqttSession.delegate = delegate
 
-      return AnonymousDisposable {
-        print("disposing!")
-      }
-//      return RefCountDisposable(disposable: AnonymousDisposable {
-//        print("disposing mqttsession!")
-//        mqttSession.disconnect()
-//      })
+      return RefCountDisposable(disposable: AnonymousDisposable {
+        print("disposing mqttsession!")
+        mqttSession.disconnect()
+      })
     }
+    .shareReplay(1) // This line is important!
 
     self.mqttSession = mqttSession
-    self.mqttTransport = mqttTransport
     self.messages = observable
   }
 
@@ -97,13 +90,13 @@ class MqttHomeClient: HomeClient {
         source.resolve()
       }
     }
-    print("mqtt connecting...")
+
     mqttSession.connectAndWaitTimeout(30)
+
     return source.promise
   }
 
   func disconnect() {
-    print("mqtt disconnecting...")
     mqttSession.disconnect()
   }
 
@@ -121,13 +114,12 @@ class MqttHomeClient: HomeClient {
   }
 
   func subscribe(topic: Topic) -> Observable<Message> {
-    print("attempting to subscribe to topic '\(topic)'")
-
+    // Tell the broker that we're interested in a new topic
     mqttSession.subscribeToTopic(topic, atLevel: .AtLeastOnce) { (error, qos) in
       if error != nil {
         print("subscribing failed!")
       } else {
-        print("subscribed to topic '\(topic)' with qos \(qos)")
+        print("subscribed to topic \(topic), granted QoS of \(qos)")
       }
     }
 
@@ -135,6 +127,7 @@ class MqttHomeClient: HomeClient {
       .filter { message in
         return message.topic == topic
       }
+      .debug()
   }
   
 }

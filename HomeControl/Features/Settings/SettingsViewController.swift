@@ -44,6 +44,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
   func textFieldShouldReturn(textField: UITextField) -> Bool {
     if textField.hasText() {
       savePreference(forTextField: textField)
+      textField.resignFirstResponder()
       return true
     }
     return false

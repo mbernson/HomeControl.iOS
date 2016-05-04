@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 
-class DisplayCell: DashboardCell, ReceivesMessages {
+class DisplayCell: UICollectionViewCell, ReceivesMessages {
   deinit {
     print("DisplayCell deinit")
   }
@@ -17,12 +17,12 @@ class DisplayCell: DashboardCell, ReceivesMessages {
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var outputLabel: UILabel!
 
-  func subscribeForChanges(client: HomeClient) {
-    titleLabel.text = "foo/bar monitor"
-    outputLabel.text = "Geen waarde"
-    disposable = client.subscribe("foo/bar").subscribeNext { [weak self] message in
+  func subscribeForChanges(action: MessageAction, client: HomeClient, disposeBag: DisposeBag) {
+    titleLabel.text = "Value of \(action.message.topic)"
+    outputLabel.text = "No value available"
+    client.subscribe(action.message.topic).subscribeNext { [weak self] message in
       self?.outputLabel.text = message.payloadString
-    }
+    }.addDisposableTo(disposeBag)
   }
 
 }

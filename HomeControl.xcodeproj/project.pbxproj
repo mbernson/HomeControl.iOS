@@ -15,7 +15,8 @@
 		D549EC021CCA145500995DA2 /* ErrorType+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = D549EC011CCA145500995DA2 /* ErrorType+Description.swift */; };
 		D54C8C0D1C9FDDF50004B02D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D54C8C0C1C9FDDF50004B02D /* SettingsViewController.swift */; };
 		D54C8C0F1C9FDDFF0004B02D /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D54C8C0E1C9FDDFF0004B02D /* Settings.storyboard */; };
-		D5653E601CCBC9C700417EF7 /* DashboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5653E5F1CCBC9C700417EF7 /* DashboardCell.swift */; };
+		D57CA8301CCF458E0089C6C4 /* ConnectionIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D57CA82F1CCF458E0089C6C4 /* ConnectionIndicatorView.swift */; };
+		D57CA8321CCF459C0089C6C4 /* ConnectionIndicatorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D57CA8311CCF459C0089C6C4 /* ConnectionIndicatorView.xib */; };
 		D5879C2E1C650F35005BF7B6 /* MqttHomeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5879C2D1C650F35005BF7B6 /* MqttHomeClient.swift */; };
 		D5A06C5F1C11AB0200664494 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A06C5E1C11AB0200664494 /* AppDelegate.swift */; };
 		D5A06C641C11AB0200664494 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5A06C621C11AB0200664494 /* Main.storyboard */; };
@@ -70,7 +71,8 @@
 		D549EC011CCA145500995DA2 /* ErrorType+Description.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ErrorType+Description.swift"; path = "Extensions/ErrorType+Description.swift"; sourceTree = "<group>"; };
 		D54C8C0C1C9FDDF50004B02D /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = Features/Settings/SettingsViewController.swift; sourceTree = "<group>"; };
 		D54C8C0E1C9FDDFF0004B02D /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Settings.storyboard; path = Features/Settings/Settings.storyboard; sourceTree = "<group>"; };
-		D5653E5F1CCBC9C700417EF7 /* DashboardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashboardCell.swift; path = Features/Dashboard/DashboardCell.swift; sourceTree = "<group>"; };
+		D57CA82F1CCF458E0089C6C4 /* ConnectionIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionIndicatorView.swift; path = Features/Dashboard/ConnectionIndicatorView.swift; sourceTree = "<group>"; };
+		D57CA8311CCF459C0089C6C4 /* ConnectionIndicatorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ConnectionIndicatorView.xib; path = Features/Dashboard/ConnectionIndicatorView.xib; sourceTree = "<group>"; };
 		D5879C2D1C650F35005BF7B6 /* MqttHomeClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MqttHomeClient.swift; path = Clients/MqttHomeClient.swift; sourceTree = "<group>"; };
 		D5A06C5B1C11AB0200664494 /* HomeControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5A06C5E1C11AB0200664494 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -263,13 +265,14 @@
 		D5B540FB1C9D69ED00E49508 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
-				D5C644751CCE776F00CAD760 /* ReceivesMessages.swift */,
-				D5C644761CCE776F00CAD760 /* SendsMessages.swift */,
 				D5C644601CCE771700CAD760 /* Cells */,
+				D57CA82F1CCF458E0089C6C4 /* ConnectionIndicatorView.swift */,
+				D57CA8311CCF459C0089C6C4 /* ConnectionIndicatorView.xib */,
+				D5B541071C9D6BB500E49508 /* Dashboard.storyboard */,
 				D5C644471CCE76EB00CAD760 /* DashboardViewController.swift */,
 				D5C644481CCE76EB00CAD760 /* MessageAction.swift */,
-				D5B541071C9D6BB500E49508 /* Dashboard.storyboard */,
-				D5653E5F1CCBC9C700417EF7 /* DashboardCell.swift */,
+				D5C644751CCE776F00CAD760 /* ReceivesMessages.swift */,
+				D5C644761CCE776F00CAD760 /* SendsMessages.swift */,
 			);
 			name = Dashboard;
 			sourceTree = "<group>";
@@ -426,6 +429,7 @@
 			files = (
 				D5A06C691C11AB0200664494 /* LaunchScreen.storyboard in Resources */,
 				D5B541081C9D6BB500E49508 /* Dashboard.storyboard in Resources */,
+				D57CA8321CCF459C0089C6C4 /* ConnectionIndicatorView.xib in Resources */,
 				D5C6446C1CCE771700CAD760 /* DisplayCell.xib in Resources */,
 				D5C6446A1CCE771700CAD760 /* ButtonCell.xib in Resources */,
 				D5A06C661C11AB0200664494 /* Assets.xcassets in Resources */,
@@ -523,6 +527,7 @@
 				D549EBFC1CCA13FB00995DA2 /* UIViewController+Error.swift in Sources */,
 				D5C644531CCE76EB00CAD760 /* MessageAction.swift in Sources */,
 				D50057B11C8DE2A600E28732 /* R.generated.swift in Sources */,
+				D57CA8301CCF458E0089C6C4 /* ConnectionIndicatorView.swift in Sources */,
 				D54C8C0D1C9FDDF50004B02D /* SettingsViewController.swift in Sources */,
 				D5B541061C9D6B3400E49508 /* Message.swift in Sources */,
 				D5C6446F1CCE771700CAD760 /* SwitchCell.swift in Sources */,
@@ -534,7 +539,6 @@
 				D5C6445F1CCE76F300CAD760 /* MessagesViewController.swift in Sources */,
 				D549EC021CCA145500995DA2 /* ErrorType+Description.swift in Sources */,
 				D5C644731CCE774500CAD760 /* Colors.swift in Sources */,
-				D5653E601CCBC9C700417EF7 /* DashboardCell.swift in Sources */,
 				D5C644741CCE774500CAD760 /* UserDefaults.swift in Sources */,
 				D549EBFE1CCA141300995DA2 /* UnitExtensions.swift in Sources */,
 				D5C644691CCE771700CAD760 /* ButtonCell.swift in Sources */,

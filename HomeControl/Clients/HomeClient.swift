@@ -19,6 +19,19 @@ protocol HomeClient {
 
   func connect() -> Promise<Void, HomeClientError>
   func disconnect()
+
+  func sharedClient() -> HomeClient
+  func setSharedClient(client: HomeClient)
+}
+
+extension HomeClient {
+  func sharedClient() -> HomeClient {
+    return AppDelegate.sharedHomeClient
+  }
+
+  func setSharedClient(client: HomeClient) {
+    AppDelegate.sharedHomeClient = client
+  }
 }
 
 struct HomeClientError: ErrorType, CustomStringConvertible {

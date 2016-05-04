@@ -9,23 +9,27 @@
 import UIKit
 import Rswift
 import RxSwift
+import RxCocoa
 
 class DashBoardViewController: UICollectionViewController {
 
-  var widgets: [MessageAction] = [
-    MessageAction(message: Message(topic: "foo", payloadString: "on"), description: "Foo display", type: .Display),
-    MessageAction(message: Message(topic: "bar", payloadString: "on"), description: "Bar display", type: .Display),
-
-    MessageAction(message: Message(topic: "bar", payloadString: "on"), description: "Bar on", type: .PushButton),
-    MessageAction(message: Message(topic: "bar", payloadString: "off"), description: "Bar off", type: .PushButton),
+  var actions: [MessageAction] = [
 
     MessageAction(message: Message(topic: "foo", payloadString: "on"), description: "Foo on", type: .PushButton),
     MessageAction(message: Message(topic: "foo", payloadString: "off"), description: "Foo off", type: .PushButton),
 
-    MessageAction(message: Message(topic: "bar", payloadString: "on"), description: "Bar toggle", type: .ToggleSwitch),
-    MessageAction(message: Message(topic: "bar", payloadString: "on"), description: "Bar toggle", type: .ToggleSwitch),
     MessageAction(message: Message(topic: "foo", payloadString: "on"), description: "Foo toggle", type: .ToggleSwitch),
     MessageAction(message: Message(topic: "foo", payloadString: "on"), description: "Foo toggle", type: .ToggleSwitch),
+
+    MessageAction(message: Message(topic: "bar", payloadString: "on"), description: "Bar on", type: .PushButton),
+    MessageAction(message: Message(topic: "bar", payloadString: "off"), description: "Bar off", type: .PushButton),
+
+    MessageAction(message: Message(topic: "bar", payloadString: "on"), description: "Bar toggle", type: .ToggleSwitch),
+    MessageAction(message: Message(topic: "bar", payloadString: "on"), description: "Bar toggle", type: .ToggleSwitch),
+
+    MessageAction(message: Message(topic: "foo", payloadString: "on"), description: "Foo display", type: .Display),
+    MessageAction(message: Message(topic: "bar", payloadString: "on"), description: "Bar display", type: .Display),
+
   ]
 
   let reuseMap: [ActionType : String] = [
@@ -34,11 +38,17 @@ class DashBoardViewController: UICollectionViewController {
     .Display: R.reuseIdentifier.displayCell.identifier,
   ]
 
-  let client: HomeClient = MqttHomeClient(userDefaults: NSUserDefaults.standardUserDefaults())
-  let disposeBag = DisposeBag()
+  var client: HomeClient!
+  var disposeBag: DisposeBag! {
+    didSet {
+      print("disposebag was set!")
+    }
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    client = MqttHomeClient(userDefaults: NSUserDefaults.standardUserDefaults())
+    disposeBag = DisposeBag()
 
     client.connect().then {
       print("dashboard connected")
@@ -47,10 +57,6 @@ class DashBoardViewController: UICollectionViewController {
       print(error)
       self?.presentError(error)
     }
-
-    client.subscribe("testing").subscribeNext { message in
-      print(message.payloadString)
-    }.addDisposableTo(disposeBag)
 
     collectionView?.delegate = self
     collectionView?.dataSource = self
@@ -69,23 +75,30 @@ class DashBoardViewController: UICollectionViewController {
   }
 
   override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return widgets.count
+    return actions.count
   }
 
   override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    let widget = widgets[indexPath.row]
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseMap[widget.type]!, forIndexPath: indexPath)
+    let action = actions[indexPath.row]
+    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseMap[action.type]!, forIndexPath: indexPath)
 
     cell.layer.cornerRadius = 30
     cell.backgroundColor = collectionView.window?.tintColor
 
+//    client.subscribe(action.message.topic).bindTo()
+//      { (collectionView, index, model) in
+//      let indexPath = NSIndexPath(forItem: i, inSection: 0)
+//      let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseMap[action.type]!, forIndexPath: indexPath)
+//      return cell as UICollectionViewCell
+//    }.addDisposableTo(disposeBag)
+
+    if let receivingCell = cell as? ReceivesMessages {
+      receivingCell.subscribeForChanges(action, client: client, disposeBag: disposeBag)
+    }
+
     if var sendingCell = cell as? SendsMessages {
       sendingCell.homeClient = client
-      sendingCell.action = widget
-    }
-    
-    if let receivingCell = cell as? ReceivesMessages {
-      receivingCell.subscribeForChanges(client)
+      sendingCell.action = action
     }
 
     return cell

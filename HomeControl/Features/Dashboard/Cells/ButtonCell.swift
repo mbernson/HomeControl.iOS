@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ButtonCell: DashboardCell, SendsMessages {
+class ButtonCell: UICollectionViewCell, SendsMessages {
 
   deinit {
     print("ButtonCollectionViewCell deinit")
