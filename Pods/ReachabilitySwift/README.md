@@ -27,13 +27,16 @@ Just drop the **Reachability.swift** file into your project. That's it!
 
     ``` ruby
     use_frameworks!
-    pod 'ReachabilitySwift', git: 'https://github.com/ashleymills/Reachability.swift'
+    pod 'ReachabilitySwift', :git => 'https://github.com/ashleymills/Reachability.swift'
     ```
 
  3. Run `pod install`.
 
 [CocoaPods]: https://cocoapods.org
 [CocoaPods Installation]: https://guides.cocoapods.org/using/getting-started.html#getting-started
+ 
+ 4. In your code import Reachability like so:
+   `import ReachabilitySwift`
 
 ### Carthage
 [Carthage][] is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks.
@@ -119,7 +122,11 @@ NSNotificationCenter.defaultCenter().addObserver(self,
                                                  name: ReachabilityChangedNotification,
                                                  object: reachability)
 
-reachability.startNotifier()
+do{
+      try reachability.startNotifier()
+    }catch{
+      print("could not start reachability notifier")
+    }
 ```
 
 and
@@ -149,6 +156,10 @@ NSNotificationCenter.defaultCenter().removeObserver(self,
                                                     name: ReachabilityChangedNotification,
                                                     object: reachability)
 ```
+
+## Got a problem?
+
+Please read https://github.com/ashleymills/Reachability.swift/wiki/Raising-an-issue before raising an issue.
 
 ## Want to help?
 
