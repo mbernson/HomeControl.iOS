@@ -17,7 +17,7 @@ struct MessageAction {
 
   let type: ActionType
 
-  init(topic: Topic, payload: String?, description: String, type: ActionType = .PushButton) {
+  init(topic: Topic, payload: String? = nil, description: String, type: ActionType = .PushButton) {
     self.message = Message(topic: topic, payloadString: payload)
     self.description = description
     self.type = type
