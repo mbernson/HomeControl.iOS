@@ -4,15 +4,15 @@ platform :ios, '9.0'
 use_frameworks!
 
 target 'HomeControl' do
-    pod 'MQTTClient'
-    pod 'ReachabilitySwift', git: 'https://github.com/ashleymills/Reachability.swift'
+    pod 'MQTTClient', '~> 0.7.4'
+    pod 'Reachability', '~> 3.2'
     pod 'Alamofire', '~> 3.0'
     pod 'Promissum', '~> 0.5'
     pod 'Promissum/Alamofire'
-    pod 'RxSwift', '~> 2.3.1'
-    pod 'RxCocoa', '~> 2.3.1'
+    pod 'RxSwift', '~> 2.4'
+    pod 'RxCocoa', '~> 2.4'
     pod 'BetterSegmentedControl', '~> 0.1'
-    pod 'R.swift'
+    pod 'R.swift', '~> 2.2.0'
 end
 
 target 'HomeControlTests' do

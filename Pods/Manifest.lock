@@ -1,13 +1,13 @@
 PODS:
-  - Alamofire (3.2.1)
-  - BetterSegmentedControl (0.1)
-  - CocoaLumberjack (2.2.0):
-    - CocoaLumberjack/Default (= 2.2.0)
-    - CocoaLumberjack/Extensions (= 2.2.0)
-  - CocoaLumberjack/Core (2.2.0)
-  - CocoaLumberjack/Default (2.2.0):
+  - Alamofire (3.3.1)
+  - BetterSegmentedControl (0.3)
+  - CocoaLumberjack (2.3.0):
+    - CocoaLumberjack/Default (= 2.3.0)
+    - CocoaLumberjack/Extensions (= 2.3.0)
+  - CocoaLumberjack/Core (2.3.0)
+  - CocoaLumberjack/Default (2.3.0):
     - CocoaLumberjack/Core
-  - CocoaLumberjack/Extensions (2.2.0):
+  - CocoaLumberjack/Extensions (2.3.0):
     - CocoaLumberjack/Default
   - MQTTClient (0.7.4):
     - MQTTClient/Core (= 0.7.4)
@@ -19,44 +19,35 @@ PODS:
     - Alamofire (~> 3.0)
     - Promissum/Core
   - Promissum/Core (0.5.0)
-  - R.swift (1.3.0):
-    - R.swift.Library (~> 1.1.0)
-  - R.swift.Library (1.1.0)
-  - ReachabilitySwift (2.3.3)
-  - RxCocoa (2.3.1):
-    - RxSwift (~> 2.3.1)
-  - RxSwift (2.3.1)
+  - R.swift (2.2.0):
+    - R.swift.Library (~> 2.1.0)
+  - R.swift.Library (2.1.0)
+  - Reachability (3.2)
+  - RxCocoa (2.4):
+    - RxSwift (~> 2.4)
+  - RxSwift (2.4)
 
 DEPENDENCIES:
   - Alamofire (~> 3.0)
   - BetterSegmentedControl (~> 0.1)
-  - MQTTClient
+  - MQTTClient (~> 0.7.4)
   - Promissum (~> 0.5)
   - Promissum/Alamofire
-  - R.swift
-  - ReachabilitySwift (from `https://github.com/ashleymills/Reachability.swift`)
-  - RxCocoa (~> 2.3.1)
-  - RxSwift (~> 2.3.1)
-
-EXTERNAL SOURCES:
-  ReachabilitySwift:
-    :git: https://github.com/ashleymills/Reachability.swift
-
-CHECKOUT OPTIONS:
-  ReachabilitySwift:
-    :commit: cf126c0584a209143c75bf1d0f23fd904891e26e
-    :git: https://github.com/ashleymills/Reachability.swift
+  - R.swift (~> 2.2.0)
+  - Reachability (~> 3.2)
+  - RxCocoa (~> 2.4)
+  - RxSwift (~> 2.4)
 
 SPEC CHECKSUMS:
-  Alamofire: f11d8624a05f5d39e0c99309b3e600a3ba64298a
-  BetterSegmentedControl: f4b7b36fecc705fb7e7539cbb9e506137817a7a8
-  CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
+  Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
+  BetterSegmentedControl: d41b1785e2f0d3f823ce5017d0482440cc6aa584
+  CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
   MQTTClient: 1c1bedf87249a317ee9324b93252867bbc443ec7
   Promissum: 178ef117f446ed62e92e58cfbf8dd01bf543dad1
-  R.swift: 43f8a833dd8cbb4a19908cbfd37fb982e9147899
-  R.swift.Library: 775f3086e07313ed1a1dfddca8418317f5a87397
-  ReachabilitySwift: e0f6b6f280effb47731acfaaa2d5ffe223703793
-  RxCocoa: a2baaf3462b989559a51dce59d78fbebb8fe0afa
-  RxSwift: 829b2843e9eddc77a02cb3f5117f0d55f8f646f1
+  R.swift: 93333ff6e5da17ec1f38463671d5ea306197cf96
+  R.swift.Library: e5e077ed04f6867a95676af491650091b23518e9
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  RxCocoa: 7d6cd877de99f5640306b3d6cf87f580c1d91b61
+  RxSwift: 67b9ef4e8b34fb394e200e754c6a09cc16559f94
 
 COCOAPODS: 0.39.0
