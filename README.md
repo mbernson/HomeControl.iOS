@@ -1,15 +1,18 @@
 # HomeControl
 
-An app for controlling your MQTT-powered home devices.
+A universal app for interacting with your MQTT-powered home devices.
 
 ## Installation
 
-Use the following commands:
+* Install Xcode 7.3.1
+* Install the mosquitto MQTT broker: `$ brew install mosquitto`
+* Start mosquitto: `$ mosquitto`
+  * For monitoring messages on all topics, run: `mosquitto_sub -h localhost -t '#' -v`
+* Open `HomeControl.xcworkspace`
+* Start hacking!
 
-* `gem install cocoapods`
-* `pod install`
-* `open HomeControl.xcworkspace`
+This project uses Cocoapods, but they are always checked into Git to ensure reproducable builds.
 
 ## License
 
-TBD
+MIT, see `LICENSE.txt`
