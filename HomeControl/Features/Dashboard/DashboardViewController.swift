@@ -13,23 +13,36 @@ import RxCocoa
 
 class DashBoardViewController: UICollectionViewController {
 
-  var actions = [
+  var dashboards = [
+    Dashboard(
+      title: "Hildebrandpad",
+      actions: [
+        MessageViewModel(message: Message(topic: "lights/all", payloadString: "on", retain: false), description: "Alle lampen aan", type: .Button),
+        MessageViewModel(message: Message(topic: "lights/all", payloadString: "off", retain: false), description: "Alle lampen uit", type: .Button),
+        MessageViewModel(message: Message(topic: "lights/M/2", payloadString: "on", retain: true), description: "Bureaulamp", type: .Toggle),
+        MessageViewModel(message: Message(topic: "lights/M/1", payloadString: "on", retain: true), description: "Staande lamp", type: .Toggle),
+        MessageViewModel(message: Message(topic: "lights/M/3", payloadString: "on", retain: true), description: "Bed lampen", type: .Toggle),
+        MessageViewModel(topic: "user/mathijs/home", description: "Mathijs thuis", type: .Display),
 
-    MessageViewModel(message: Message(topic: "hildebrandpad/livingroom/lights/all", payloadString: "on", retain: false), description: "Alle lampen aan", type: .Button),
-    MessageViewModel(message: Message(topic: "hildebrandpad/livingroom/lights/bureaulamp", payloadString: "on", retain: true), description: "Bureaulamp", type: .Toggle),
-    MessageViewModel(message: Message(topic: "hildebrandpad/livingroom/lights/staande_lamp", payloadString: "on", retain: true), description: "Staande lamp", type: .Toggle),
+        //    MessageViewModel(topic: "hildebrandpad/temperature", description: "Kamer temperatuur", type: .Display),
+        //    MessageViewModel(topic: "hildebrandpad/humidity", description: "Kamer luchtvochtigheid", type: .Display),
+      ]
+    ),
+    Dashboard(
+      title: "Bilderdijkstraat",
+      actions: [
+        MessageViewModel(message: Message(topic: "lights/M/1", payloadString: "on", retain: true), description: "Meidenkastje", type: .Toggle),
 
-    MessageViewModel(message: Message(topic: "hildebrandpad/livingroom/lights/bed_lampen", payloadString: "on", retain: true), description: "Bed lampen", type: .Toggle),
+        MessageViewModel(message: Message(topic: "lights/M/4", payloadString: "on", retain: true), description: "Staande lamp zithoek", type: .Toggle),
+        MessageViewModel(message: Message(topic: "lights/M/5", payloadString: "on", retain: true), description: "Lampen straatkant", type: .Toggle),
 
-    MessageViewModel(message: Message(topic: "hildebrandpad/livingroom/lights/all", payloadString: "off"), description: "Vertrek van huis", type: .Button),
-
-    MessageViewModel(topic: "hildebrandpad/temperature", description: "Kamer temperatuur", type: .Display),
-    MessageViewModel(topic: "hildebrandpad/humidity", description: "Kamer luchtvochtigheid", type: .Display),
-
-    MessageViewModel(message: Message(topic: "hildebrandpad/livingroom/lights/staande_lamp", payloadString: "on", retain: true), description: "Staande lamp", type: .Toggle),
-
-    MessageViewModel(message: Message(topic: "hildebrandpad/livingroom/lights/bed_lampen", payloadString: "on", retain: true), description: "Bed lampen", type: .Toggle),
+        MessageViewModel(message: Message(topic: "lights/E/1", payloadString: "on", retain: true), description: "Serre tafel", type: .Toggle),
+        MessageViewModel(message: Message(topic: "lights/E/2", payloadString: "on", retain: true), description: "Serre lamp", type: .Toggle),
+      ]
+    ),
   ]
+
+  var currentDashboard: Dashboard!
 
   let reuseMap: [ActionType : String] = [
     .Button: R.reuseIdentifier.buttonCell.identifier,
@@ -44,6 +57,7 @@ class DashBoardViewController: UICollectionViewController {
     super.viewDidLoad()
     client = MqttHomeClient(userDefaults: NSUserDefaults.standardUserDefaults())
     disposeBag = DisposeBag()
+    currentDashboard = dashboards[0]
 
     client.connect().then {
       print("dashboard connected")
@@ -54,11 +68,12 @@ class DashBoardViewController: UICollectionViewController {
     collectionView?.delegate = self
     collectionView?.dataSource = self
 
-    collectionView?.registerNib(R.nib.switchCell)
     collectionView?.registerNib(R.nib.buttonCell)
     collectionView?.registerNib(R.nib.displayCell)
+    collectionView?.registerNib(R.nib.switchCell)
 
-    collectionView?.contentInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+    let inset: CGFloat = 16
+    collectionView?.contentInset = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
   }
 
   // MARK: Collection view data source
@@ -68,11 +83,11 @@ class DashBoardViewController: UICollectionViewController {
   }
 
   override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return actions.count
+    return currentDashboard.actions.count
   }
 
   override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    let action = actions[indexPath.row]
+    let action = currentDashboard.actions[indexPath.row]
     let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseMap[action.type]!, forIndexPath: indexPath)
 
     cell.layer.cornerRadius = 30

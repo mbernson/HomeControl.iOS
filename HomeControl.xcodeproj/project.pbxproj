@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		699C55C50DEA8C5B578A8FB2 /* Pods_HomeControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 707BA3C191EC60538C624174 /* Pods_HomeControl.framework */; };
 		D50057B11C8DE2A600E28732 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = D50057B01C8DE2A600E28732 /* R.generated.swift */; };
+		D5360AF31CDF83380039F098 /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5360AF21CDF83380039F098 /* Dashboard.swift */; };
 		D549EBFC1CCA13FB00995DA2 /* UIViewController+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = D549EBFB1CCA13FB00995DA2 /* UIViewController+Error.swift */; };
 		D549EBFE1CCA141300995DA2 /* UnitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D549EBFD1CCA141300995DA2 /* UnitExtensions.swift */; };
 		D549EC001CCA143000995DA2 /* NSUserDefaults+Subscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = D549EBFF1CCA143000995DA2 /* NSUserDefaults+Subscript.swift */; };
@@ -67,6 +68,7 @@
 		707BA3C191EC60538C624174 /* Pods_HomeControl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HomeControl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		87AB8638862A41723CCFC337 /* Pods-HomeControl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeControl.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeControl/Pods-HomeControl.release.xcconfig"; sourceTree = "<group>"; };
 		D50057B01C8DE2A600E28732 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
+		D5360AF21CDF83380039F098 /* Dashboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dashboard.swift; path = Domain/Dashboard.swift; sourceTree = "<group>"; };
 		D549EBFB1CCA13FB00995DA2 /* UIViewController+Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIViewController+Error.swift"; path = "Extensions/UIViewController+Error.swift"; sourceTree = "<group>"; };
 		D549EBFD1CCA141300995DA2 /* UnitExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UnitExtensions.swift; path = Extensions/UnitExtensions.swift; sourceTree = "<group>"; };
 		D549EBFF1CCA143000995DA2 /* NSUserDefaults+Subscript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSUserDefaults+Subscript.swift"; path = "Extensions/NSUserDefaults+Subscript.swift"; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 			isa = PBXGroup;
 			children = (
 				D5B541051C9D6B3400E49508 /* Message.swift */,
+				D5360AF21CDF83380039F098 /* Dashboard.swift */,
 			);
 			name = Domain;
 			sourceTree = "<group>";
@@ -544,6 +547,7 @@
 				D5C644451CCE76C100CAD760 /* HttpHomeClient.swift in Sources */,
 				D549EC001CCA143000995DA2 /* NSUserDefaults+Subscript.swift in Sources */,
 				D5C6445F1CCE76F300CAD760 /* MessagesViewController.swift in Sources */,
+				D5360AF31CDF83380039F098 /* Dashboard.swift in Sources */,
 				D549EC021CCA145500995DA2 /* ErrorType+Description.swift in Sources */,
 				D5C644731CCE774500CAD760 /* Colors.swift in Sources */,
 				D5C644741CCE774500CAD760 /* UserDefaults.swift in Sources */,
