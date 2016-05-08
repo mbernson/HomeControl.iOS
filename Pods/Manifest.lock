@@ -19,7 +19,7 @@ PODS:
     - Alamofire (~> 3.0)
     - Promissum/Core
   - Promissum/Core (0.5.0)
-  - R.swift (2.2.0):
+  - R.swift (2.2.2):
     - R.swift.Library (~> 2.1.0)
   - R.swift.Library (2.1.0)
   - Reachability (3.2)
@@ -33,7 +33,7 @@ DEPENDENCIES:
   - MQTTClient (~> 0.7.4)
   - Promissum (~> 0.5)
   - Promissum/Alamofire
-  - R.swift (~> 2.2.0)
+  - R.swift
   - Reachability (~> 3.2)
   - RxCocoa (~> 2.4)
   - RxSwift (~> 2.4)
@@ -44,7 +44,7 @@ SPEC CHECKSUMS:
   CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
   MQTTClient: 1c1bedf87249a317ee9324b93252867bbc443ec7
   Promissum: 178ef117f446ed62e92e58cfbf8dd01bf543dad1
-  R.swift: 93333ff6e5da17ec1f38463671d5ea306197cf96
+  R.swift: ed40b24d65ad70c6cf48a2f249a26a3e5a4a7bc0
   R.swift.Library: e5e077ed04f6867a95676af491650091b23518e9
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   RxCocoa: 7d6cd877de99f5640306b3d6cf87f580c1d91b61

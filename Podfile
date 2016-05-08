@@ -12,7 +12,7 @@ target 'HomeControl' do
     pod 'RxSwift', '~> 2.4'
     pod 'RxCocoa', '~> 2.4'
     pod 'BetterSegmentedControl', '~> 0.1'
-    pod 'R.swift', '~> 2.2.0'
+    pod 'R.swift' #, '~> 1.4.2'
 end
 
 target 'HomeControlTests' do
