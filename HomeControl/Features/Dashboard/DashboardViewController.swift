@@ -11,38 +11,42 @@ import Rswift
 import RxSwift
 import RxCocoa
 
+let dashboards = [
+  Dashboard(
+    title: "Hildebrandpad",
+    actions: [
+      MessageViewModel(message: Message(topic: "lights/all", payloadString: "on", retain: false), description: "Alle lampen aan", type: .Button),
+      MessageViewModel(message: Message(topic: "lights/all", payloadString: "off", retain: false), description: "Alle lampen uit", type: .Button),
+      MessageViewModel(message: Message(topic: "lights/M/2", payloadString: "on", retain: true), description: "Bureaulamp", type: .Toggle),
+      MessageViewModel(message: Message(topic: "lights/M/1", payloadString: "on", retain: true), description: "Staande lamp", type: .Toggle),
+      MessageViewModel(message: Message(topic: "lights/M/3", payloadString: "on", retain: true), description: "Bed lampen", type: .Toggle),
+      MessageViewModel(topic: "user/mathijs/home", description: "Mathijs thuis", type: .Display),
+
+      //    MessageViewModel(topic: "hildebrandpad/temperature", description: "Kamer temperatuur", type: .Display),
+      //    MessageViewModel(topic: "hildebrandpad/humidity", description: "Kamer luchtvochtigheid", type: .Display),
+    ]
+  ),
+  Dashboard(
+    title: "Bilderdijkstraat",
+    actions: [
+      MessageViewModel(message: Message(topic: "lights/M/1", payloadString: "on", retain: true), description: "Meidenkastje", type: .Toggle),
+
+      MessageViewModel(message: Message(topic: "lights/M/4", payloadString: "on", retain: true), description: "Staande lamp zithoek", type: .Toggle),
+      MessageViewModel(message: Message(topic: "lights/M/5", payloadString: "on", retain: true), description: "Lampen straatkant", type: .Toggle),
+
+      MessageViewModel(message: Message(topic: "lights/E/1", payloadString: "on", retain: true), description: "Serre tafel", type: .Toggle),
+      MessageViewModel(message: Message(topic: "lights/E/2", payloadString: "on", retain: true), description: "Serre lamp", type: .Toggle),
+    ]
+  ),
+]
+
 class DashBoardViewController: UICollectionViewController {
 
-  var dashboards = [
-    Dashboard(
-      title: "Hildebrandpad",
-      actions: [
-        MessageViewModel(message: Message(topic: "lights/all", payloadString: "on", retain: false), description: "Alle lampen aan", type: .Button),
-        MessageViewModel(message: Message(topic: "lights/all", payloadString: "off", retain: false), description: "Alle lampen uit", type: .Button),
-        MessageViewModel(message: Message(topic: "lights/M/2", payloadString: "on", retain: true), description: "Bureaulamp", type: .Toggle),
-        MessageViewModel(message: Message(topic: "lights/M/1", payloadString: "on", retain: true), description: "Staande lamp", type: .Toggle),
-        MessageViewModel(message: Message(topic: "lights/M/3", payloadString: "on", retain: true), description: "Bed lampen", type: .Toggle),
-        MessageViewModel(topic: "user/mathijs/home", description: "Mathijs thuis", type: .Display),
-
-        //    MessageViewModel(topic: "hildebrandpad/temperature", description: "Kamer temperatuur", type: .Display),
-        //    MessageViewModel(topic: "hildebrandpad/humidity", description: "Kamer luchtvochtigheid", type: .Display),
-      ]
-    ),
-    Dashboard(
-      title: "Bilderdijkstraat",
-      actions: [
-        MessageViewModel(message: Message(topic: "lights/M/1", payloadString: "on", retain: true), description: "Meidenkastje", type: .Toggle),
-
-        MessageViewModel(message: Message(topic: "lights/M/4", payloadString: "on", retain: true), description: "Staande lamp zithoek", type: .Toggle),
-        MessageViewModel(message: Message(topic: "lights/M/5", payloadString: "on", retain: true), description: "Lampen straatkant", type: .Toggle),
-
-        MessageViewModel(message: Message(topic: "lights/E/1", payloadString: "on", retain: true), description: "Serre tafel", type: .Toggle),
-        MessageViewModel(message: Message(topic: "lights/E/2", payloadString: "on", retain: true), description: "Serre lamp", type: .Toggle),
-      ]
-    ),
-  ]
-
-  var currentDashboard: Dashboard!
+  var currentDashboard: Dashboard! {
+    didSet {
+      applyDashboard()
+    }
+  }
 
   let reuseMap: [ActionType : String] = [
     .Button: R.reuseIdentifier.buttonCell.identifier,
@@ -55,12 +59,13 @@ class DashBoardViewController: UICollectionViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    client = MqttHomeClient(userDefaults: NSUserDefaults.standardUserDefaults())
+
+    client = MqttHomeClient()
     disposeBag = DisposeBag()
     currentDashboard = dashboards[0]
 
     client.connect().then {
-      print("dashboard connected")
+      self.navigationItem.title = "\(self.currentDashboard.title) [Connected]"
     }.trap { [weak self] error in
       self?.presentError(error)
     }
@@ -69,11 +74,16 @@ class DashBoardViewController: UICollectionViewController {
     collectionView?.dataSource = self
 
     collectionView?.registerNib(R.nib.buttonCell)
-    collectionView?.registerNib(R.nib.displayCell)
     collectionView?.registerNib(R.nib.switchCell)
+    collectionView?.registerNib(R.nib.displayCell)
 
     let inset: CGFloat = 16
     collectionView?.contentInset = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
+  }
+
+  private func applyDashboard() {
+    disposeBag = DisposeBag()
+    collectionView?.reloadData()
   }
 
   // MARK: Collection view data source
@@ -107,9 +117,9 @@ class DashBoardViewController: UICollectionViewController {
 
   // MARK: Collection view delegate
 
-  override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+//  override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
     //
-  }
+//  }
 
   override func collectionView(collectionView: UICollectionView, canMoveItemAtIndexPath indexPath: NSIndexPath) -> Bool {
     return true

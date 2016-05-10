@@ -12,12 +12,20 @@ import Promissum
 import RxSwift
 
 class HttpHomeClient: HomeClient {
-  private var userDefaults = NSUserDefaults.standardUserDefaults()
+  let mqttWebProxyUrl: String
+
+  convenience init(userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()) {
+    self.init(mqttWebProxyUrl: userDefaults.stringForKey("api_mqtt_url")!)
+  }
+
+  init(mqttWebProxyUrl: String) {
+    self.mqttWebProxyUrl = mqttWebProxyUrl
+  }
 
   func publish(message: Message) -> Promise<Message, HomeClientError> {
     print("httpHomeClient publish")
 
-    return Alamofire.request(.POST, userDefaults.stringForKey("api_mqtt_url")!, parameters: [
+    return Alamofire.request(.POST, mqttWebProxyUrl, parameters: [
       "topic": message.topic,
       "message": message.payloadString ?? "",
       "retain": message.retain

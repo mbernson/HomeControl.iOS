@@ -7,8 +7,14 @@
 //
 
 import UIKit
+import Promissum
 
 class DashboardPickerTableViewController: UITableViewController {
+
+  private let promiseSource = PromiseSource<Dashboard, Void>()
+  var promise: Promise<Dashboard, Void> {
+    return promiseSource.promise
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -21,7 +27,8 @@ class DashboardPickerTableViewController: UITableViewController {
   }
 
   @IBAction func cancelButtonPressed(sender: AnyObject) {
-    self.dismissViewControllerAnimated(true, completion: nil)
+    promiseSource.reject()
+    dismissViewControllerAnimated(true, completion: nil)
   }
 
   override func didReceiveMemoryWarning() {

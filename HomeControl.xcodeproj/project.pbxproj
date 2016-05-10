@@ -27,6 +27,7 @@
 		D5A06C691C11AB0200664494 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5A06C671C11AB0200664494 /* LaunchScreen.storyboard */; };
 		D5A06C741C11AB0200664494 /* HomeControlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A06C731C11AB0200664494 /* HomeControlTests.swift */; };
 		D5A06C7F1C11AB0300664494 /* HomeControlUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5A06C7E1C11AB0300664494 /* HomeControlUITests.swift */; };
+		D5AE921E1CE0EEF10092B815 /* SwitchingHomeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5AE921D1CE0EEF10092B815 /* SwitchingHomeClient.swift */; };
 		D5B541061C9D6B3400E49508 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B541051C9D6B3400E49508 /* Message.swift */; };
 		D5B541081C9D6BB500E49508 /* Dashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5B541071C9D6BB500E49508 /* Dashboard.storyboard */; };
 		D5C644441CCE76C100CAD760 /* HomeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C644421CCE76C100CAD760 /* HomeClient.swift */; };
@@ -92,6 +93,7 @@
 		D5A06C7A1C11AB0200664494 /* HomeControlUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HomeControlUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5A06C7E1C11AB0300664494 /* HomeControlUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeControlUITests.swift; sourceTree = "<group>"; };
 		D5A06C801C11AB0300664494 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D5AE921D1CE0EEF10092B815 /* SwitchingHomeClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwitchingHomeClient.swift; path = Clients/SwitchingHomeClient.swift; sourceTree = "<group>"; };
 		D5B541051C9D6B3400E49508 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Domain/Message.swift; sourceTree = "<group>"; };
 		D5B541071C9D6BB500E49508 /* Dashboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Dashboard.storyboard; path = Features/Dashboard/Dashboard.storyboard; sourceTree = "<group>"; };
 		D5C644421CCE76C100CAD760 /* HomeClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeClient.swift; path = Clients/HomeClient.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				D5C644421CCE76C100CAD760 /* HomeClient.swift */,
 				D5C644431CCE76C100CAD760 /* HttpHomeClient.swift */,
 				D5879C2D1C650F35005BF7B6 /* MqttHomeClient.swift */,
+				D5AE921D1CE0EEF10092B815 /* SwitchingHomeClient.swift */,
 			);
 			name = Clients;
 			sourceTree = "<group>";
@@ -550,6 +553,7 @@
 				D5360AF31CDF83380039F098 /* Dashboard.swift in Sources */,
 				D549EC021CCA145500995DA2 /* ErrorType+Description.swift in Sources */,
 				D5C644731CCE774500CAD760 /* Colors.swift in Sources */,
+				D5AE921E1CE0EEF10092B815 /* SwitchingHomeClient.swift in Sources */,
 				D5C644741CCE774500CAD760 /* UserDefaults.swift in Sources */,
 				D588ACCB1CDA38F500005705 /* AddWidgetViewController.swift in Sources */,
 				D549EBFE1CCA141300995DA2 /* UnitExtensions.swift in Sources */,

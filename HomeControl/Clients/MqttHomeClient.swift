@@ -43,6 +43,7 @@ class MqttHomeClient: HomeClient {
   let mqttSession: MQTTSession
   let messages: Observable<Message>
   var currentObserver: AnyObserver<Message>?
+  var topics = [Topic]()
 
   convenience init(userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()) {
     let host = userDefaults.stringForKey("mqtt_host")!
@@ -87,11 +88,14 @@ class MqttHomeClient: HomeClient {
       if error != nil {
         source.reject(HomeClientError(message: error.description))
       } else {
+        for topic in self.topics {
+          self.mqttSession.subscribeToTopic(topic, atLevel: .AtLeastOnce)
+        }
         source.resolve()
       }
     }
 
-    mqttSession.connectAndWaitTimeout(10)
+    mqttSession.connect()
 
     return source.promise
   }
@@ -123,6 +127,8 @@ class MqttHomeClient: HomeClient {
         print("subscribed to topic \(topic), granted QoS of \(qos)")
       }
     }
+
+    topics.append(topic)
 
     return messages.filter { message in
       return message.topic == topic
