@@ -1,5 +1,7 @@
 PODS:
-  - Alamofire (3.3.1)
+  - Alamofire (3.4.0)
+  - AlamofireNetworkActivityIndicator (1.0.1):
+    - Alamofire (~> 3.3)
   - BetterSegmentedControl (0.3)
   - CocoaLumberjack (2.3.0):
     - CocoaLumberjack/Default (= 2.3.0)
@@ -9,9 +11,9 @@ PODS:
     - CocoaLumberjack/Core
   - CocoaLumberjack/Extensions (2.3.0):
     - CocoaLumberjack/Default
-  - MQTTClient (0.7.4):
-    - MQTTClient/Core (= 0.7.4)
-  - MQTTClient/Core (0.7.4):
+  - MQTTClient (0.7.8):
+    - MQTTClient/Core (= 0.7.8)
+  - MQTTClient/Core (0.7.8):
     - CocoaLumberjack
   - Promissum (0.5.0):
     - Promissum/Core (= 0.5.0)
@@ -19,35 +21,54 @@ PODS:
     - Alamofire (~> 3.0)
     - Promissum/Core
   - Promissum/Core (0.5.0)
-  - R.swift (2.2.2):
+  - R.swift (2.3.0):
     - R.swift.Library (~> 2.1.0)
   - R.swift.Library (2.1.0)
   - Reachability (3.2)
-  - RxCocoa (2.4):
-    - RxSwift (~> 2.4)
-  - RxSwift (2.4)
+  - RxCocoa (2.5.0):
+    - RxSwift (~> 2.5)
+  - RxSwift (2.5.0)
+  - SegueManager (2.1.0):
+    - SegueManager/iOS (= 2.1.0)
+    - SegueManager/OSX (= 2.1.0)
+    - SegueManager/R.swift (= 2.1.0)
+  - SegueManager/iOS (2.1.0)
+  - SegueManager/R.swift (2.1.0):
+    - R.swift.Library
+    - SegueManager/iOS
+  - Statham/Core (0.6.1)
+  - Statham/NSDate-iso8601 (0.6.1):
+    - Statham/Core
 
 DEPENDENCIES:
-  - Alamofire (~> 3.0)
+  - Alamofire (~> 3.4)
+  - AlamofireNetworkActivityIndicator (~> 1.0)
   - BetterSegmentedControl (~> 0.1)
   - MQTTClient (~> 0.7.4)
   - Promissum (~> 0.5)
   - Promissum/Alamofire
-  - R.swift
+  - R.swift (~> 2.2)
   - Reachability (~> 3.2)
   - RxCocoa (~> 2.4)
   - RxSwift (~> 2.4)
+  - SegueManager (~> 2.1)
+  - Statham/NSDate-iso8601 (~> 0.6.1)
 
 SPEC CHECKSUMS:
-  Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
+  Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
+  AlamofireNetworkActivityIndicator: 49a6e39afb947136f7b1872bae2d684957c26697
   BetterSegmentedControl: d41b1785e2f0d3f823ce5017d0482440cc6aa584
   CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
-  MQTTClient: 1c1bedf87249a317ee9324b93252867bbc443ec7
+  MQTTClient: be89741654eccf5a57eb62f4ef0fd57e0e19aa17
   Promissum: 178ef117f446ed62e92e58cfbf8dd01bf543dad1
-  R.swift: ed40b24d65ad70c6cf48a2f249a26a3e5a4a7bc0
+  R.swift: 38b2191a603c3d491a09baddfb4ccc7aa9be4d9d
   R.swift.Library: e5e077ed04f6867a95676af491650091b23518e9
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  RxCocoa: 7d6cd877de99f5640306b3d6cf87f580c1d91b61
-  RxSwift: 67b9ef4e8b34fb394e200e754c6a09cc16559f94
+  RxCocoa: e1b1562e57a554d0fb2aabf9d71b637f177257c7
+  RxSwift: 402b41a50e922a0368fc14cb3bc9f4427920e8ae
+  SegueManager: 07a64c4e8cd814b3e0f564ab838777af75951a29
+  Statham: 8f600fa7a1fcb40ca7f4dd08b37ee3ae4e682f35
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: dd12e1b0cddf55b7e3fa7ea9f8e4d9936fee9635
+
+COCOAPODS: 1.0.1
