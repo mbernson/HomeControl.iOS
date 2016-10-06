@@ -14,12 +14,12 @@ extension Int {
   }
 }
 
-extension NSTimeInterval {
-  var minutes: NSTimeInterval {
+extension TimeInterval {
+  var minutes: TimeInterval {
     return self * 60
   }
 
-  var hours: NSTimeInterval {
+  var hours: TimeInterval {
     return self * 60 * 60
   }
 }

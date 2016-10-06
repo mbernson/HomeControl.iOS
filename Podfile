@@ -4,17 +4,13 @@ platform :ios, '9.0'
 use_frameworks!
 
 target 'HomeControl' do
-    pod 'MQTTClient'
+    pod 'MQTTClient', '~> 0.8.5'
     pod 'Reachability'
     pod 'Alamofire', '~> 4.0.0'
-    # pod 'AlamofireNetworkActivityIndicator'
     pod 'Promissum', git: 'https://github.com/tomlokhorst/Promissum.git'
     pod 'Promissum/Alamofire', git: 'https://github.com/tomlokhorst/Promissum.git'
-    # pod 'Statham/NSDate-iso8601'
     pod 'RxSwift', '3.0.0-beta.2'
-    # pod 'BetterSegmentedControl', '~> 0.1'
     pod 'R.swift', '~> 3.0.0'
-    # pod 'SegueManager', '~> 2.1'
 end
 
 target 'HomeControlTests' do
@@ -25,3 +21,10 @@ target 'HomeControlUITests' do
 
 end
 
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['SWIFT_VERSION'] = '3.0'
+    end
+  end
+end

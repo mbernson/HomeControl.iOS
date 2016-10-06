@@ -31,15 +31,15 @@ struct MessageViewModel {
 }
 
 enum ActionType {
-  case Button
-  case Toggle
-  case Display // (ValueType)
+  case button
+  case toggle
+  case display // (ValueType)
 //  case Color
 }
 
 enum ValueType {
-  case Integer
-  case Float
-  case Boolean
-  case Text
+  case integer
+  case float
+  case boolean
+  case text
 }

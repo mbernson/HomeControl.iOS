@@ -11,37 +11,37 @@ import UIKit
 import MQTTClient
 
 struct Message {
-  static let encoding = NSUTF8StringEncoding
+  static let encoding = String.Encoding.utf8
 
   enum QoS {
-    case AtMostOnce
-    case AtLeastOnce
-    case ExactlyOnce
+    case atMostOnce
+    case atLeastOnce
+    case exactlyOnce
 
-    static func fromMqttQoS(mqttQos: MQTTQosLevel) -> QoS {
+    static func fromMqttQoS(_ mqttQos: MQTTQosLevel) -> QoS {
       switch mqttQos {
-      case .AtLeastOnce: return QoS.AtLeastOnce
-      case .ExactlyOnce: return QoS.ExactlyOnce
-      case .AtMostOnce:  return QoS.AtMostOnce
+      case .atLeastOnce: return QoS.atLeastOnce
+      case .exactlyOnce: return QoS.exactlyOnce
+      case .atMostOnce:  return QoS.atMostOnce
       }
     }
   }
 
   let topic: Topic
-  let payload: NSData?
+  let payload: Data?
   let qos: QoS
   let retain: Bool
 
-  init(topic: Topic, payload: NSData? = nil, qos: QoS = .AtLeastOnce, retain: Bool = false) {
+  init(topic: Topic, payload: Data? = nil, qos: QoS = .atLeastOnce, retain: Bool = false) {
     self.topic = topic
     self.payload = payload
     self.qos = qos
     self.retain = retain
   }
 
-  init(topic: Topic, payloadString: String? = nil, qos: QoS = .AtLeastOnce, retain: Bool = false) {
+  init(topic: Topic, payloadString: String? = nil, qos: QoS = .atLeastOnce, retain: Bool = false) {
     self.topic = topic
-    self.payload = payloadString?.dataUsingEncoding(Message.encoding)
+    self.payload = payloadString?.data(using: Message.encoding)
     self.qos = qos
     self.retain = retain
   }
@@ -65,7 +65,7 @@ struct Message {
   }
 
   func asColor() -> UIColor? {
-    return .clearColor()
+    return UIColor.clear
   }
 }
 
@@ -77,9 +77,9 @@ extension Message {
 
   var mqttQos: MQTTQosLevel {
     switch qos {
-    case .AtLeastOnce: return MQTTQosLevel.AtLeastOnce
-    case .ExactlyOnce: return MQTTQosLevel.ExactlyOnce
-    case .AtMostOnce:  return MQTTQosLevel.AtMostOnce
+    case .atLeastOnce: return MQTTQosLevel.atLeastOnce
+    case .exactlyOnce: return MQTTQosLevel.exactlyOnce
+    case .atMostOnce:  return MQTTQosLevel.atMostOnce
     }
   }
 }

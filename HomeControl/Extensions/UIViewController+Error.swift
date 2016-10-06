@@ -10,26 +10,26 @@ import UIKit
 
 extension UIViewController {
 
-  func presentError(error: ErrorType, title: String? = nil) {
+  func presentError(_ error: Error, title: String? = nil) {
     let alertController = UIAlertController(
       title: title,
       message: error.description,
-      preferredStyle: .Alert)
+      preferredStyle: .alert)
 
-    alertController.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "[TEMP]"), style: .Default, handler: nil))
+    alertController.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "[TEMP]"), style: .default, handler: nil))
 
-    presentViewController(alertController, animated: true, completion: nil)
+    present(alertController, animated: true, completion: nil)
   }
 
-  func presentMessage(message: String, title: String? = nil) {
+  func presentMessage(_ message: String, title: String? = nil) {
     let alertController = UIAlertController(
       title: title,
       message: message,
-      preferredStyle: .Alert)
+      preferredStyle: .alert)
 
-    alertController.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "[TEMP]"), style: .Default, handler: nil))
+    alertController.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: "[TEMP]"), style: .default, handler: nil))
 
-    presentViewController(alertController, animated: true, completion: nil)
+    present(alertController, animated: true, completion: nil)
   }
 
 }

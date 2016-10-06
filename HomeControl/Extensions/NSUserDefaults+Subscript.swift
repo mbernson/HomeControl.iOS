@@ -20,115 +20,115 @@ struct Key<T> {
 // Extensions to NSUserDefaults for subscripting using keys.
 // Apparently generics don't work with subscript.
 // But this code should be in a library somewhere, so who cares about a little repetition.
-extension NSUserDefaults {
+extension Foundation.UserDefaults {
   subscript(key: Key<String>) -> String? {
     get {
-      return stringForKey(key.name)
+      return string(forKey: key.name)
     }
     set {
       if let value = newValue {
         setValue(value, forKey: key.name)
       }
       else {
-        removeObjectForKey(key.name)
+        removeObject(forKey: key.name)
       }
     }
   }
 
   subscript(key: Key<Int>) -> Int? {
     get {
-      return integerForKey(key.name)
+      return integer(forKey: key.name)
     }
     set {
       if let value = newValue {
-        setInteger(value, forKey: key.name)
+        set(value, forKey: key.name)
       }
       else {
-        removeObjectForKey(key.name)
+        removeObject(forKey: key.name)
       }
     }
   }
 
   subscript(key: Key<Double>) -> Double? {
     get {
-      return doubleForKey(key.name)
+      return double(forKey: key.name)
     }
     set {
       if let value = newValue {
-        setDouble(value, forKey: key.name)
+        set(value, forKey: key.name)
       }
       else {
-        removeObjectForKey(key.name)
+        removeObject(forKey: key.name)
       }
     }
   }
 
   subscript(key: Key<Bool>) -> Bool? {
     get {
-      return boolForKey(key.name)
+      return bool(forKey: key.name)
     }
     set {
       if let value = newValue {
-        setBool(value, forKey: key.name)
+        set(value, forKey: key.name)
       }
       else {
-        removeObjectForKey(key.name)
+        removeObject(forKey: key.name)
       }
     }
   }
 
-  subscript(key: Key<NSData>) -> NSData? {
+  subscript(key: Key<Data>) -> Data? {
     get {
-      return dataForKey(key.name)
+      return data(forKey: key.name)
     }
     set {
       if let value = newValue {
         setValue(value, forKey: key.name)
       }
       else {
-        removeObjectForKey(key.name)
+        removeObject(forKey: key.name)
       }
     }
   }
 
-  subscript(key: Key<NSDate>) -> NSDate? {
+  subscript(key: Key<Date>) -> Date? {
     get {
-      return objectForKey(key.name) as? NSDate
+      return object(forKey: key.name) as? Date
     }
     set {
       if let value = newValue {
         setValue(value, forKey: key.name)
       }
       else {
-        removeObjectForKey(key.name)
+        removeObject(forKey: key.name)
       }
     }
   }
 
   subscript(key: Key<[String : Bool]>) -> [String : Bool]? {
     get {
-      return objectForKey(key.name) as? [String : Bool]
+      return object(forKey: key.name) as? [String : Bool]
     }
     set {
       if let value = newValue {
         setValue(value, forKey: key.name)
       }
       else {
-        removeObjectForKey(key.name)
+        removeObject(forKey: key.name)
       }
     }
   }
 
   subscript(key: Key<[String]>) -> [String]? {
     get {
-      return stringArrayForKey(key.name)
+      return stringArray(forKey: key.name)
     }
     set {
       if let value = newValue {
         setValue(value, forKey: key.name)
       }
       else {
-        removeObjectForKey(key.name)
+        removeObject(forKey: key.name)
       }
     }
   }

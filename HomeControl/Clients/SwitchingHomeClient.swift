@@ -12,17 +12,17 @@ import RxSwift
 import Reachability
 
 internal class ProxyHomeClient: HomeClient {
-  private var instance: HomeClient
+  fileprivate var instance: HomeClient
 
   init(instance: HomeClient) {
     self.instance = instance
   }
 
-  func publish(message: Message) -> Promise<Message, HomeClientError> {
+  func publish(_ message: Message) -> Promise<Message, HomeClientError> {
     return instance.publish(message)
   }
 
-  func subscribe(topic: Topic) -> Observable<Message> {
+  func subscribe(_ topic: Topic) -> Observable<Message> {
     return instance.subscribe(topic)
   }
 
@@ -36,7 +36,7 @@ internal class ProxyHomeClient: HomeClient {
 }
 
 class SwitchingHomeClient: ProxyHomeClient {
-  let userDefaults: NSUserDefaults
+  let userDefaults: Foundation.UserDefaults
 
   let internetReachability: Reachability
   let localReachability: Reachability
@@ -44,13 +44,13 @@ class SwitchingHomeClient: ProxyHomeClient {
   typealias LocalClient = MqttHomeClient
   typealias RemoteClient = HttpHomeClient
 
-  init(userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()) {
+  init(userDefaults: Foundation.UserDefaults = Foundation.UserDefaults.standard) {
     self.userDefaults = userDefaults
 
-    internetReachability = Reachability(hostName: userDefaults.stringForKey("api_mqtt_url")!)
-    localReachability = Reachability(hostName: userDefaults.stringForKey("mqtt_host")!)
+    internetReachability = Reachability(hostName: userDefaults.string(forKey: "api_mqtt_url")!)
+    localReachability = Reachability(hostName: userDefaults.string(forKey: "mqtt_host")!)
 
-    super.init(instance: HttpHomeClient(userDefaults: userDefaults))
+    super.init(instance: HttpHomeClient(mqttWebProxyUrl: userDefaults.string(forKey: "api_mqtt_url")!))
 
     localReachability.reachableBlock = self.switchToLocalNetwork
     localReachability.reachableOnWWAN = false
@@ -60,7 +60,7 @@ class SwitchingHomeClient: ProxyHomeClient {
     localReachability.startNotifier()
   }
 
-  private func swapInstanceFor(newInstance: HomeClient) {
+  fileprivate func swapInstanceFor(_ newInstance: HomeClient) {
     let oldClient = instance
     newInstance.connect().then {
       self.instance = newInstance
@@ -69,13 +69,13 @@ class SwitchingHomeClient: ProxyHomeClient {
     }
   }
 
-  private func switchToLocalNetwork(reachability: Reachability!) {
+  fileprivate func switchToLocalNetwork(reachability: Reachability?) {
     if instance is LocalClient { return }
     swapInstanceFor(RemoteClient())
-    print("switchToLocalNetwork")
+    print("switched to LocalNetwork")
   }
 
-  private func switchToRemoteNetwork(reachability: Reachability!) {
+  fileprivate func switchToRemoteNetwork(reachability: Reachability?) {
     if instance is RemoteClient { return }
     swapInstanceFor(LocalClient())
     print("switchToRemoteNetwork")

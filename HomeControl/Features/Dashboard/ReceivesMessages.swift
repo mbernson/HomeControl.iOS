@@ -10,5 +10,5 @@ import UIKit
 import RxSwift
 
 protocol ReceivesMessages {
-  func subscribeForChanges(action: MessageViewModel, client: HomeClient, disposeBag: DisposeBag)
+  func subscribeForChanges(_ action: MessageViewModel, client: HomeClient, disposeBag: DisposeBag)
 }

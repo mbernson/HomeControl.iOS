@@ -31,22 +31,22 @@ class MessagesViewController: UIViewController {
   @IBOutlet weak var topicTextField: UITextField!
   @IBOutlet weak var messageTextField: UITextField!
 
-  @IBAction func sendButtonPressed(sender: AnyObject) {
+  @IBAction func sendButtonPressed(_ sender: AnyObject) {
     self.messageTextField.resignFirstResponder()
-    guard let client = client, topic = topicTextField.text else { return }
+    guard let client = client, let topic = topicTextField.text else { return }
     let message = Message(topic: topic, payloadString: messageTextField.text ?? defaultMessageChoice)
     client.publish(message).then { result in
       print("message was sent")
     }
   }
 
-  @IBAction func viewWasTapped(sender: AnyObject) {
+  @IBAction func viewWasTapped(_ sender: AnyObject) {
     self.messageTextField.resignFirstResponder()
   }
 
-  @IBAction func customMessageSwitchChanged(sender: UISwitch) {
+  @IBAction func customMessageSwitchChanged(_ sender: UISwitch) {
     self.messageTextField.resignFirstResponder()
-    if(!sender.on) {
+    if(!sender.isOn) {
       let messagePickerView = UIPickerView()
       messagePickerView.delegate = self
       messageTextField.inputView = messagePickerView
@@ -58,19 +58,19 @@ class MessagesViewController: UIViewController {
 }
 
 extension MessagesViewController: UIPickerViewDataSource, UIPickerViewDelegate {
-  func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+  func numberOfComponents(in pickerView: UIPickerView) -> Int {
     return 1
   }
 
-  func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+  func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
     return messageChoices.count
   }
 
-  func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
     return messageChoices[row]
   }
 
-  func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     messageTextField.text = messageChoices[row]
   }
 }

@@ -23,7 +23,7 @@ class ConnectionIndicatorView: UIView {
   func initialize() {
 
     let view = UINib(nibName: "ConnecdtionIndicatorView", bundle: nil)
-    let v = view.instantiateWithOwner(self, options: nil).first as! UIView
+    let v = view.instantiate(withOwner: self, options: nil).first as! UIView
       addSubview(v)
 //      view.autoPinEdgesToSuperviewEdges()
 //    }

@@ -25,7 +25,7 @@ class SwitchCell: UICollectionViewCell, SendsMessages, ReceivesMessages {
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var toggleSwitch: UISwitch!
 
-  @IBAction func switchValueDidChange(sender: AnyObject) {
+  @IBAction func switchValueDidChange(_ sender: AnyObject) {
     guard var action = action else { return }
     guard let oldValue = action.message.asBoolean() else { return }
 
@@ -37,7 +37,7 @@ class SwitchCell: UICollectionViewCell, SendsMessages, ReceivesMessages {
     sendCurrentMessage()
   }
 
-  func subscribeForChanges(action: MessageViewModel, client: HomeClient, disposeBag: DisposeBag) {
+  func subscribeForChanges(_ action: MessageViewModel, client: HomeClient, disposeBag: DisposeBag) {
     homeClient = client
 
     client.subscribe(action.message.topic).subscribeNext { message in

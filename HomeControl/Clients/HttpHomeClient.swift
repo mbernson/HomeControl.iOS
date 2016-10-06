@@ -14,18 +14,18 @@ import RxSwift
 class HttpHomeClient: HomeClient {
   let mqttWebProxyUrl: String
 
-  convenience init(userDefaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()) {
-    self.init(mqttWebProxyUrl: userDefaults.stringForKey("api_mqtt_url")!)
+  convenience init(userDefaults: Foundation.UserDefaults = Foundation.UserDefaults.standard) {
+    self.init(mqttWebProxyUrl: userDefaults.string(forKey: "api_mqtt_url")!)
   }
 
   init(mqttWebProxyUrl: String) {
     self.mqttWebProxyUrl = mqttWebProxyUrl
   }
 
-  func publish(message: Message) -> Promise<Message, HomeClientError> {
+  func publish(_ message: Message) -> Promise<Message, HomeClientError> {
     print("httpHomeClient publish")
 
-    return Alamofire.request(.POST, mqttWebProxyUrl, parameters: [
+    return Alamofire.request(mqttWebProxyUrl, method: .post, parameters: [
       "topic": message.topic,
       "message": message.payloadString ?? "",
       "retain": message.retain
@@ -39,7 +39,7 @@ class HttpHomeClient: HomeClient {
       }
   }
 
-  func subscribe(topic: Topic) -> Observable<Message> {
+  func subscribe(_ topic: Topic) -> Observable<Message> {
     fatalError("Not implmemented")
   }
 

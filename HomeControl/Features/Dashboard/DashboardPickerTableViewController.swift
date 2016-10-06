@@ -11,7 +11,7 @@ import Promissum
 
 class DashboardPickerTableViewController: UITableViewController {
 
-  private let promiseSource = PromiseSource<Dashboard, Void>()
+  fileprivate let promiseSource = PromiseSource<Dashboard, Void>()
   var promise: Promise<Dashboard, Void> {
     return promiseSource.promise
   }
@@ -26,9 +26,9 @@ class DashboardPickerTableViewController: UITableViewController {
     // self.navigationItem.rightBarButtonItem = self.editButtonItem()
   }
 
-  @IBAction func cancelButtonPressed(sender: AnyObject) {
+  @IBAction func cancelButtonPressed(_ sender: AnyObject) {
     promiseSource.reject()
-    dismissViewControllerAnimated(true, completion: nil)
+    dismiss(animated: true, completion: nil)
   }
 
   override func didReceiveMemoryWarning() {

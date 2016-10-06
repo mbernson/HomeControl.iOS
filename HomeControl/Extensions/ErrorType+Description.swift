@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension ErrorType {
+extension Error {
 
   var description: String {
     get {

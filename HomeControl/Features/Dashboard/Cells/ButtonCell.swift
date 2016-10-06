@@ -17,13 +17,13 @@ class ButtonCell: UICollectionViewCell, SendsMessages {
   
   var action: MessageViewModel? {
     didSet {
-      button.setTitle(action?.description, forState: .Normal)
+      button.setTitle(action?.description, for: UIControlState())
     }
   }
 
   @IBOutlet weak var button: UIButton!
 
-  @IBAction func buttonTouchedUp(sender: AnyObject) {
+  @IBAction func buttonTouchedUp(_ sender: AnyObject) {
     sendCurrentMessage()
   }
 }

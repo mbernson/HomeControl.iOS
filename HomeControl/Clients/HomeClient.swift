@@ -13,15 +13,15 @@ import RxSwift
 typealias Topic = String
 
 protocol HomeClient {
-  func publish(message: Message) -> Promise<Message, HomeClientError>
+  func publish(_ message: Message) -> Promise<Message, HomeClientError>
 
-  func subscribe(topic: Topic) -> Observable<Message>
+  func subscribe(_ topic: Topic) -> Observable<Message>
 
   func connect() -> Promise<Void, HomeClientError>
   func disconnect()
 
   func sharedClient() -> HomeClient
-  func setSharedClient(client: HomeClient)
+  func setSharedClient(_ client: HomeClient)
 }
 
 extension HomeClient {
@@ -29,12 +29,12 @@ extension HomeClient {
     return AppDelegate.sharedHomeClient
   }
 
-  func setSharedClient(client: HomeClient) {
+  func setSharedClient(_ client: HomeClient) {
     AppDelegate.sharedHomeClient = client
   }
 }
 
-struct HomeClientError: ErrorType, CustomStringConvertible {
+struct HomeClientError: Error, CustomStringConvertible {
   let message: String
   var description: String {
     return message

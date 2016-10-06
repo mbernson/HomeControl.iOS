@@ -16,12 +16,12 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
     for (index, tag) in tags {
-      textFields[index].text = userDefaults.stringForKey(tag)
+      textFields[index].text = userDefaults.string(forKey: tag)
     }
-    testConnectionSpinner.hidden = true
+    testConnectionSpinner.isHidden = true
   }
 
-  let userDefaults = NSUserDefaults.standardUserDefaults()
+  let userDefaults = Foundation.UserDefaults.standard
 
   let tags = [
     0: "mqtt_host",
@@ -29,20 +29,20 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     2: "api_mqtt_url",
   ]
 
-  private func savePreference(forTextField textField: UITextField) {
-    let index = textFields.indexOf(textField)!
+  fileprivate func savePreference(forTextField textField: UITextField) {
+    let index = textFields.index(of: textField)!
     let tag = tags[index]!
     userDefaults.setValue(textField.text, forKey: tag)
   }
 
-  func textFieldDidEndEditing(textField: UITextField) {
-    if textField.hasText() {
+  func textFieldDidEndEditing(_ textField: UITextField) {
+    if textField.hasText {
       savePreference(forTextField: textField)
     }
   }
 
-  func textFieldShouldReturn(textField: UITextField) -> Bool {
-    if textField.hasText() {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    if textField.hasText {
       savePreference(forTextField: textField)
       textField.resignFirstResponder()
       return true
@@ -50,8 +50,8 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     return false
   }
 
-  @IBAction func testConnection(sender: AnyObject) {
-    testConnectionSpinner.hidden = false
+  @IBAction func testConnection(_ sender: AnyObject) {
+    testConnectionSpinner.isHidden = false
 
     let client = MqttHomeClient(userDefaults: userDefaults)
     client.connect().then { [weak self] in
@@ -60,7 +60,7 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
         self?.presentError(error)
       }.finally { [weak self] in
         client.disconnect()
-        self?.testConnectionSpinner.hidden = true
+        self?.testConnectionSpinner.isHidden = true
       }
   }
 

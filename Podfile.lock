@@ -22,7 +22,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.0.0)
-  - MQTTClient
+  - MQTTClient (~> 0.8.5)
   - Promissum (from `https://github.com/tomlokhorst/Promissum.git`)
   - Promissum/Alamofire (from `https://github.com/tomlokhorst/Promissum.git`)
   - R.swift (~> 3.0.0)
@@ -47,6 +47,6 @@ SPEC CHECKSUMS:
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   RxSwift: 0ea939d7d97cb70657190ffde8dc2a9b455778fc
 
-PODFILE CHECKSUM: 767a2671a06e828ca13ed83f68c9ab06ce10b605
+PODFILE CHECKSUM: 678714fddcc8d99dad68e3da4d56d991d94bcf47
 
 COCOAPODS: 1.0.1

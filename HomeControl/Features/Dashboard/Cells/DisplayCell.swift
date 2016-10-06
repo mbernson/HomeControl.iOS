@@ -17,7 +17,7 @@ class DisplayCell: UICollectionViewCell, ReceivesMessages {
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var outputLabel: UILabel!
 
-  func subscribeForChanges(action: MessageViewModel, client: HomeClient, disposeBag: DisposeBag) {
+  func subscribeForChanges(_ action: MessageViewModel, client: HomeClient, disposeBag: DisposeBag) {
     titleLabel.text = action.description
     outputLabel.text = "No value received"
     client.subscribe(action.message.topic).subscribeNext { [weak self] message in
