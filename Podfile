@@ -4,18 +4,17 @@ platform :ios, '9.0'
 use_frameworks!
 
 target 'HomeControl' do
-    pod 'MQTTClient', '~> 0.7.4'
-    pod 'Reachability', '~> 3.2'
-    pod 'Alamofire', '~> 3.4'
-    pod 'AlamofireNetworkActivityIndicator', '~> 1.0'
-    pod 'Promissum', '~> 0.5'
-    pod 'Promissum/Alamofire'
-    pod 'Statham/NSDate-iso8601', '~> 0.6.1'
-    pod 'RxSwift', '~> 2.4'
-    pod 'RxCocoa', '~> 2.4'
-    pod 'BetterSegmentedControl', '~> 0.1'
-    pod 'R.swift', '~> 2.2'
-    pod 'SegueManager', '~> 2.1'
+    pod 'MQTTClient'
+    pod 'Reachability'
+    pod 'Alamofire', '~> 4.0.0'
+    # pod 'AlamofireNetworkActivityIndicator'
+    pod 'Promissum', git: 'https://github.com/tomlokhorst/Promissum.git'
+    pod 'Promissum/Alamofire', git: 'https://github.com/tomlokhorst/Promissum.git'
+    # pod 'Statham/NSDate-iso8601'
+    pod 'RxSwift', '3.0.0-beta.2'
+    # pod 'BetterSegmentedControl', '~> 0.1'
+    pod 'R.swift', '~> 3.0.0'
+    # pod 'SegueManager', '~> 2.1'
 end
 
 target 'HomeControlTests' do

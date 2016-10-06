@@ -1,6 +1,0 @@
-framework module Statham {
-  umbrella header "Statham-umbrella.h"
-
-  export *
-  module * { export * }
-}

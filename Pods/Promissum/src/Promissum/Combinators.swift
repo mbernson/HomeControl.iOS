@@ -11,7 +11,7 @@ import Foundation
 /// Flattens a nested Promise of Promise into a single Promise.
 ///
 /// The returned Promise resolves (or rejects) when the nested Promise resolves.
-public func flatten<Value, Error>(promise: Promise<Promise<Value, Error>, Error>) -> Promise<Value, Error> {
+public func flatten<Value, Error>(_ promise: Promise<Promise<Value, Error>, Error>) -> Promise<Value, Error> {
   return promise.flatMap { $0 }
 }
 
@@ -21,8 +21,19 @@ public func flatten<Value, Error>(promise: Promise<Promise<Value, Error>, Error>
 /// The new Promise's value is of a tuple type constructed from both argument promises.
 ///
 /// If either of the two Promises fails, the returned Promise also fails.
-public func whenBoth<A, B, Error>(promiseA: Promise<A, Error>, _ promiseB: Promise<B, Error>) -> Promise<(A, B), Error> {
-  return promiseA.flatMap { valueA in promiseB.map { valueB in (valueA, valueB) } }
+public func whenBoth<A, B, Error>(_ promiseA: Promise<A, Error>, _ promiseB: Promise<B, Error>) -> Promise<(A, B), Error> {
+  let source = PromiseSource<(A, B), Error>()
+
+  promiseA.trap(source.reject)
+  promiseB.trap(source.reject)
+
+  promiseA.then { valueA in
+    promiseB.then { valueB in
+      source.resolve((valueA, valueB))
+    }
+  }
+
+  return source.promise
 }
 
 
@@ -32,7 +43,7 @@ public func whenBoth<A, B, Error>(promiseA: Promise<A, Error>, _ promiseB: Promi
 /// If any of the supplied Promises fails, the returned Promise immediately fails.
 ///
 /// When called with an empty array of promises, this returns a Resolved Promise (with an empty array value).
-public func whenAll<Value, Error>(promises: [Promise<Value, Error>]) -> Promise<[Value], Error> {
+public func whenAll<Value, Error>(_ promises: [Promise<Value, Error>]) -> Promise<[Value], Error> {
   let source = PromiseSource<[Value], Error>()
   var results = promises.map { $0.value }
   var remaining = promises.count
@@ -41,7 +52,7 @@ public func whenAll<Value, Error>(promises: [Promise<Value, Error>]) -> Promise<
     source.resolve([])
   }
   
-  for (ix, promise) in promises.enumerate() {
+  for (ix, promise) in promises.enumerated() {
 
     promise
       .then { value in
@@ -69,7 +80,7 @@ public func whenAll<Value, Error>(promises: [Promise<Value, Error>]) -> Promise<
 /// If both argument Promises are already Resolved, the first Promise's value is used.
 ///
 /// If both Promises fail, the returned Promise also fails.
-public func whenEither<Value, Error>(promise1: Promise<Value, Error>, _ promise2: Promise<Value, Error>) -> Promise<Value, Error> {
+public func whenEither<Value, Error>(_ promise1: Promise<Value, Error>, _ promise2: Promise<Value, Error>) -> Promise<Value, Error> {
   return whenAny([promise1, promise2])
 }
 
@@ -78,7 +89,7 @@ public func whenEither<Value, Error>(promise1: Promise<Value, Error>, _ promise2
 /// If all of the supplied Promises fail, the returned Promise fails.
 ///
 /// When called with an empty array of promises, this returns a Promise that will never resolve.
-public func whenAny<Value, Error>(promises: [Promise<Value, Error>]) -> Promise<Value, Error> {
+public func whenAny<Value, Error>(_ promises: [Promise<Value, Error>]) -> Promise<Value, Error> {
   let source = PromiseSource<Value, Error>()
   var remaining = promises.count
 
@@ -106,7 +117,7 @@ public func whenAny<Value, Error>(promises: [Promise<Value, Error>]) -> Promise<
 /// Creates a Promise that resolves when all provided Promises finalize.
 ///
 /// When called with an empty array of promises, this returns a Resolved Promise.
-public func whenAllFinalized<Value, Error>(promises: [Promise<Value, Error>]) -> Promise<Void, NoError> {
+public func whenAllFinalized<Value, Error>(_ promises: [Promise<Value, Error>]) -> Promise<Void, NoError> {
   let source = PromiseSource<Void, NoError>()
   var remaining = promises.count
 
@@ -133,7 +144,7 @@ public func whenAllFinalized<Value, Error>(promises: [Promise<Value, Error>]) ->
 /// Creates a Promise that resolves when any of the provided Promises finalize.
 ///
 /// When called with an empty array of promises, this returns a Promise that will never resolve.
-public func whenAnyFinalized<Value, Error>(promises: [Promise<Value, Error>]) -> Promise<Void, NoError> {
+public func whenAnyFinalized<Value, Error>(_ promises: [Promise<Value, Error>]) -> Promise<Void, NoError> {
   let source = PromiseSource<Void, NoError>()
 
   for promise in promises {
@@ -150,15 +161,25 @@ public func whenAnyFinalized<Value, Error>(promises: [Promise<Value, Error>]) ->
 extension Promise {
 
   /// Returns a Promise where the value information is thrown away.
-  public func void() -> Promise<Void, Error> {
+  public func mapVoid() -> Promise<Void, Error> {
     return self.map { _ in }
+  }
+
+  @available(*, unavailable, renamed: "mapVoid")
+  public func void() -> Promise<Void, Error> {
+    fatalError()
   }
 }
 
-extension Promise where Error : ErrorType {
+extension Promise where Error : Swift.Error {
 
   /// Returns a Promise where the error is casted to an ErrorType.
-  public func mapErrorType() -> Promise<Value, ErrorType> {
+  public func mapError() -> Promise<Value, Swift.Error> {
     return self.mapError { $0 }
+  }
+
+  @available(*, unavailable, renamed: "mapError")
+  public func mapErrorType() -> Promise<Value, Swift.Error> {
+    fatalError()
   }
 }

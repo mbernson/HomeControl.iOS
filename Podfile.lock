@@ -1,74 +1,52 @@
 PODS:
-  - Alamofire (3.4.0)
-  - AlamofireNetworkActivityIndicator (1.0.1):
-    - Alamofire (~> 3.3)
-  - BetterSegmentedControl (0.3)
-  - CocoaLumberjack (2.3.0):
-    - CocoaLumberjack/Default (= 2.3.0)
-    - CocoaLumberjack/Extensions (= 2.3.0)
-  - CocoaLumberjack/Core (2.3.0)
-  - CocoaLumberjack/Default (2.3.0):
-    - CocoaLumberjack/Core
-  - CocoaLumberjack/Extensions (2.3.0):
-    - CocoaLumberjack/Default
-  - MQTTClient (0.7.8):
-    - MQTTClient/Core (= 0.7.8)
-  - MQTTClient/Core (0.7.8):
-    - CocoaLumberjack
-  - Promissum (0.5.0):
-    - Promissum/Core (= 0.5.0)
-  - Promissum/Alamofire (0.5.0):
-    - Alamofire (~> 3.0)
+  - Alamofire (4.0.1)
+  - MQTTClient (0.8.5):
+    - MQTTClient/Core (= 0.8.5)
+  - MQTTClient/Core (0.8.5):
+    - MQTTClient/Manager
+    - MQTTClient/Min
+  - MQTTClient/Manager (0.8.5):
+    - MQTTClient/Min
+  - MQTTClient/Min (0.8.5)
+  - Promissum (1.0.0):
+    - Promissum/Core (= 1.0.0)
+  - Promissum/Alamofire (1.0.0):
+    - Alamofire (~> 4.0)
     - Promissum/Core
-  - Promissum/Core (0.5.0)
-  - R.swift (2.3.0):
-    - R.swift.Library (~> 2.1.0)
-  - R.swift.Library (2.1.0)
+  - Promissum/Core (1.0.0)
+  - R.swift (3.0.0):
+    - R.swift.Library (~> 3.0.0)
+  - R.swift.Library (3.0.1)
   - Reachability (3.2)
-  - RxCocoa (2.5.0):
-    - RxSwift (~> 2.5)
-  - RxSwift (2.5.0)
-  - SegueManager (2.1.0):
-    - SegueManager/iOS (= 2.1.0)
-    - SegueManager/OSX (= 2.1.0)
-    - SegueManager/R.swift (= 2.1.0)
-  - SegueManager/iOS (2.1.0)
-  - SegueManager/R.swift (2.1.0):
-    - R.swift.Library
-    - SegueManager/iOS
-  - Statham/Core (0.6.1)
-  - Statham/NSDate-iso8601 (0.6.1):
-    - Statham/Core
+  - RxSwift (3.0.0-beta.2)
 
 DEPENDENCIES:
-  - Alamofire (~> 3.4)
-  - AlamofireNetworkActivityIndicator (~> 1.0)
-  - BetterSegmentedControl (~> 0.1)
-  - MQTTClient (~> 0.7.4)
-  - Promissum (~> 0.5)
-  - Promissum/Alamofire
-  - R.swift (~> 2.2)
-  - Reachability (~> 3.2)
-  - RxCocoa (~> 2.4)
-  - RxSwift (~> 2.4)
-  - SegueManager (~> 2.1)
-  - Statham/NSDate-iso8601 (~> 0.6.1)
+  - Alamofire (~> 4.0.0)
+  - MQTTClient
+  - Promissum (from `https://github.com/tomlokhorst/Promissum.git`)
+  - Promissum/Alamofire (from `https://github.com/tomlokhorst/Promissum.git`)
+  - R.swift (~> 3.0.0)
+  - Reachability
+  - RxSwift (= 3.0.0-beta.2)
+
+EXTERNAL SOURCES:
+  Promissum:
+    :git: https://github.com/tomlokhorst/Promissum.git
+
+CHECKOUT OPTIONS:
+  Promissum:
+    :commit: 06a9782473147aca8308d83ec97648c6fe0663a4
+    :git: https://github.com/tomlokhorst/Promissum.git
 
 SPEC CHECKSUMS:
-  Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
-  AlamofireNetworkActivityIndicator: 49a6e39afb947136f7b1872bae2d684957c26697
-  BetterSegmentedControl: d41b1785e2f0d3f823ce5017d0482440cc6aa584
-  CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
-  MQTTClient: be89741654eccf5a57eb62f4ef0fd57e0e19aa17
-  Promissum: 178ef117f446ed62e92e58cfbf8dd01bf543dad1
-  R.swift: 38b2191a603c3d491a09baddfb4ccc7aa9be4d9d
-  R.swift.Library: e5e077ed04f6867a95676af491650091b23518e9
+  Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
+  MQTTClient: fca939bcd74aa70af2d8ee35f3e44f258f4e9888
+  Promissum: 78ebc215aeab3a2d0d75682da2024f9a3afd4f38
+  R.swift: 5a8b4a4ea565b0f20c39d8ce1445f3d3a9064768
+  R.swift.Library: 0869d8d546517aa79db078fd8262724391a38db8
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  RxCocoa: e1b1562e57a554d0fb2aabf9d71b637f177257c7
-  RxSwift: 402b41a50e922a0368fc14cb3bc9f4427920e8ae
-  SegueManager: 07a64c4e8cd814b3e0f564ab838777af75951a29
-  Statham: 8f600fa7a1fcb40ca7f4dd08b37ee3ae4e682f35
+  RxSwift: 0ea939d7d97cb70657190ffde8dc2a9b455778fc
 
-PODFILE CHECKSUM: dd12e1b0cddf55b7e3fa7ea9f8e4d9936fee9635
+PODFILE CHECKSUM: 767a2671a06e828ca13ed83f68c9ab06ce10b605
 
 COCOAPODS: 1.0.1

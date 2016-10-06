@@ -67,13 +67,14 @@ Note that `PromiseSource.deinit` by default will log a warning when an unresolve
 
 */
 public class PromiseSource<Value, Error> {
-  typealias ResultHandler = Result<Value, Error> -> Void
+  typealias ResultHandler = (Result<Value, Error>) -> Void
 
-  private var handlers: [Result<Value, Error> -> Void] = []
+  private var handlers: [(Result<Value, Error>) -> Void] = []
+  internal let dispatchKey: DispatchSpecificKey<Void>
   internal let dispatchMethod: DispatchMethod
 
   /// The current state of the PromiseSource
-  public var state: State<Value, Error>
+  private(set) public var state: State<Value, Error>
 
   /// Print a warning on deinit of an unresolved PromiseSource
   public var warnUnresolvedDeinit: Bool
@@ -81,30 +82,31 @@ public class PromiseSource<Value, Error> {
   // MARK: Initializers & deinit
 
   internal convenience init(value: Value) {
-    self.init(state: .Resolved(value), dispatch: .Unspecified, warnUnresolvedDeinit: false)
+    self.init(state: .resolved(value), dispatchKey: DispatchSpecificKey(), dispatchMethod: .unspecified, warnUnresolvedDeinit: false)
   }
 
   internal convenience init(error: Error) {
-    self.init(state: .Rejected(error), dispatch: .Unspecified, warnUnresolvedDeinit: false)
+    self.init(state: .rejected(error), dispatchKey: DispatchSpecificKey(), dispatchMethod: .unspecified, warnUnresolvedDeinit: false)
   }
 
   /// Initialize a new Unresolved PromiseSource
   ///
   /// - parameter warnUnresolvedDeinit: Print a warning on deinit of an unresolved PromiseSource
-  public convenience init(dispatch: DispatchMethod = .Unspecified, warnUnresolvedDeinit: Bool = true) {
-    self.init(state: .Unresolved, dispatch: dispatch, warnUnresolvedDeinit: warnUnresolvedDeinit)
+  public convenience init(dispatch dispatchMethod: DispatchMethod = .unspecified, warnUnresolvedDeinit: Bool = true) {
+    self.init(state: .unresolved, dispatchKey: DispatchSpecificKey(), dispatchMethod: dispatchMethod, warnUnresolvedDeinit: warnUnresolvedDeinit)
   }
 
-  internal init(state: State<Value, Error>, dispatch: DispatchMethod, warnUnresolvedDeinit: Bool) {
+  internal init(state: State<Value, Error>, dispatchKey: DispatchSpecificKey<Void>, dispatchMethod: DispatchMethod, warnUnresolvedDeinit: Bool) {
     self.state = state
-    self.dispatchMethod = dispatch
+    self.dispatchKey = dispatchKey
+    self.dispatchMethod = dispatchMethod
     self.warnUnresolvedDeinit = warnUnresolvedDeinit
   }
 
   deinit {
     if warnUnresolvedDeinit {
       switch state {
-      case .Unresolved:
+      case .unresolved:
         print("PromiseSource.deinit: WARNING: Unresolved PromiseSource deallocated, maybe retain this object?")
       default:
         break
@@ -126,24 +128,24 @@ public class PromiseSource<Value, Error> {
   /// Resolve an Unresolved PromiseSource with supplied value.
   ///
   /// When called on a PromiseSource that is already Resolved or Rejected, the call is ignored.
-  public func resolve(value: Value) {
+  public func resolve(_ value: Value) {
 
-    resolveResult(.Value(value))
+    resolveResult(.value(value))
   }
 
 
   /// Reject an Unresolved PromiseSource with supplied error.
   ///
   /// When called on a PromiseSource that is already Resolved or Rejected, the call is ignored.
-  public func reject(error: Error) {
+  public func reject(_ error: Error) {
 
-    resolveResult(.Error(error))
+    resolveResult(.error(error))
   }
 
-  internal func resolveResult(result: Result<Value, Error>) {
+  internal func resolveResult(_ result: Result<Value, Error>) {
 
     switch state {
-    case .Unresolved:
+    case .unresolved:
       state = result.state
 
       executeResultHandlers(result)
@@ -152,10 +154,10 @@ public class PromiseSource<Value, Error> {
     }
   }
 
-  private func executeResultHandlers(result: Result<Value, Error>) {
+  private func executeResultHandlers(_ result: Result<Value, Error>) {
 
     // Call all previously scheduled handlers
-    callHandlers(result, handlers: handlers, dispatchMethod: dispatchMethod)
+    callHandlers(result, handlers: handlers, dispatchKey: dispatchKey, dispatchMethod: dispatchMethod)
 
     // Cleanup
     handlers = []
@@ -163,55 +165,52 @@ public class PromiseSource<Value, Error> {
 
   // MARK: Adding result handlers
 
-  internal func addOrCallResultHandler(handler: Result<Value, Error> -> Void) {
+  internal func addOrCallResultHandler(_ handler: @escaping (Result<Value, Error>) -> Void) {
 
     switch state {
-    case .Unresolved:
+    case .unresolved:
       // Save handler for later
       handlers.append(handler)
 
-    case .Resolved(let value):
+    case .resolved(let value):
       // Value is already available, call handler immediately
-      callHandlers(Result.Value(value), handlers: [handler], dispatchMethod: dispatchMethod)
+      callHandlers(Result.value(value), handlers: [handler], dispatchKey: dispatchKey, dispatchMethod: dispatchMethod)
 
-    case .Rejected(let error):
+    case .rejected(let error):
       // Error is already available, call handler immediately
-      callHandlers(Result.Error(error), handlers: [handler], dispatchMethod: dispatchMethod)
+      callHandlers(Result.error(error), handlers: [handler], dispatchKey: dispatchKey, dispatchMethod: dispatchMethod)
     }
   }
 }
 
-internal func callHandlers<T>(value: T, handlers: [T -> Void], dispatchMethod: DispatchMethod) {
+internal func callHandlers<T>(_ value: T, handlers: [(T) -> Void], dispatchKey: DispatchSpecificKey<Void>, dispatchMethod: DispatchMethod) {
 
   for handler in handlers {
     switch dispatchMethod {
-    case .Unspecified:
+    case .unspecified:
 
-      if NSThread.isMainThread() {
+      // Main queue doesn't guarantee main thread, so this is merely an optimization
+      if Thread.isMainThread {
         handler(value)
       }
       else {
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
           handler(value)
         }
       }
 
-    case .Synchronous:
+    case .synchronous:
 
       handler(value)
 
-    case let .OnQueue(targetQueue):
-      let currentQueueLabel = String(UTF8String: dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL))!
-      let targetQueueLabel = String(UTF8String: dispatch_queue_get_label(targetQueue))!
-
-      // Assume on correct queue if labels match, but be conservative if label is empty
-      let alreadyOnQueue = currentQueueLabel == targetQueueLabel && currentQueueLabel != ""
+    case .queue(let targetQueue):
+      let alreadyOnQueue = DispatchQueue.getSpecific(key: dispatchKey) != nil
 
       if alreadyOnQueue {
         handler(value)
       }
       else {
-        dispatch_async(targetQueue) {
+        targetQueue.async {
           handler(value)
         }
       }
