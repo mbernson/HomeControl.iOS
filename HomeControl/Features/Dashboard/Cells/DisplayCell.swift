@@ -20,9 +20,9 @@ class DisplayCell: UICollectionViewCell, ReceivesMessages {
   func subscribeForChanges(_ action: MessageViewModel, client: HomeClient, disposeBag: DisposeBag) {
     titleLabel.text = action.description
     outputLabel.text = "No value received"
-    client.subscribe(action.message.topic).subscribeNext { [weak self] message in
+    client.subscribe(action.message.topic).subscribe(onNext: { [weak self] message in
       self?.outputLabel.text = message.payloadString
-    }.addDisposableTo(disposeBag)
+    }).addDisposableTo(disposeBag)
   }
 
 }

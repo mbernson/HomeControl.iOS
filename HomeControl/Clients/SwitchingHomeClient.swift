@@ -41,6 +41,13 @@ class SwitchingHomeClient: ProxyHomeClient {
   let internetReachability: Reachability
   let localReachability: Reachability
 
+  var connectionState: ConnectionState
+
+  enum ConnectionState {
+    case localnetwork
+    case remoteproxy
+  }
+
   typealias LocalClient = MqttHomeClient
   typealias RemoteClient = HttpHomeClient
 
@@ -49,6 +56,8 @@ class SwitchingHomeClient: ProxyHomeClient {
 
     internetReachability = Reachability(hostName: userDefaults.string(forKey: "api_mqtt_url")!)
     localReachability = Reachability(hostName: userDefaults.string(forKey: "mqtt_host")!)
+
+    connectionState = .localnetwork
 
     super.init(instance: HttpHomeClient(mqttWebProxyUrl: userDefaults.string(forKey: "api_mqtt_url")!))
 
@@ -72,12 +81,14 @@ class SwitchingHomeClient: ProxyHomeClient {
   fileprivate func switchToLocalNetwork(reachability: Reachability?) {
     if instance is LocalClient { return }
     swapInstanceFor(RemoteClient())
+    connectionState = .remoteproxy
     print("switched to LocalNetwork")
   }
 
   fileprivate func switchToRemoteNetwork(reachability: Reachability?) {
     if instance is RemoteClient { return }
     swapInstanceFor(LocalClient())
+    connectionState = .localnetwork
     print("switchToRemoteNetwork")
   }
 

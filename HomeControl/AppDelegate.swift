@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 let defaultPreferences = [
   "api_mqtt_url": "https://lab.duckson.nl/iot/api/mqtt",
@@ -23,7 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    // Override point for customization after application launch.
 
     Foundation.UserDefaults.standard.register(defaults: defaultPreferences)
 
@@ -31,6 +31,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window?.tintColor = Colors.tintColor
 
     AppDelegate.sharedHomeClient = MqttHomeClient()
+
+    AppDelegate.sharedHomeClient.connect().then {
+      print("client connected")
+    }.trap { error in
+      print("client could not connect")
+    }
 
     return true
   }
@@ -52,7 +58,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func applicationDidBecomeActive(_ application: UIApplication) {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    AppDelegate.sharedHomeClient.connect()
+    AppDelegate.sharedHomeClient.connect().then {
+      print("client connected")
+    }.trap { error in
+      print("client could not connect")
+    }
   }
 
   func applicationWillTerminate(_ application: UIApplication) {

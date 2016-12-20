@@ -70,16 +70,12 @@ class MqttHomeClient: HomeClient {
       mqttSession.delegate = delegate
       currentObserver = observer
 
-      return AnonymousDisposable {
+      return Disposables.create {
         print("disposing mqttsession!")
         mqttSession.disconnect()
       }
     }.shareReplay(1) // This line is important!
     self.currentObserver = currentObserver
-  }
-
-  deinit {
-    print("mqtthomeclient deinit")
   }
 
   func connect() -> Promise<Void, HomeClientError> {
